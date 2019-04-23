@@ -51,6 +51,7 @@ render() {
                 <p>{(this.state.launchesData[i].missions[0] !== undefined) ? this.state.launchesData[i].missions[0].description : 'no details at this time'}</p> 
                 <p>set to launch from {this.state.launchesData[i].location.name} on {this.state.launchesData[i].windowend}</p>
                 <p>see video below</p>
+                {/* would we want to try and embed this or just link? */}
                 {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
                 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <hr />
