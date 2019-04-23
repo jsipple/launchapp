@@ -11,6 +11,14 @@ class Launches extends Component {
         }
     }
     componentDidMount = () => {
+        console.log(window.location.pathname)
+        let a = new Date().toISOString()
+        let past = new Date(new Date().setFullYear(new Date().getFullYear() -1)).toISOString()
+        past = past.substring(0, 10)
+        console.log(past)
+        a = a.substring(0, 10)
+        // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
+        if (window.location.pathname === '/launches/upcoming') {
         axios.get('https://launchlibrary.net/1.3/launch/next/5')
             .then(res => {
                 console.log(res)
@@ -22,6 +30,15 @@ class Launches extends Component {
                 console.log(res.data.launches[i])
                 }
             })
+        } else if (window.location.pathname === '/launches/past') {
+            axios.get('https://launchlibrary.net/1.3/launch/' + past)
+                .then(res => {
+                    console.log(res)
+                    this.setState({
+                        launchesData: res.data.launches
+                    })
+                })
+        }
     }
 render() {
     let image = this.state.launchesData.map( (x, i) => {
