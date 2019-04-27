@@ -3,18 +3,25 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
 import axios from 'axios'
 
+let search;
+
 class Launches extends Component {
     constructor(props) {
         super()
         this.state = {
-            launchesData: []
+            launchesData: [],
+            date: ''
         }
     }
     componentDidMount = () => {
         console.log(window.location.pathname)
+        // using this to grab a year before by default
         let a = new Date().toISOString()
         let past = new Date(new Date().setFullYear(new Date().getFullYear() -1)).toISOString()
         past = past.substring(0, 10)
+        this.setState({
+            date: past
+        })
         console.log(past)
         a = a.substring(0, 10)
         // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
@@ -31,19 +38,39 @@ class Launches extends Component {
                 }
             })
         } else if (window.location.pathname === '/launches/past') {
-            axios.get('https://launchlibrary.net/1.3/launch/' + past)
-                .then(res => {
-                    console.log(res)
-                    this.setState({
-                        launchesData: res.data.launches
-                    })
-                })
+            this.timedApi(past)
+    }
+
+}
+timedApi = (date) => {
+    console.log(date)
+    axios.get('https://launchlibrary.net/1.3/launch/?startdate=' + date)
+    .then(res => {
+        console.log(res)
+        this.setState({
+            launchesData: res.data.launches
+        })
+    })
+    } 
+    handleChange = (e) => {
+        this.setState({
+            date: e.target.value
+        })
+    }
+    handleKeyPress = (e) => {
+        console.log(e.key)
+        if (e.key === 'Enter') {
+            console.log('a')
+        this.timedApi(this.state.date)
         }
     }
 render() {
+        search = <input onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.date} type='date' />
+
     let image = this.state.launchesData.map( (x, i) => {
     return (
     <div>
+        {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
         <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
             <h1>{this.state.launchesData[i].name}</h1>
             {/* should we have this be a link to their website? */}
@@ -60,7 +87,8 @@ render() {
     // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
  return(
   <Fragment>
-   <div>launch component</div>
+   { search }
+
    {image}
   </Fragment>
  )
