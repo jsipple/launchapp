@@ -4,9 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
-
 # testing
 /coverage
+# make sure this ignores keys.js
+/keys.js
 
 # production
 /build
