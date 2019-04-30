@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - npm test
+  - npm run build
+deploy:
+  provider: heroku
+  api_key: 86ca35fa-8093-4503-b9c4-8b9a5531a0b9
+  app: launchtrackerapp
+  project: ./build/
+on:
+  branch: master
+
+
+
+
+
