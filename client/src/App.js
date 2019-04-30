@@ -13,6 +13,7 @@ import organizationsRoute from './routes/organizationsRoute';
 class App extends Component {
   render() {
     return (
+      
       <div className="App">
         <BrowserRouter>
           <Navbar />
