@@ -1,6 +1,6 @@
 import { ADD_LAUNCH } from '../actions/addAction';
-import { REMOVE_LAUNCH } from '../actions/addAction';
-import { UPDATE_LAUNCH } from '../actions/addAction';
+import { REMOVE_LAUNCH } from '../actions/removeAction';
+import { UPDATE_LAUNCH } from '../actions/updateAction';
 
 const initialState = {
     launch: []
@@ -23,11 +23,13 @@ const launchReducer = (state = initialState, action) => {
                 ...state,
                 launch: state.launch.map(rocket => {
                     if (rocket === state.launch[action.idx]) {
-                        rocket = rocket
+                        rocket = 'test'
                     }
-                    rocket = rocket
+                    return rocket;
                 })
             }
+        default:
+            return state
     }
 };
 
