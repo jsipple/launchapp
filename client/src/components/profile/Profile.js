@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import './Profile.css'
 
 class Profile extends Component {

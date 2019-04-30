@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import homeRoute from './routes/homeRoute'
 import Navbar from './components/navbar/Navbar'
 import profileRoute from './routes/profileRoute';
@@ -15,7 +15,7 @@ class App extends Component {
     return (
       
       <div className="App">
-        <BrowserRouter>
+        <Router>
           <Navbar />
           <Route path='/home' component={homeRoute} />
           <Route path='/profile' component={profileRoute} />
@@ -26,7 +26,7 @@ class App extends Component {
           <Route exact path='/launches/fav' component={favoritedLaunchesRoute} />
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
           <Route path='/organizations' component={organizationsRoute} />
-        </BrowserRouter>
+        </Router>
       </div>
     );
   }
