@@ -3,9 +3,9 @@ import React, { Fragment } from 'react';
 
 const homeRoute = () => {
  return (
-  <Fragment>
-   <Home />
-  </Fragment>
+ <Fragment>
+    <Home />
+ </Fragment>
  )
 }
 

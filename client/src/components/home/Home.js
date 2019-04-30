@@ -1,17 +1,82 @@
-import React, { Component,Fragment } from 'react';
-// import 'bootstrap/dist/css/bootstrap.css';
+import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
+import Container from 'react-bootstrap/Container';
+import Carousel from 'react-bootstrap/Carousel';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import './Home.css'
 
 class Home extends Component {
- render() {
-  return (
-   <Fragment>
-    <div>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+    state= {
+        index: 0,
+        direction: null
+    }
+    
+    handleSelect = (selectedIndex, e) =>  {
+        this.setState({
+          index: selectedIndex,
+          direction: e.direction,
+        });
+      }
+    render () {
+        const {index, direction} = this.state;
+     return (
+            <div>
+        <Container>
+            <Row>
+                <Col></Col>
+                <Col xs={8}>
+                <h1>Hello</h1>
+                <Carousel
+                        activeIndex={index}
+                        direction={direction}
+                        onSelect={this.handleSelect}
+                    >
+                        <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://via.placeholder.com/200"
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://via.placeholder.com/200"
+                            alt="Third slide"
+                        />
+    
+                        <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://via.placeholder.com/200"
+                            alt="Third slide"
+                        />
+    
+                        <Carousel.Caption>
+                            <h3>Third slide label</h3>
+                            <p>
+                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                            </p>
+                        </Carousel.Caption>
+                        </Carousel.Item>
+                    </Carousel>
+                </Col>
+                <Col></Col>
+            </Row>
+        </Container>
+            </div>
+            )
+        }
+    }
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</div>
-   </Fragment>
-  )
- }
-}
-
-export default Home
+export default Home;
