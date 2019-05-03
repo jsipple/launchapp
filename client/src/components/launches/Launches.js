@@ -71,7 +71,7 @@ render() {
     return (
     <div>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
-        <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
+        <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='rocket' />
             <h1>{this.state.launchesData[i].name}</h1>
             {/* should we have this be a link to their website? */}
                 <p>made by {this.state.launchesData[i].rocket.agencies[0].name}</p>
