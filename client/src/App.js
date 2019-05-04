@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import homeRoute from './routes/homeRoute'
-import Navbar from './components/navbar/Navbar'
 import profileRoute from './routes/profileRoute';
 import notificationsRoute from './routes/notificationsRoute';
 import launchesRoute from './routes/launchesRoute';
 import pastLaunchesRoute from './routes/pastLaunchesRoute';
 import favoritedLaunchesRoute from './routes/favoritedLaunchesRoute';
 import organizationsRoute from './routes/organizationsRoute';
+import Template from './components/template-wrapper/Template';
 
 class App extends Component {
   render() {
@@ -16,7 +16,7 @@ class App extends Component {
       
       <div className="App">
         <Router>
-          <Navbar />
+          <Template />
           <Route path='/home' component={homeRoute} />
           <Route path='/profile' component={profileRoute} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
