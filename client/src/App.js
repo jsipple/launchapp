@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import homeRoute from './routes/homeRoute'
+import Home from './pages/Home';
+import Landing from './pages/Landing';
+import LaunchList from './pages/LaunchList';
+import LaunchDetails from './pages/LaunchDetails';
+import MyLaunches from './pages/MyLaunches';
+import PastLaunches from './pages/PastLauches';
+import Organizations from './pages/Organizations';
+import Profile from './pages/Profile';
 import Navbar from './components/navbar/Navbar'
-import profileRoute from './routes/profileRoute';
-import notificationsRoute from './routes/notificationsRoute';
-import launchesRoute from './routes/launchesRoute';
-import pastLaunchesRoute from './routes/pastLaunchesRoute';
-import favoritedLaunchesRoute from './routes/favoritedLaunchesRoute';
-import organizationsRoute from './routes/organizationsRoute';
 
 class App extends Component {
   render() {
@@ -17,15 +18,16 @@ class App extends Component {
       <div className="App">
         <Router>
           <Navbar />
-          <Route path='/home' component={homeRoute} />
-          <Route path='/profile' component={profileRoute} />
+          <Route path='/home' component={Home} />
+          <Route path='/profile' component={Profile} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
-          <Route path='/notifications' component={notificationsRoute} />
-          <Route exact path='/launches/upcoming' component={launchesRoute} />
-          <Route exact path='/launches/past' component={pastLaunchesRoute} />
-          <Route exact path='/launches/fav' component={favoritedLaunchesRoute} />
+          <Route exact path='/launches/upcoming' component={Home} />
+          <Route path='/details' component={LaunchDetails} />
+          <Route path ='/launches/list' component={LaunchList} />
+          <Route exact path='/launches/past' component={PastLaunches} />
+          <Route exact path='/launches/fav' component={MyLaunches} />
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
-          <Route path='/organizations' component={organizationsRoute} />
+          <Route path='/organizations' component={Organizations} />
         </Router>
       </div>
     );
