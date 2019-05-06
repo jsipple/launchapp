@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <SideNav />
-          <Route path='/home' component={Home} />
+          <Route exact path='/' component={Home} />
           <Route path='/profile' component={Profile} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
           <Route exact path='/launches/upcoming' component={Home} />

@@ -8,7 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import {Link} from 'react-router-dom';
 
 
 const styles = {
@@ -34,15 +34,40 @@ class SideNav extends React.Component {
   render() {
     const { classes } = this.props;
 
+
     const sideList = (
       <div className={classes.list}>
-        <List>
-          {['Launches', 'My Lauches', 'Past Launches', 'Organizations', 'Notifications', 'Profile', 'Home'].map((text, index) => (
-            <ListItem button key={text}>
-              {/* <ListItemIcon>{index === 6 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <List >
+            <Link to="/launches/upcoming" >
+                <ListItem button key={1} >
+                <ListItemText primary="Launches" />
+                </ListItem> 
+            </Link>
+            <Link to="/launches/fav">
+                <ListItem button key={2} >
+                    <ListItemText primary="My Launches" />
+                </ListItem> 
+            </Link>
+            <Link to="/launches/past">
+                <ListItem button key={2} >
+                    <ListItemText primary="Past Launches" />
+                </ListItem> 
+            </Link>
+            <Link to="/organizations">
+                <ListItem button key={4} >
+                    <ListItemText primary='Organizations' />
+                </ListItem>
+            </Link>
+            <Link to="/profile">
+                <ListItem button key={5} >
+                    <ListItemText primary='Profile' />
+                </ListItem>
+            </Link>
+            <Link to="/">     
+                <ListItem button key={6} >
+                    <ListItemText primary='Home' />
+                </ListItem>   
+            </Link>
         </List>
       </div>
     );
