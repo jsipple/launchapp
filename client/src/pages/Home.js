@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import Wrapper from '../components/Wrapper';
 
 const tutorialSteps = [
   {
@@ -79,6 +80,7 @@ class Home extends React.Component {
     const maxSteps = tutorialSteps.length;
 
     return (
+      <Wrapper>
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.header}>
           <Typography>{tutorialSteps[activeStep].label}</Typography>
@@ -107,6 +109,7 @@ class Home extends React.Component {
           }
         />
       </div>
+      </Wrapper>
     );
   }
 }

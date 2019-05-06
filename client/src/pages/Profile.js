@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-
+import Wrapper from '../components/Wrapper';
     
     class Profile extends Component {
      constructor() {
@@ -24,18 +24,21 @@ import React, { Component } from 'react';
      }
      render() {
       return (
-       <div>
-       <input type='file' onChange={this.handleChange} name='profilePic' id='profilePic' accept='image/png, image/jpeg, image/jpg'/>
-        {/* look into making a default avatar if nothing in the system */}
-        <img alt='profileImg' id='profileImg' src={`${this.state.image}`} onError={this.handleError} />
-        <hr />
-        <p>Home screen preference</p>
-        <select>
-         <option>Home</option>
-         <option>launches</option>
-         <option>organizations</option>
-        </select>
+        <Wrapper>
+          <div>
+        <input type='file' onChange={this.handleChange} name='profilePic' id='profilePic' accept='image/png, image/jpeg, image/jpg'/>
+          {/* look into making a default avatar if nothing in the system */}
+          <img alt='profileImg' id='profileImg' src={`${this.state.image}`} onError={this.handleError} />
+          <hr />
+          <p>Home screen preference</p>
+          <select>
+          <option>Home</option>
+          <option>launches</option>
+          <option>organizations</option>
+          </select>
         </div>
+        </Wrapper>
+       
        )
      }
     }
