@@ -1,54 +1,103 @@
 import React, { Component,Fragment } from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
-import FacebookLogin from 'react-facebook-login';
-import TwitterLogin from 'react-twitter-auth';
-import {GoogleAPI, GoogleLogin, GoogleLogout } from 'react-google-oauth'
-
+import axios from 'axios'
 import './Home.css'
+import TwitterLogin from 'react-twitter-auth';
+import FacebookLogin from 'react-facebook-login';
+import { GoogleLogin } from 'react-google-login';
+import ids from '../../config'
 
-let componentClicked
-const responseFacebook = (response) => {
-    console.log(response);
-  }
-const googleResponse = res => {
-    console.log(res)
-}
-const googlefailure = res => {
-    console.log('falied')
-}
-const twitterResponse = res => {
-    console.log(res)
-}
 class Home extends Component {
- render() {
-  return (
-   <Fragment>
-    <div>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-    <GoogleAPI clientId="859211818646-ums20503fv8se7vkf0g49ls3kd85132s.apps.googleusercontent.com"
-            onUpdateSigninStatus={googleResponse}
-            onInitFailure={googlefailure} >
+  // need to save this state to store as well figure out if i want to use token
+  state = {
+    isAuthenticated: false,
+    user: null,
+    token: ''
+  }
+  handleLogout = () => {
+    console.log(this.state.user)
+    this.setState({
+      isAuthenticated: false,
+      user: null,
+      token: ''
+    })
+  }
+  // this is working
+  googleResponse = (response) => {
+    console.log(response)
+    axios.get('/login/google', response )
+      .then(res => {
+        this.setState({
+          user: res.config.profileObj,
+          isAuthenticated: true
+        })
+      })
+  }
+  // says needs to be https for this to run what do i need to do
+  facebookResponse = (response) => {
+    axios.get('/login/facebook', response)
+      .then(res => {
+        console.log(res)
+      })
+  }
+  twitterResponse = (response) => {
+    axios.get('/login/twitter', response)
+      .then(res => {
+        console.log(res)
+      })
+  }
+  onFailure = error => {
+    alert(error)
+  }
+  handleServer = () => {
+  // this is not being grabbed trying to get 3000 still
+    // getting a 404 not found seem sissue with proxy probably
+    axios.get('/auth/login', (req, res) => {
+    })
+    .then(res => {
+      console.log(res.data)
+    })
+  }
+  render() {
+    let content = this.state.isAuthenticated ?
+        (
             <div>
-    <GoogleLogin />
-    <GoogleLogout />
-    </div>
-    </GoogleAPI>
-          <FacebookLogin
-    appId="386466931941979"
-    autoLoad={true}
-    fields="name,email,picture"
-    onClick={componentClicked}
-    callback={responseFacebook} />
-    <TwitterLogin
-    // need to figure out what to put for website
-  loginUrl="http://localhost:4000/api/v1/auth/twitter"
-  onFailure={twitterResponse}
-  onSuccess={twitterResponse}
-  requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse"
-/>
-    </div>
-   </Fragment>
-  )
- }
+                <p>Authenticated</p>
+                <div>
+                    {this.state.user.email}
+                </div>
+                <div>
+                    <button onClick={this.handleLogout} className="button">
+                        Log out
+                    </button>
+                </div>
+            </div>
+        ) :
+        (
+            <div>
+                <TwitterLogin loginUrl="localhost:8080/login/twitter"
+                               onFailure={this.twitterResponse} onSuccess={this.twitterResponse}
+                               requestTokenUrl="http://localhost:8080/auth/twitter/reverse"/>
+                <FacebookLogin
+                    appId={ids.facebook.clientID}
+                    autoLoad={false}
+                    fields="name,email,picture"
+                    callback={this.facebookResponse} />
+                <GoogleLogin
+                    clientId={ids.google.clientID}
+                    buttonText="Login"
+                    onSuccess={this.googleResponse}
+                    onFailure={this.onFailure}
+                />
+            </div>
+        );
+
+    return (
+        <div className="App">
+            {content}
+        </div>
+    );
+}
 }
 
 export default Home
