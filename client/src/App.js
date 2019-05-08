@@ -26,7 +26,7 @@ class App extends Component {
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
           <Route path='/organizations' component={organizationsRoute} />
         </BrowserRouter>
-      </div>
+      </div>  
     );
   }
 }

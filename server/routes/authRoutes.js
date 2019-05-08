@@ -27,16 +27,15 @@ router.get('/login/google/callback',
         failureRedirect: '/auth/google/failure'
 }));
 
+router.get('/login/facebook', passport.authenticate('facebook'));
 
-
-router.get('/login/twiter', (req, res) => {
-    console.log('twitter')
-    // res.json({name: 'hello'})
-    passport.authenticate('google', {
-        scope: ['profile']
-    })
-    res.send(req.body)
-})
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+router.get('/login/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
 
 router.get('/google/redirect', passport.authenticate('google', (req, res) => {
     // this is what we want to save to state
@@ -50,9 +49,15 @@ router.get('/login/facebook', (req,res) => {
     // passport.authenticate(''))
 })
 // not sure what needs to be done with this route
-router.get('/auth/twitter/reverse', (req, res) => {
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
 
-})
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 
 module.exports = router

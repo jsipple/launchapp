@@ -10,7 +10,8 @@ module.exports = {
         apiSecret: '45zdY34WphQbIROJhz0MzZH4NobUToSzw9KjnEH3eCUbJpNMPc'
     },
     facebook: {
-        appID: '386466931941979'
+        appID: '386466931941979',
+        clientSecret: '197f12a945d58d5a3d2377329b33bd8f'
     },
     session: {
         // just random string

@@ -1,5 +1,7 @@
 const passport = require('passport')
 const googleStrategy = require('passport-google-oauth2').Strategy
+const FacebookStrategy = require('passport-facebook').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy
 const keys = require('./keys')
 const User = require('../models/user')
 
@@ -35,3 +37,29 @@ passport.use(new googleStrategy({
 
 })
 )
+
+
+passport.use(new FacebookStrategy({
+    clientID: keys.facebook.appID,
+    clientSecret: keys.facebook.clientSecret,
+    callbackURL: "http://www.example.com/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({email: profile.email}, function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
+passport.use(new TwitterStrategy({
+    consumerKey: keys.twitter.apiKey,
+    consumerSecret: keys.twitter.apiSecret,
+    callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
+  },
+  function(token, tokenSecret, profile, cb) {
+    User.findOrCreate({ twitterId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
