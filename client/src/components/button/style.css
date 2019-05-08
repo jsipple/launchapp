@@ -1,0 +1,15 @@
+.follow{
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    width: 45%;
+    height: 6%;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bolder;
+    letter-spacing: 4px;
+    cursor: pointer;
+    border-bottom-right-radius: 50px;
+    border-top-right-radius: 50px;
+    border-left: .5px solid white;
+}
