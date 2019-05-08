@@ -20,12 +20,13 @@ class App extends Component {
           <Route path='/home' component={homeRoute} />
           <Route path='/profile' component={profileRoute} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
-          <Route path='/notifications' component={notificationsRoute} />
-          <Route exact path='/launches/upcoming' component={launchesRoute} />
-          <Route exact path='/launches/past' component={pastLaunchesRoute} />
-          <Route exact path='/launches/fav' component={favoritedLaunchesRoute} />
+          <Route exact path='/launches/upcoming' component={Home} />
+          <Route path='/details' component={LaunchDetails} />
+          <Route path ='/launches/list' component={LaunchList} />
+          <Route exact path='/launches/past' component={PastLaunches} />
+          <Route exact path='/launches/fav' component={MyLaunches} />
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
-          <Route path='/organizations' component={organizationsRoute} />
+          <Route path='/organizations' component={Organizations} />
         </Router>
       </div>
     );
