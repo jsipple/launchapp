@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import Grid from '@material-ui/core/Grid';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
 import axios from 'axios'
@@ -70,7 +69,7 @@ render() {
 
     let image = this.state.launchesData.map( (x, i) => {
     return (
-    <Grid item xs={9}>
+    <div>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
         <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
             <h1>{this.state.launchesData[i].name}</h1>
@@ -83,7 +82,7 @@ render() {
                 {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
                 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <hr />
-    </Grid>
+    </div>
     )})
     // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
  return(
