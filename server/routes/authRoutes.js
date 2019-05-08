@@ -6,14 +6,29 @@ router.get('/google', passport.authenticate('google', {
     scope: ['profile']
 }))
 
-router.get('/login/google', (req, res) => {
-    console.log('login route')
-    // res.json({name: 'hello'})
-    passport.authenticate('google', {
-        scope: ['profile']
-    })
-    res.send(req.body)
-})
+// router.get('/login/google', (req, res) => {
+//     console.log('login route')
+//     // res.json({name: 'hello'})
+//     passport.authenticate('google', {
+//         scope: ['profile']
+//     })
+//     res.send(req.body)
+// })
+// might not be working because on localhost
+router.get('/login/google',
+  passport.authenticate('google', { scope: 
+      [ 'https://www.googleapis.com/auth/plus.login',
+      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
+));
+
+router.get('/login/google/callback', 
+    passport.authenticate( 'google', { 
+        successRedirect: '/auth/google/success',
+        failureRedirect: '/auth/google/failure'
+}));
+
+
+
 router.get('/login/twiter', (req, res) => {
     console.log('twitter')
     // res.json({name: 'hello'})

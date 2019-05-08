@@ -1,5 +1,5 @@
 const passport = require('passport')
-const googleStrategy = require('passport-google-oauth20')
+const googleStrategy = require('passport-google-oauth2').Strategy
 const keys = require('./keys')
 const User = require('../models/user')
 
@@ -26,23 +26,12 @@ passport.use(new googleStrategy({
 }, (accessToken, refreshToken, profile, done) => {
     // passport callback
     // this does not seem to be running whenever authenticated talk to ta's about
-    User.findOrCreate({googleId: profile.id})
-        .then((currentUser) => {
-            if (currentUser) {
-                // user already exist in db
-                console.log(currentUser)
-                // when done called goes to serialize
-                done(null, currentUser)
-            } else {
-                new User({
-                    name: profile.displayName,
-                    googleId: profile.id
-                }).save().then((newUser) => {
-                    console.log(newUser)
-                    done(null, newUser)
-                })
-            }
+    // probably change to email in case someone uses different auth
+    User.findOrCreate({googleId: profile.id}, (err, user) => {
+        console.log('a')
+        return done(err, user)
     })
+
 
 })
 )

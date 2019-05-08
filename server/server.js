@@ -40,8 +40,6 @@ app.use(passport.session())
 
 app.use('/', authRoutes)
 
-
-
 // https.createServer(, (req, res) => {
 
 // })

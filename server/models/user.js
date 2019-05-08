@@ -16,24 +16,9 @@ let userSchema = new Schema({
   // double check what type this should be
   type: String
  },
- bio: {
-  type: String
- },
  // also add a preferred starter page
  // probably better to just have 3rd party id here instead of 3 different ones
  // for pictures see if they just want us to grab from 3rd party or have both options
- googleId: {
-  type: String,
-  token: String
- },
- facebookId: {
-  type: String,
-  token: String
- },
- twitterId: {
-  type: String,
-  token: String
- },
  favLaunches: {
   type: Array
  }
