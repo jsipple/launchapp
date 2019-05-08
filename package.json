@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/danieldayton33/launchapp/issues"
   },
-  "homepage": "https://github.com/danieldayton33/launchapp#readme"
+  "homepage": "https://github.com/danieldayton33/launchapp#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.5.6",
+    "path": "^0.12.7"
+  }
 }
