@@ -28,6 +28,7 @@
   "homepage": "https://github.com/danieldayton33/launchapp#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "if-env": "^1.0.4",
     "mongoose": "^5.5.6",
     "path": "^0.12.7"
   }
