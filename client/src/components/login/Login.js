@@ -1,4 +1,4 @@
-import React, { Component,Fragment } from 'react';
+import React, { Component } from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
 import './Home.css'
@@ -7,7 +7,7 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import ids from '../../config'
 
-class Home extends Component {
+class Login extends Component {
   // need to save this state to store as well figure out if i want to use token
   state = {
     isAuthenticated: false,
@@ -100,4 +100,4 @@ class Home extends Component {
 }
 }
 
-export default Home
+export default Login
