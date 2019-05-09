@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Wrapper from '../components/Wrapper';
+import NavBar1 from "../components/NavBar.1/navbar"
 
 const tutorialSteps = [
   {
@@ -81,6 +82,7 @@ class Home extends React.Component {
 
     return (
       <Wrapper>
+        <NavBar1 />
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.header}>
           <Typography>{tutorialSteps[activeStep].label}</Typography>

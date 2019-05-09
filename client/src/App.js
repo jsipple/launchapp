@@ -11,6 +11,7 @@ import Organizations from './pages/Organizations';
 import Profile from './pages/Profile';
 import Navbar from './components/navbar/Navbar';
 import SideNav from './components/SideNav';
+import NavBar1 from "./components/NavBar.1/navbar"
 
 class App extends Component {
   render() {

@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+}
+.bg {
+    background-image: url('../images/Atlantis-Rollout-STS-79.jpg');
+
+    opacity: 0.6;
+
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+
+}
+
+.icon-button {
+    margin: 5px;
+}
+
+.footer {
+    align-self: flex-end;
+}
