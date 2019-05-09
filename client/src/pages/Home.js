@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Wrapper from '../components/Wrapper';
+import NavBar from '../components/NavBar.1/navbar';
+import ShuttleView from '../components/ShuttleView';
+import Grid from '@material-ui/core/Grid';
 
 const tutorialSteps = [
   {
@@ -38,7 +41,7 @@ const tutorialSteps = [
 
 const styles = theme => ({
   root: {
-    maxWidth: 400,
+    maxWidth: 600,
     flexGrow: 1,
   },
   header: {
@@ -60,6 +63,8 @@ const styles = theme => ({
 class Home extends React.Component {
   state = {
     activeStep: 0,
+    viewType: 'shuttle',
+    launches: ''
   };
 
   handleNext = () => {
@@ -82,14 +87,14 @@ class Home extends React.Component {
     return (
       <Wrapper>
       <div className={classes.root}>
+        <NavBar />
         <Paper square elevation={0} className={classes.header}>
           <Typography>{tutorialSteps[activeStep].label}</Typography>
         </Paper>
-        <img
-          className={classes.img}
-          src={tutorialSteps[activeStep].imgPath}
-          alt={tutorialSteps[activeStep].label}
-        />
+        <Grid container justify="center" className={classes.root}>
+          <ShuttleView />
+        </Grid>
+       
         <MobileStepper
           steps={maxSteps}
           position="static"
