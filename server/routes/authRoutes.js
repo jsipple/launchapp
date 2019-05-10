@@ -49,10 +49,10 @@ router.get('/login/facebook', (req,res) => {
     // passport.authenticate(''))
 })
 // not sure what needs to be done with this route
-app.get('/auth/twitter',
+router.get('/auth/twitter',
   passport.authenticate('twitter'));
 
-app.get('/auth/twitter/callback', 
+router.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
