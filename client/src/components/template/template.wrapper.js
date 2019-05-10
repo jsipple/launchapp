@@ -25,7 +25,7 @@ export default class Template extends Component {
             </Navbar.Collapse>
         </Navbar>
         <section>
-        
+          {this.props.children}
         </section>
         <footer className="text-center">
           <Navbar 
