@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-
+import Template from '../components/template/template.wrapper';
     
     class Profile extends Component {
      constructor() {
@@ -25,7 +25,7 @@ import React, { Component } from 'react';
      render() {
       return (
        
-          <div>
+          <Template>
         <input type='file' onChange={this.handleChange} name='profilePic' id='profilePic' accept='image/png, image/jpeg, image/jpg'/>
           {/* look into making a default avatar if nothing in the system */}
           <img alt='profileImg' id='profileImg' src={`${this.state.image}`} onError={this.handleError} />
@@ -36,7 +36,7 @@ import React, { Component } from 'react';
           <option>launches</option>
           <option>organizations</option>
           </select>
-        </div>
+        </Template>
        
        )
      }

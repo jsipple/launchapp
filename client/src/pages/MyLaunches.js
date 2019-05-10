@@ -1,10 +1,11 @@
 import React from 'react';
+import Template from '../components/template/template.wrapper';
 
 const MyLaunches = () => {
     return (
-        <div>
+        <Template>
             Saved Launches
-        </div>
+        </Template>
     );
 }
 
