@@ -2,9 +2,6 @@ import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
 import axios from 'axios'
-import { connect } from 'react-redux';
-import { addLaunch } from '../../actions/addAction';
-import { bindActionCreators} from 'redux';
 
 let search;
 
@@ -99,15 +96,4 @@ render() {
  }
 }
 
-const mapStateToProps = state => ({
-    launchs: state.launches
-})
-
-const mapDispatchToProps = dispatch => {
-    const boundActions = bindActionCreators({ addLaunch }, dispatch);
-    return {
-        ...boundActions
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Launches);
+export default Launches
