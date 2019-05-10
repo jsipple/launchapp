@@ -10,6 +10,8 @@ import Wrapper from '../components/Wrapper';
 import NavBar from '../components/NavBar.1/navbar';
 import ShuttleView from '../components/ShuttleView';
 import Grid from '@material-ui/core/Grid';
+import Login from '../components/login/Login'
+
 
 const tutorialSteps = [
   {
@@ -86,6 +88,7 @@ class Home extends React.Component {
 
     return (
       <Wrapper>
+        <Login />
       <div className={classes.root}>
         <NavBar />
         <Paper square elevation={0} className={classes.header}>
