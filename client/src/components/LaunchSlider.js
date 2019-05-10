@@ -49,7 +49,7 @@ const LaunchSlider = (props) => {
                     <Button onClick={()=> handleIndexChange(-1)}> {prevDate} </Button>
                 </Col>
                 <Col>
-                    <h4>{total}</h4>
+                    <h4>{total} Upcoming</h4>
                 </Col>
                 <Col>
                     <Button onClick={()=> handleIndexChange(1)}> {nextDate} </Button>
