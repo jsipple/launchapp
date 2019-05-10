@@ -27,8 +27,8 @@ class Navbar extends Component {
    <Link to="/launches/past">Past Launches</Link>
    <Link to="/organizations">Organizations</Link>
    <Link to="/notifications">Notifications</Link>
-   <Link to="/Profile">Profile</Link>
-   <Link to="/home">Home</Link>
+   <Link to="/profile">Profile</Link>
+   <Link to="/">Home</Link>
  </div>
  <span onClick={this.toggleNav}>&#9776; open</span>
            </Fragment>
