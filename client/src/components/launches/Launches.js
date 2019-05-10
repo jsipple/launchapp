@@ -66,8 +66,7 @@ render() {
         search = <input onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.date} type='date' />
 
     let image = this.state.launchesData.map( (x, i) => {
-    return (
-   <div key={i}>
+   return (<div key={i}>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
         <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
             <h1>{this.state.launchesData[i].name}</h1>
@@ -80,7 +79,7 @@ render() {
                 {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
                 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <hr />
-    </div>
+        </div>
     )})
     // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
  return(

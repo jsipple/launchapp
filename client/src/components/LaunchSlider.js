@@ -1,0 +1,62 @@
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import FollowButton from '../components/button';
+import Button from 'react-bootstrap/Button';
+
+const LaunchSlider = (props) => {
+    const {launch, prevDate, nextDate, total, handleIndexChange} = props
+    console.log(launch.image)
+    // console.log(launch.company)
+    return(
+        <Container className="slider" style={{backgroundColor: "blue"}}>
+            <Row>
+                <Col>
+                    <Container>
+                        <Row>
+                            <Col>
+                                <ul>
+                                    <li>Location: {launch.location}</li>
+                                    <li>Date: {launch.date} </li>
+                                </ul>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                               <ul>
+                                   <li>Company: {launch.company}</li>
+                                   <li>Rocket: {launch.rocket}</li>
+                               </ul>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Col>
+                <Col>
+                    <img id="rocket-pic" style={{height: 400, width: 400}}src={launch.image} alt="rocket"/>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <FollowButton text="Details" />
+                </Col>
+                <Col>
+                    <FollowButton text="Follow" />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button onClick={()=> handleIndexChange(-1)}> {prevDate} </Button>
+                </Col>
+                <Col>
+                    <h4>{total}</h4>
+                </Col>
+                <Col>
+                    <Button onClick={()=> handleIndexChange(1)}> {nextDate} </Button>
+                </Col>
+            </Row>
+        </Container>
+    )
+}
+
+export default LaunchSlider;
