@@ -9,8 +9,7 @@ import MyLaunches from './pages/MyLaunches';
 import PastLaunches from './pages/PastLauches';
 import Organizations from './pages/Organizations';
 import Profile from './pages/Profile';
-import Navbar from './components/navbar/Navbar';
-// import SideNav from './components/SideNav';
+
 
 class App extends Component {
   render() {
@@ -18,9 +17,10 @@ class App extends Component {
       
       <div className="App">
         <Router>
-         <Navbar />
+      
           <Route exact path='/' component={Home} />
           <Route path='/profile' component={Profile} />
+          <Route path='/home' component={Landing} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
           <Route exact path='/launches/upcoming' component={Home} />
           <Route path='/details' component={LaunchDetails} />

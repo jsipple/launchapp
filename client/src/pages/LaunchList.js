@@ -1,10 +1,12 @@
 import React from 'react';
+import Template from '../components/template/template.wrapper';
 
 const LaunchList = () => {
     return (
-        <div>
+       <Template>
             Listview of Launches
-        </div>
+       </Template>
+            
     )
 }
 

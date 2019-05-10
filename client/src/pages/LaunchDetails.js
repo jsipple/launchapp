@@ -1,10 +1,12 @@
 import React from 'react';
+import Template from '../components/template/template.wrapper';
 
 const LandingDetails = ()=> {
     return (
-        <div>
-            Landing Details
-        </div>
+       <Template>
+        Landing Details
+       </Template>
+            
     )
 }
 

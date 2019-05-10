@@ -1,10 +1,11 @@
 import React from 'react';
+import Template from '../components/template/template.wrapper';
 
 const Organizations =()=> {
     return (
-        <div>
+        <Template>
             List of Organizations
-        </div>
+        </Template>
     );
 }
 
