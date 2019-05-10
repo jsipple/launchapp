@@ -1,8 +1,10 @@
 import React from 'react';
-
+import Template from '../components/template/template.wrapper';
 const Landing = () => {
     return (
-        <div>Landing Page, Login</div>
+        <Template>
+            Landing Page, Login
+        </Template>
     );
 }
 
