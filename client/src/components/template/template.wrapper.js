@@ -7,6 +7,7 @@ export default class Template extends Component {
 
 
   render() {
+    
     return (
       <div>
         <Navbar bg="dark" variant="dark" expand="lg">

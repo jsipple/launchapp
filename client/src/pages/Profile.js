@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import Wrapper from '../components/Wrapper';
+
     
     class Profile extends Component {
      constructor() {
@@ -24,7 +24,7 @@ import Wrapper from '../components/Wrapper';
      }
      render() {
       return (
-        <Wrapper>
+       
           <div>
         <input type='file' onChange={this.handleChange} name='profilePic' id='profilePic' accept='image/png, image/jpeg, image/jpg'/>
           {/* look into making a default avatar if nothing in the system */}
@@ -37,7 +37,6 @@ import Wrapper from '../components/Wrapper';
           <option>organizations</option>
           </select>
         </div>
-        </Wrapper>
        
        )
      }
