@@ -1,11 +1,13 @@
 import React from 'react';
 import Launches from '../components/launches/Launches';
-
+import Template from '../components/template/template.wrapper';
 
 const PastLaunches = () => {
     return (
-  
-           <Launches />
+        <Template>
+             <Launches />
+        </Template>
+          
     )
 }
 

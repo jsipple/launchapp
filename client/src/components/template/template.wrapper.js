@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Container, Row, Col } from 'react-bootstrap'
 import NavbarComponent from '../navbar/Navbar';
 
 
@@ -28,11 +28,11 @@ export class Template extends Component {
                 </NavDropdown>
             </Navbar.Collapse>
         </Navbar>
-        <Container>
+        <Container className="wrapper"> 
           <section>
             {this.props.children}
           </section>
-        </Container>
+         </Container>
         <footer className="text-center">
           <Navbar 
           bg="light" 
