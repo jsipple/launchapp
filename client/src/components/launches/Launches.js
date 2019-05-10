@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import Grid from '@material-ui/core/Grid';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
 import axios from 'axios'
@@ -73,20 +72,21 @@ render() {
 
     let image = this.state.launchesData.map( (x, i) => {
     return (
-    <Grid item xs={9}>
+    <div>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
+        <h1>{this.state.launchesData[i].name}</h1>
         <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
-            <h1>{this.state.launchesData[i].name}</h1>
             {/* should we have this be a link to their website? */}
                 <p>made by {this.state.launchesData[i].rocket.agencies[0].name}</p>
                 <p>{(this.state.launchesData[i].missions[0] !== undefined) ? this.state.launchesData[i].missions[0].description : 'no details at this time'}</p> 
+                {/* could do a wikipedia link or something like that if api does not have any information(or maybe do a scrape of it) */}
                 <p>set to launch from {this.state.launchesData[i].location.name} on {this.state.launchesData[i].windowend}</p>
                 <p>see video below</p>
                 {/* would we want to try and embed this or just link? */}
                 {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
                 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <hr />
-    </Grid>
+    </div>
     )})
     // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
  return(
