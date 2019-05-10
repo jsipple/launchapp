@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 let search;
 
@@ -25,7 +26,7 @@ class Launches extends Component {
         console.log(past)
         a = a.substring(0, 10)
         // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
-        if (window.location.pathname === '/launches/upcoming') {
+        if (window.location.pathname === '/launches/list') {
         axios.get('https://launchlibrary.net/1.3/launch/next/5')
             .then(res => {
                 console.log(res)
@@ -71,7 +72,7 @@ render() {
     return (
    <div>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
-        <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
+        <Link to={`details/${this.state.launchesData[i].id}`}> <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' /></Link>
             <h1>{this.state.launchesData[i].name}</h1>
             {/* should we have this be a link to their website? */}
                 <p>made by {this.state.launchesData[i].rocket.agencies[0].name}</p>
