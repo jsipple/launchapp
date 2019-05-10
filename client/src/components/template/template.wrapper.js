@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import NavbarComponent from '../navbar/Navbar';
 
 
-export default class Template extends Component {
+export class Template extends Component {
 
 
   render() {
     
     return (
       <div>
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar 
+        bg="dark" 
+        variant="dark" 
+        expand="lg"
+        style={{marginBottom: 80}}>
             <Navbar.Brand href="#home"><h4>LaunchVue</h4></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -24,9 +28,11 @@ export default class Template extends Component {
                 </NavDropdown>
             </Navbar.Collapse>
         </Navbar>
-        <section>
-          {this.props.children}
-        </section>
+        <Container>
+          <section>
+            {this.props.children}
+          </section>
+        </Container>
         <footer className="text-center">
           <Navbar 
           bg="light" 

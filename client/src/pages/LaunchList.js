@@ -1,11 +1,11 @@
 import React from 'react';
+import { ListView } from '../components/template/list-view/list.view';
 
-const LaunchList = () => {
+export const LaunchList = () => {
     return (
         <div>
-            Listview of Launches
+            <ListView />
         </div>
     )
 }
 
-export default LaunchList;

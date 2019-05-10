@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Home from './pages/Home';
 import Landing from './pages/Landing';
-import LaunchList from './pages/LaunchList';
+import { LaunchList } from './pages/LaunchList';
 import LaunchDetails from './pages/LaunchDetails';
 import MyLaunches from './pages/MyLaunches';
 import PastLaunches from './pages/PastLauches';
@@ -18,7 +18,6 @@ class App extends Component {
       
       <div className="App">
         <Router>
-         <Navbar />
           <Route exact path='/' component={Home} />
           <Route path='/profile' component={Profile} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
