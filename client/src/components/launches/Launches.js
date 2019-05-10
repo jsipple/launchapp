@@ -1,18 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
-import axios from 'axios'
+import API from '../../utils/API';
 
 let search;
 
 class Launches extends Component {
-    constructor(props) {
-        super()
-        this.state = {
+    state = {
             launchesData: [],
             date: ''
         }
-    }
+    
     componentDidMount = () => {
         console.log(window.location.pathname)
         // using this to grab a year before by default
@@ -21,12 +19,12 @@ class Launches extends Component {
         past = past.substring(0, 10)
         this.setState({
             date: past
-        })
+        });
         console.log(past)
         a = a.substring(0, 10)
         // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
         if (window.location.pathname === '/launches/upcoming') {
-        axios.get('https://launchlibrary.net/1.3/launch/next/5')
+            API.getUpcoming()
             .then(res => {
                 console.log(res)
                 this.setState({
@@ -44,7 +42,7 @@ class Launches extends Component {
 }
 timedApi = (date) => {
     console.log(date)
-    axios.get('https://launchlibrary.net/1.3/launch/?startdate=' + date)
+   API.getPast(date)
     .then(res => {
         console.log(res)
         this.setState({
@@ -69,7 +67,7 @@ render() {
 
     let image = this.state.launchesData.map( (x, i) => {
     return (
-   <div>
+   <div key={i}>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
         <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
             <h1>{this.state.launchesData[i].name}</h1>
