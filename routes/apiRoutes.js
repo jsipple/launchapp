@@ -2,7 +2,9 @@ const User = require("../models/User");
 
 module.exports = function(app){
 
+  // Renders all users
   app.get("/api/user/", function(req, res){
+    
     User.find({}, (error, data) => {
      
       if (error) {
@@ -15,9 +17,10 @@ module.exports = function(app){
     });
   })
 
+  // Renders a specific user at this url
   app.get("/api/user/:id", function(req, res){
+    
     User.findOne({_id: req.params.id}, (error, data) => {
-      
       if (error) {
         console.log(error);
       }
@@ -28,8 +31,9 @@ module.exports = function(app){
     });
   })
 
+  // Creates a new user 
   app.post("/api/user/", function(req, res) {
-
+    
     console.log(req.body);
 
     User.create(req.body)
@@ -41,10 +45,22 @@ module.exports = function(app){
     });
   });
 
+  // Adds launch data to the user's followed launches.
   app.post("/api/user/:id", function(req, res){
-    console.log(req.body.launch);
-
+    
     User.updateOne({_id: req.params.id}, {$push: {launches: req.body.launch}})
+    .then(() => {
+      res.json(true);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+  })
+
+  // Removes specific launch from user's followed launches
+  app.put("/api/user/:id", function(req, res){
+    
+    User.updateOne({_id: req.params.id}, {$pull: {launches: {id: req.body.id}}})
     .then(() => {
       res.json(true);
     })

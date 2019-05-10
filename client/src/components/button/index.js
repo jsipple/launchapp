@@ -4,14 +4,20 @@ import "./style.css";
 
 class Button extends Component {
 
-    addLaunch = (data, userId) => {
-        axios.post('/api/user/' + userId, data);
+    handleLaunch = (data, userId) => {
+
+        if(this.props.text === "FOLLOW"){
+            axios.post('/api/user/' + userId, data);
+        }
+        else if(this.props.text === "UNFOLLOW"){
+            axios.put('/api/user/' + userId, data)
+        }
     }
 
     render() {
         return (
             <div>
-                <button className="btn follow" onClick={() => this.addLaunch(this.props.launchData, this.props.userId)}>{this.props.text}</button>
+                <button className="btn follow" onClick={() => this.handleLaunch(this.props.launchData, this.props.userId)}>{this.props.text}</button>
             </div>
         );
     }
