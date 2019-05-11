@@ -1,18 +1,12 @@
 import React from 'react';
-import { Template } from '../components/template/template.wrapper';
-import Button from '../components/button/index'
-import MissionDetails from '../components/missionDetails/MissionDetails'
-const LaunchDetails = () => {
-    // this.state({
-    //     updates: true
-    // })
-    console.log('hello')
-    // look at using hooks
+import {Template} from '../components/template/template.wrapper';
+
+const LaunchDetails = ()=> {
     return (
        <Template>
            {/* follow button benj already */}
-           <Button />
-           <MissionDetails />
+           {/* <Button />
+           <MissionDetails /> */}
            {/* countdown(moment or something similar) */}
             {/* mission details which will pull from launch api */}
             {/* weather(at time of launch if available(or maybe current weather if not available)) */}

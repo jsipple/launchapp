@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "./style.css";
 
-class Button extends Component {
+class FollowButton extends Component {
 
     handleLaunch = (data, userId) => {
 
@@ -23,4 +23,4 @@ class Button extends Component {
     }
 }
 
-export default Button;
+export default FollowButton;

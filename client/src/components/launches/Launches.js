@@ -1,19 +1,21 @@
 import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
+<<<<<<< HEAD
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+=======
+import API from '../../utils/API';
+>>>>>>> f9e77d7cc8dca79fb35e4de86929dc874d9eb5ae
 
 let search;
 
 class Launches extends Component {
-    constructor(props) {
-        super()
-        this.state = {
+    state = {
             launchesData: [],
             date: ''
         }
-    }
+    
     componentDidMount = () => {
         console.log(window.location.pathname)
         // using this to grab a year before by default
@@ -22,12 +24,17 @@ class Launches extends Component {
         past = past.substring(0, 10)
         this.setState({
             date: past
-        })
+        });
         console.log(past)
         a = a.substring(0, 10)
         // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
+<<<<<<< HEAD
         if (window.location.pathname === '/launches/list') {
         axios.get('https://launchlibrary.net/1.3/launch/next/5')
+=======
+        if (window.location.pathname === '/launches/upcoming') {
+            API.getUpcoming()
+>>>>>>> f9e77d7cc8dca79fb35e4de86929dc874d9eb5ae
             .then(res => {
                 console.log(res)
                 this.setState({
@@ -45,7 +52,7 @@ class Launches extends Component {
 }
 timedApi = (date) => {
     console.log(date)
-    axios.get('https://launchlibrary.net/1.3/launch/?startdate=' + date)
+   API.getPast(date)
     .then(res => {
         console.log(res)
         this.setState({
@@ -69,8 +76,7 @@ render() {
         search = <input onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.date} type='date' />
 
     let image = this.state.launchesData.map( (x, i) => {
-    return (
-   <div>
+   return (<div key={i}>
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
         <Link to={`details/${this.state.launchesData[i].id}`}> <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' /></Link>
             <h1>{this.state.launchesData[i].name}</h1>
@@ -83,7 +89,7 @@ render() {
                 {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
                 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <hr />
-    </div>
+        </div>
     )})
     // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
  return(
