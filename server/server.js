@@ -13,7 +13,7 @@ app.use(cors())
 const bodyParser = require('body-parser')
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Users";
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 
 app.use(bodyParser.json()) // to support JSON-encoded bodies
@@ -43,7 +43,7 @@ app.use(passport.session())
 
 app.use('/', authRoutes)
 
-// app.use('/api', apiRoutes)
+require("./routes/apiRoutes.js")(app);
 
 // https.createServer(, (req, res) => {
 

@@ -30,7 +30,7 @@ class Navbar extends Component {
    <Link to="/profile">Profile</Link>
    <Link to="/">Home</Link>
  </div>
- <span onClick={this.toggleNav}>&#9776;</span>
+ <span class="text-white" onClick={this.toggleNav}>&#9776;</span>
            </Fragment>
            )
  }
