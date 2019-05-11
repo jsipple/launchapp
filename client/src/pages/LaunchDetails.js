@@ -1,5 +1,5 @@
 import React from 'react';
-import Template from '../components/template/template.wrapper';
+import { Template } from '../components/template/template.wrapper';
 import Button from '../components/button/index'
 import MissionDetails from '../components/missionDetails/MissionDetails'
 const LaunchDetails = () => {
