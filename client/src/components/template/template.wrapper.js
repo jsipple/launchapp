@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavDropdown, Container, Row, Col } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap'
 import NavbarComponent from '../navbar/Navbar';
 
 
@@ -7,7 +7,7 @@ export class Template extends Component {
 
 
   render() {
-    
+    const {handleViewChange} = this.props
     return (
       <div>
         <Navbar 
@@ -21,11 +21,13 @@ export class Template extends Component {
                 <Nav className="mr-auto">
                   <NavbarComponent />
                 </Nav>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                <Button onClick={()=>handleViewChange("slider")}>Slider</Button>
+                <Button value="list" onClick={()=>handleViewChange("list")}>List</Button>
+                {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Carousel View</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.2">List View</NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
             </Navbar.Collapse>
         </Navbar>
         <Container className="wrapper"> 
