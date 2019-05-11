@@ -24,23 +24,29 @@ class Login extends Component {
   // this is working
   googleResponse = (response) => {
     console.log(response)
-    axios.get('/login/google', response )
+    this.setState({
+        user: response.profileObj,
+        isAuthenticated: true
+      })
+    axios.get('/auth/login/google', response )
       .then(res => {
-        this.setState({
-          user: res.config.profileObj,
-          isAuthenticated: true
-        })
+
       })
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
-    axios.get('/login/facebook', response)
+      console.log(response)
+    this.setState({
+        user: response,
+        isAuthenticated: true
+      })
+    axios.get('/auth/login/facebook', response)
       .then(res => {
         console.log(res)
       })
   }
   twitterResponse = (response) => {
-    axios.get('/login/twitter', response)
+    axios.get('/auth/login/twitter', response)
       .then(res => {
         console.log(res)
       })
@@ -74,14 +80,16 @@ class Login extends Component {
         ) :
         (
             <div>
-                <TwitterLogin loginUrl="localhost:8080/login/twitter"
+                <TwitterLogin loginUrl="localhost:3001/login/twitter"
                                onFailure={this.twitterResponse} onSuccess={this.twitterResponse}
-                               requestTokenUrl="http://localhost:8080/auth/twitter/reverse"/>
+                               requestTokenUrl="http://localhost:3001/auth/twitter/redirect"/>
                 <FacebookLogin
-                    appId={ids.facebook.clientID}
-                    autoLoad={false}
+                    appId='386466931941979'
+                    autoLoad={true}
                     fields="name,email,picture"
-                    callback={this.facebookResponse} />
+                    callback={this.facebookResponse}
+                    reAuthenticate={true}
+                     />
                 <GoogleLogin
                     clientId={ids.google.clientID}
                     buttonText="Login"
