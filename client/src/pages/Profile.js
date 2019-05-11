@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import Template from '../components/template/template.wrapper';
+import { Template } from '../components/template/template.wrapper';
     
     class Profile extends Component {
      constructor() {

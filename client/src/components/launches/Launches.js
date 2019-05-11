@@ -69,11 +69,7 @@ render() {
 
     let image = this.state.launchesData.map( (x, i) => {
     return (
-<<<<<<< HEAD
-        <div>
-=======
    <div>
->>>>>>> e0d97fb0ec76793b38c6045931f61295842b7367
         {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
         <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' />
             <h1>{this.state.launchesData[i].name}</h1>
@@ -86,11 +82,7 @@ render() {
                 {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
                 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
         <hr />
-<<<<<<< HEAD
-        </div>
-=======
     </div>
->>>>>>> e0d97fb0ec76793b38c6045931f61295842b7367
     )})
     // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
  return(
