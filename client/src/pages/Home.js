@@ -3,6 +3,8 @@ import {Template} from '../components/template/template.wrapper'
 import API from '../utils/API';
 import LaunchSlider from '../components/LaunchSlider';
 import Spinner from 'react-bootstrap/Spinner';
+import Carousel from 'react-bootstrap/Carousel';
+import CarouselItem from 'react-bootstrap/CarouselItem';
 
 class Home extends React.Component {
   state ={
@@ -57,13 +59,18 @@ class Home extends React.Component {
     console.log(launches)
     return (
       <Template>
-      {launches.length ? (<LaunchSlider 
+      {launches.length ? 
+      
+     
+        (<LaunchSlider 
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
         launch={launches[index]}
         total={launches.length}
         handleIndexChange = {this.handleIndexChange}
         nextDate={((index + 1 < launches.length)? (launches[(index+1)].date) : ("none"))} 
-        />) :
+        />) 
+        
+        :
         (<Spinner animation="border" role="status">
           <span className="sr-only"> Loading ... </span>
           </Spinner>)}
@@ -74,3 +81,4 @@ class Home extends React.Component {
 
 
 export default Home;
+
