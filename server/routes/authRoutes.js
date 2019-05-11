@@ -35,7 +35,7 @@ router.get('/login/facebook', passport.authenticate('facebook'));
 // authentication has failed.
 router.get('/login/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+    failureRedirect: '/login' }));
 
 router.get('/google/redirect', passport.authenticate('google', (req, res) => {
     // this is what we want to save to state
@@ -49,10 +49,10 @@ router.get('/login/facebook', (req,res) => {
     // passport.authenticate(''))
 })
 // not sure what needs to be done with this route
-app.get('/auth/twitter',
+router.get('/auth/twitter',
   passport.authenticate('twitter'));
 
-app.get('/auth/twitter/callback', 
+router.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
