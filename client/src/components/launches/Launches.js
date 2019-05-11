@@ -1,13 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Launches.css'
-<<<<<<< HEAD
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-=======
 import API from '../../utils/API';
->>>>>>> f9e77d7cc8dca79fb35e4de86929dc874d9eb5ae
-
+import {Link} from 'react-router-dom';
 let search;
 
 class Launches extends Component {
@@ -28,13 +23,8 @@ class Launches extends Component {
         console.log(past)
         a = a.substring(0, 10)
         // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
-<<<<<<< HEAD
-        if (window.location.pathname === '/launches/list') {
-        axios.get('https://launchlibrary.net/1.3/launch/next/5')
-=======
         if (window.location.pathname === '/launches/upcoming') {
             API.getUpcoming()
->>>>>>> f9e77d7cc8dca79fb35e4de86929dc874d9eb5ae
             .then(res => {
                 console.log(res)
                 this.setState({
