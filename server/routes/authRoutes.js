@@ -35,7 +35,7 @@ router.get('/login/facebook', passport.authenticate('facebook'));
 // authentication has failed.
 router.get('/login/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+    failureRedirect: '/login' }));
 
 router.get('/google/redirect', passport.authenticate('google', (req, res) => {
     // this is what we want to save to state
