@@ -1,5 +1,4 @@
 const express = require('express')
-const path = require('path')
 const passportSetup = require('./config/passport-setup')
 const apiRoutes = require('./routes/apiRoutes')
 const authRoutes = require('./routes/authRoutes')

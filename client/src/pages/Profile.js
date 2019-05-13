@@ -16,12 +16,13 @@ import API from "../utils/API";
 
       let image = {image: window.URL.createObjectURL(input.files[0])}
 
+      console.log(window.URL.createObjectURL(input.files[0]));
+
       API.addUserImg(image, this.state.userId);
 
       this.setState({
        image
       })
-      console.log(window.URL.createObjectURL(input.files[0]))
      }
      handleError = (e) => {
       console.log('a')

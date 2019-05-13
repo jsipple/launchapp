@@ -11,9 +11,9 @@ export default {
         return axios.post('/api/user/' + userId, data);
     },
     unfollowLaunch: function(data, userId) {
-        return axios.put('/api/user' + userId, data)
+        return axios.put('/api/user/' + userId, data)
     },
     addUserImg: function(data, userId){
-        return axios.post('/api/user/image' + userId, data);
+        return axios.put('/api/user/image/' + userId, data);
     }
 }
