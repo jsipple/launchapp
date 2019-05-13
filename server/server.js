@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const passportSetup = require('./config/passport-setup')
 const apiRoutes = require('./routes/apiRoutes')
 const authRoutes = require('./routes/authRoutes')
@@ -13,7 +14,7 @@ app.use(cors())
 const bodyParser = require('body-parser')
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Users";
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 
 app.use(bodyParser.json()) // to support JSON-encoded bodies

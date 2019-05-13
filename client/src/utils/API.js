@@ -10,7 +10,10 @@ export default {
     followLaunch: function(data, userId) {
         return axios.post('/api/user/' + userId, data);
     },
-    unfollowLaucnh: function(data, userId) {
+    unfollowLaunch: function(data, userId) {
         return axios.put('/api/user' + userId, data)
+    },
+    addUserImg: function(data, userId){
+        return axios.post('/api/user/image' + userId, data);
     }
 }
