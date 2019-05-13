@@ -3,13 +3,14 @@ import {Template} from '../components/template/template.wrapper'
 import API from '../utils/API';
 import LaunchSlider from '../components/LaunchSlider';
 import Spinner from 'react-bootstrap/Spinner';
-import Carousel from 'react-bootstrap/Carousel';
-import CarouselItem from 'react-bootstrap/CarouselItem';
+import ListView from '../components/list-view/list.view';
+
 
 class Home extends React.Component {
   state ={
     launches: [],
-    index: 0
+    index: 0,
+    view: "slider"
   }
   componentDidMount () {
     console.log("mounted");
@@ -30,7 +31,7 @@ class Home extends React.Component {
         const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
         const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type};
         
-        console.log("LAUNCHDATA",launchData)
+        // console.log("LAUNCHDATA",launchData)
         launches.push(launchData)
       })
       this.setState({
@@ -39,6 +40,36 @@ class Home extends React.Component {
     })
     .catch(err => console.log(err));
   }
+
+  handleViewChange = (view) => {
+    
+    this.setState({
+      view: view
+    });
+  }
+
+  returnLaunchSlider = () => {
+    const {launches, index} = this.state
+      return (
+        <LaunchSlider 
+        prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
+        launch={launches[index]}
+        total={launches.length}
+        handleIndexChange = {this.handleIndexChange}
+        nextDate={((index + 1 < launches.length)? (launches[(index+1)].date) : ("none"))} 
+        />
+      )
+    }
+
+    returnListView = () => {
+      const launches = this.state.launches
+      return (
+        launches.map((launch,index) => (
+          <ListView launch={launch} key={index} />)
+        )
+      )
+    }
+
     handleIndexChange = (change) => {
       if(change > 0 && (this.state.index + change) < this.state.launches.length) {
         this.setState({
@@ -55,21 +86,12 @@ class Home extends React.Component {
       }
     }
   render() {
-    const {index, launches} = this.state;
+    const {launches} = this.state;
     console.log(launches)
     return (
-      <Template>
+      <Template handleViewChange={this.handleViewChange}>
       {launches.length ? 
-      
-     
-        (<LaunchSlider 
-        prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
-        launch={launches[index]}
-        total={launches.length}
-        handleIndexChange = {this.handleIndexChange}
-        nextDate={((index + 1 < launches.length)? (launches[(index+1)].date) : ("none"))} 
-        />) 
-        
+        ((this.state.view === 'slider')? (this.returnLaunchSlider()): (this.returnListView())) 
         :
         (<Spinner animation="border" role="status">
           <span className="sr-only"> Loading ... </span>

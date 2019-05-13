@@ -30,7 +30,7 @@ class Login extends Component {
       })
     axios.get('/auth/login/google', response )
       .then(res => {
-
+        console.log('added to mongodb')
       })
   }
   // says needs to be https for this to run what do i need to do
@@ -42,13 +42,13 @@ class Login extends Component {
       })
     axios.get('/auth/login/facebook', response)
       .then(res => {
-        console.log(res)
+        console.log('added to mongodb')
       })
   }
   twitterResponse = (response) => {
     axios.get('/auth/login/twitter', response)
       .then(res => {
-        console.log(res)
+        console.log('added to mongodb')
       })
   }
   onFailure = error => {

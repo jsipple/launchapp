@@ -4,7 +4,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy
 const keys = require('./keys')
 const User = require('../models/user')
-
+// const FontAwesome = require()
 passport.serializeUser((user, done) => {
     // grabs mongodb id
     // null would be the error

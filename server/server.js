@@ -3,7 +3,8 @@ const path = require('path')
 const passportSetup = require('./config/passport-setup')
 const apiRoutes = require('./routes/apiRoutes')
 const authRoutes = require('./routes/authRoutes')
-const app = express()
+const app = express();
+const path = require('path');
 const mongoose = require('mongoose')
 const keys = require('./config/keys')
 // this encrypts cookies    
