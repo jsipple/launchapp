@@ -4,10 +4,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import FollowButton from '../components/button';
 import Button from 'react-bootstrap/Button';
+import Counter from '../components/Counter';
 
 const LaunchSlider = (props) => {
     const {launch, prevDate, nextDate, total, handleIndexChange} = props
-    console.log(launch.image)
+    // console.log("LAUNCH SLIDER", launch.countdownTime)
     // console.log(launch.company)
     return(
         <Container className="slider" style={{backgroundColor: "blue"}}>
@@ -19,6 +20,7 @@ const LaunchSlider = (props) => {
                                 <ul>
                                     <li>Location: {launch.location}</li>
                                     <li>Date: {launch.date} </li>
+                                    <Counter date={`${launch.countdownTime}`} />
                                 </ul>
                             </Col>
                         </Row>
