@@ -4,10 +4,12 @@ import API from '../utils/API';
 import LaunchSlider from '../components/LaunchSlider';
 import Spinner from 'react-bootstrap/Spinner';
 import ListView from '../components/list-view/list.view';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setView } from '../actions/setView';
 import { addLaunch } from '../actions/addAction';
+
 
 
 class Home extends React.Component {
@@ -36,7 +38,11 @@ class Home extends React.Component {
         const launchName = (launch.missions.length && launch.missions[0].name) ? (launch.missions[0].name) : ("");
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
         const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
-        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type};
+        console.log(date);
+        const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
+        console.log(countdownTime);
+        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime};
+        
         
         // console.log("LAUNCHDATA",launchData)
         launches.push(launchData)
