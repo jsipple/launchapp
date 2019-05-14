@@ -28,7 +28,8 @@ class Navbar extends Component {
    <Link to="/organizations">Organizations</Link>
    <Link to="/notifications">Notifications</Link>
    <Link to="/profile">Profile</Link>
-   <Link to="/">Home</Link>
+   {/* will change back later have it as this for testing */}
+   <Link to="/home">Home</Link>
  </div>
  <span class="text-white" onClick={this.toggleNav}>&#9776;</span>
            </Fragment>

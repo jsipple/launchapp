@@ -1,63 +1,30 @@
-const router = require('express').Router()
+const express = require('express')
+const router = express.Router()
 const passport = require('passport')
+const authController = require('../controllers/authcontroller')
 
-router.get('/google', passport.authenticate('google', {
-    // what we want to retrieve see if need more than profile
-    scope: ['profile']
-}))
+// Setting up the passport middleware for each of the OAuth providers
+const twitterAuth = passport.authenticate('twitter')
+const googleAuth = passport.authenticate('google', { scope: ['profile'] })
+const facebookAuth = passport.authenticate('facebook')
 
-// router.get('/login/google', (req, res) => {
-//     console.log('login route')
-//     // res.json({name: 'hello'})
-//     passport.authenticate('google', {
-//         scope: ['profile']
-//     })
-//     res.send(req.body)
-// })
-// might not be working because on localhost
-router.get('/login/google',
-  passport.authenticate('google', { scope: 
-      [ 'https://www.googleapis.com/auth/plus.login',
-      , 'https://www.googleapis.com/auth/plus.profile.emails.read' ] }
-));
+// This custom middleware allows us to attach the socket id to the session.
+// With the socket id attached we can send back the right user info to 
+// the right socket
+const addSocketIdtoSession = (req, res, next) => {
+  req.session.socketId = req.query.socketId
+  next()
+}
 
-router.get('/login/google/callback', 
-    passport.authenticate( 'google', { 
-        successRedirect: '/auth/google/success',
-        failureRedirect: '/auth/google/failure'
-}));
+// Routes that are triggered by the React client
+router.get('/twitter', addSocketIdtoSession, twitterAuth)
+router.get('/google', addSocketIdtoSession, googleAuth)
+router.get('/facebook', addSocketIdtoSession, facebookAuth)
 
-router.get('/login/facebook', passport.authenticate('facebook'));
-
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
-router.get('/login/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
-    failureRedirect: '/login' }));
-
-router.get('/google/redirect', passport.authenticate('google', (req, res) => {
-    // this is what we want to save to state
-    console.log('hello there')
-    res.redirect('http://localhost:3000')
-    // this is where we redirect too but see what needs to be done with react
-}))
-
-router.get('/login/facebook', (req,res) => {
-    console.log('facebook')
-    // passport.authenticate(''))
-})
-// not sure what needs to be done with this route
-router.get('/auth/twitter',
-  passport.authenticate('twitter'));
-
-router.get('/auth/twitter/callback', 
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
+// Routes that are triggered by callbacks from OAuth providers once 
+// the user has authenticated successfully
+router.get('/twitter/callback', twitterAuth, authController.twitter)
+router.get('/google/callback', googleAuth, authController.google)
+router.get('/facebook/callback', facebookAuth, authController.facebook)
 
 module.exports = router
