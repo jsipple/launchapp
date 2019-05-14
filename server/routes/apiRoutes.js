@@ -68,4 +68,26 @@ module.exports = function(app){
       res.json(err);
     });
   })
+
+//   app.get("/api/user/image/:id", function(req, res){
+//     User.findOne({_id: req.params.id}, (error, data) => {
+//         if (error) {
+//           console.log(error);
+//         }
+//         else {
+//             res.render(data.picture);
+//         }
+//       });
+//   })
+
+  app.put("/api/user/image/:id", function(req, res){
+    
+    User.updateOne({_id: req.params.id}, {picture: req.body.image})
+    .then(() => {
+      res.json(true);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+  })
 }

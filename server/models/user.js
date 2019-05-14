@@ -14,7 +14,8 @@ let userSchema = new Schema({
  },
  picture: {
   // double check what type this should be
-  type: String
+   data: Buffer,
+   contentType: String 
  },
  // also add a preferred starter page
  // probably better to just have 3rd party id here instead of 3 different ones
