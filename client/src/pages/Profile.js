@@ -1,7 +1,9 @@
 
 import React, { Component } from 'react';
-import {Template} from '../components/template/template.wrapper';
+
+import Template from '../components/template/template.wrapper';
 import API from "../utils/API";
+
     
     class Profile extends Component {
      constructor() {
