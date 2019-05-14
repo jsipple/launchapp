@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap'
 import NavbarComponent from '../navbar/Navbar';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setView } from '../../actions/setView';
 
 
-export class Template extends Component {
+class Template extends Component {
+  constructor(props) {
+    super(props)
+  }
 
+  handleChangeView = () => {
+    console.log('setting view');
+    this.props.setView();
+  }
 
   render() {
     const {handleViewChange} = this.props
+    console.log(this.props);
     return (
       <div>
         <Navbar 
@@ -21,8 +32,8 @@ export class Template extends Component {
                 <Nav className="mr-auto">
                   <NavbarComponent />
                 </Nav>
-                <Button onClick={()=>handleViewChange("slider")}>Slider</Button>
-                <Button value="list" onClick={()=>handleViewChange("list")}>List</Button>
+                <Button onClick={()=>this.handleChangeView()}>Slider</Button>
+                <Button value="list" onClick={()=>this.handleChangeView()}>List</Button>
                 {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Carousel View</NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -52,3 +63,12 @@ export class Template extends Component {
     )
   }
 }
+
+
+const mapStateToProps = state => ({appState: state});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ setView }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Template);
