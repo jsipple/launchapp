@@ -1,12 +1,19 @@
 import React from 'react';
-import {Template} from '../components/template/template.wrapper'
+import Template from '../components/template/template.wrapper'
 import API from '../utils/API';
 import LaunchSlider from '../components/LaunchSlider';
 import Spinner from 'react-bootstrap/Spinner';
 import ListView from '../components/list-view/list.view';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setView } from '../actions/setView';
+import { addLaunch } from '../actions/addAction';
 
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   state ={
     launches: [],
     index: 0,
@@ -37,19 +44,22 @@ class Home extends React.Component {
       this.setState({
         launches: launches
       })
+      // this.props.addLaunch(launches);
     })
     .catch(err => console.log(err));
   }
 
   handleViewChange = (view) => {
     
-    this.setState({
-      view: view
-    });
+    // this.setState({
+    //   view: view
+    // });
+    this.props.setView();
   }
 
   returnLaunchSlider = () => {
     const {launches, index} = this.state
+    // const {launches, index} = this.props.appState.launches;
       return (
         <LaunchSlider 
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
@@ -91,7 +101,7 @@ class Home extends React.Component {
     return (
       <Template handleViewChange={this.handleViewChange}>
       {launches.length ? 
-        ((this.state.view === 'slider')? (this.returnLaunchSlider()): (this.returnListView())) 
+        ((this.props.appState.launchView === 'slider') ? (this.returnLaunchSlider()) : (this.returnListView())) 
         :
         (<Spinner animation="border" role="status">
           <span className="sr-only"> Loading ... </span>
@@ -101,6 +111,13 @@ class Home extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  appState: state
+});
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ setView, addLaunch }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
