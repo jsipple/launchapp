@@ -21,7 +21,10 @@ passport.deserializeUser((id, done) => {
 })
 // this is where also need to save to database
 const callback = (accessToken, refreshToken, profile, cb) => cb(null, profile)
-
+// User.findOrCreate({googleId: profile.id}, (err, user) => {
+//   console.log('a')
+//   return done(err, user)
+// })
 // Adding each OAuth provider's strategy to passport
 passport.use(new TwitterStrategy(twitterKeys, callback))
 passport.use(new GoogleStrategy(googleKeys, callback))

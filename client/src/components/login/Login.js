@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
+// using socket so probably don't need axios
 import axios from 'axios'
-import ids from './keys'
 import OAuth from './OAuth'
 import io from 'socket.io-client'
 import { APIurls } from './APIurls'
