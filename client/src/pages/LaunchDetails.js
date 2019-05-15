@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 
 const LaunchDetails = (props)=> {
-    console.log(props.state.launches);
-    const launch = props.state.launches[0];
+    console.log(props.appState.launches);
+    const launch = props.appState.launches[0];
+    console.log(launch);
     return (
        <Template>
            
