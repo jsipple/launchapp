@@ -2,13 +2,17 @@ import { ADD_LAUNCH } from '../actions/addAction';
 import { REMOVE_LAUNCH } from '../actions/removeAction';
 import { UPDATE_LAUNCH } from '../actions/updateAction';
 import { SET_VIEW } from '../actions/setView';
+import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
+import { GET_CURRENT } from '../actions/currentLaunch';
 
 const initialState = {
     isAuthenticated: false,
     launchView: 'list',
     profileImage: '',
     favoriteLaunches: [],
-    launches: []
+    launches: [],
+    index: 0,
+    currentLaunch: 0
 };
 
 const launchReducer = (state = initialState, action) => {
@@ -18,21 +22,36 @@ const launchReducer = (state = initialState, action) => {
                 ...state, 
                 launchView: state.launchView === 'list' ? 'slider' : 'list'
             }
+        case GET_CURRENT:
+            return {
+                ...state,
+                launches: state.launches.filter(launch => launch === state.launches[action.index])
+            }
         case ADD_LAUNCH:
             return {
                 ...state,
-                launches: state.launches.concat(action.launch)
+                launch: state.launches.push(action.launch)
+            }
+        case INCREMENT_INDEX:
+            return {
+                ...state,
+                index: state.index += 1
+            }
+        case DECREMENT_INDEX:
+            return {
+                ...state,
+                index: state.index -= 1
             }
         case REMOVE_LAUNCH:
             return {
                 ...state,
-                launches: state.launch.filter(rocket => rocket !== state.launch[action.idx])
+                launches: state.launches.filter(rocket => rocket !== state.launch[action.idx])
             }
         case UPDATE_LAUNCH:
             return {
                 ...state,
-                launches: state.launch.map(rocket => {
-                    if (rocket === state.launch[action.idx]) {
+                launches: state.launches.map(rocket => {
+                    if (rocket === state.launches[action.idx]) {
                         rocket = 'test'
                     }
                     return rocket;

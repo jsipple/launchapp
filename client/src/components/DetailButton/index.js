@@ -2,15 +2,14 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import "./style.css";
-import { addLaunch } from '../../actions/addAction';
-import { Redirect } from 'react-router-dom';
+import { getCurrentLaunch } from '../../actions/currentLaunch';
 import { withRouter } from "react-router";
 
 
 class DetailButton extends Component {
-    handleDetailClick = (launch) => {
-        console.log(launch);
-        this.props.addLaunch(launch);
+    handleDetailClick = (index) => {
+        console.log(index);
+        this.props.getCurrentLaunch(index);
         
         this.props.history.push('/launches/details')
         
@@ -18,10 +17,10 @@ class DetailButton extends Component {
       }
     render() {
       console.log('PROPS ', this.props)
-        const {launch} = this.props
+        const {index} = this.props
         return (
             <div>
-                <button className="btn details" onClick={()=>this.handleDetailClick(launch)}>Details</button>
+                <button className="btn details" onClick={()=>this.handleDetailClick(index)}>Details</button>
             </div>
         );
     }
@@ -32,7 +31,7 @@ const mapStateToProps = state => ({
   });
   
   const mapDispatchToProps = dispatch => {
-    return bindActionCreators({ addLaunch }, dispatch);
+    return bindActionCreators({ getCurrentLaunch }, dispatch);
   };
   
   export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DetailButton));

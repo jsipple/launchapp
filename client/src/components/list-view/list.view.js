@@ -1,12 +1,15 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import FollowButton from '../button';
+import DetailButton from '../DetailButton';
+import "./list.view.css";
 
 const ListView = (props) => {
-    const {launch}= props
+    const {launch, index}= props
     console.log("LISTVIEW", launch);
   return (
     <div>
-        <Card style={{ margin: 40}}>
+        <Card className="list-view" style={{ margin: 40, backgroundColor: "blue"}}>
             <Card.Img style={{height: 100, width: 100}}className="list-image" variant="top" src={launch.image}/>
             <Card.Body>
                 <Card.Title>{launch.date}</Card.Title>
@@ -14,7 +17,8 @@ const ListView = (props) => {
                   <p>{launch.company} | {launch.rocket} </p>
                   <p>{launch.location}</p>
                 </Card.Text>
-                <Button variant="dark">Add To Favorite</Button>
+                <DetailButton index={index} />
+                <FollowButton text={"Follow"}/>
             </Card.Body>
         </Card>
     </div>

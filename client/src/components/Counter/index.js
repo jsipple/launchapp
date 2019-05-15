@@ -27,7 +27,7 @@ class Counter extends Component {
     }, 1000);
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     this.stop();
   }
 
