@@ -8,7 +8,8 @@ const initialState = {
     launchView: 'list',
     profileImage: '',
     favoriteLaunches: [],
-    launches: []
+    launches: [],
+    index: 0
 };
 
 const middleware = [thunk];
