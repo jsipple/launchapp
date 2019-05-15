@@ -9,7 +9,8 @@ const initialState = {
     profileImage: '',
     favoriteLaunches: [],
     launches: [],
-    index: 0
+    index: 0,
+    currentLaunch: 0
 };
 
 const middleware = [thunk];
