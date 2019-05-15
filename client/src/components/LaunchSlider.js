@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import FollowButton from '../components/button';
 import Button from 'react-bootstrap/Button';
 import Counter from '../components/Counter';
+import DetailButton from '../components/DetailButton';
 
 const LaunchSlider = (props) => {
     const {launch, prevDate, nextDate, total, handleIndexChange} = props
@@ -40,7 +41,7 @@ const LaunchSlider = (props) => {
             </Row>
             <Row>
                 <Col>
-                    <FollowButton text="Details" />
+                    <DetailButton launch={launch} />
                 </Col>
                 <Col>
                     <FollowButton text="Follow" />

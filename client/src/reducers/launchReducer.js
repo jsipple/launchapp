@@ -21,17 +21,17 @@ const launchReducer = (state = initialState, action) => {
         case ADD_LAUNCH:
             return {
                 ...state,
-                launch: state.launch.concat(action.launch)
+                launches: state.launches.concat(action.launch)
             }
         case REMOVE_LAUNCH:
             return {
                 ...state,
-                launch: state.launch.filter(rocket => rocket !== state.launch[action.idx])
+                launches: state.launch.filter(rocket => rocket !== state.launch[action.idx])
             }
         case UPDATE_LAUNCH:
             return {
                 ...state,
-                launch: state.launch.map(rocket => {
+                launches: state.launch.map(rocket => {
                     if (rocket === state.launch[action.idx]) {
                         rocket = 'test'
                     }

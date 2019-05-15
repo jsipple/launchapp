@@ -12,6 +12,7 @@ import { addLaunch } from '../actions/addAction';
 
 
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -19,7 +20,6 @@ class Home extends React.Component {
   state ={
     launches: [],
     index: 0,
-    view: "slider"
   }
   componentDidMount () {
     console.log("mounted");
@@ -38,9 +38,7 @@ class Home extends React.Component {
         const launchName = (launch.missions.length && launch.missions[0].name) ? (launch.missions[0].name) : ("");
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
         const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
-        console.log(date);
         const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
-        console.log(countdownTime);
         const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime};
         
         
@@ -56,13 +54,10 @@ class Home extends React.Component {
   }
 
   handleViewChange = (view) => {
-    
-    // this.setState({
-    //   view: view
-    // });
     this.props.setView();
+  
   }
-
+  
   returnLaunchSlider = () => {
     const {launches, index} = this.state
     // const {launches, index} = this.props.appState.launches;
@@ -71,6 +66,7 @@ class Home extends React.Component {
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
         launch={launches[index]}
         total={launches.length}
+        handleDetailClick = {this.handleDetailClick}
         handleIndexChange = {this.handleIndexChange}
         nextDate={((index + 1 < launches.length)? (launches[(index+1)].date) : ("none"))} 
         />

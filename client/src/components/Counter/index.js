@@ -21,7 +21,6 @@ class Counter extends Component {
   componentDidMount() {
     // update every second
     this.interval = setInterval(() => {
-        console.log("COUNTER",this.props.date);
 
       const date = this.calculateCountdown(this.props.date);
       date ? this.setState(date) : this.stop();
@@ -33,8 +32,6 @@ class Counter extends Component {
   }
 
   calculateCountdown = (endDate) => {
-      console.log("CALCULATE", endDate);
-      console.log(Date.parse(new Date(endDate)));
     let diff = (Date.parse(new Date(endDate)) - Date.parse(new Date())) / 1000;
 
     // clear countdown when date is reached
