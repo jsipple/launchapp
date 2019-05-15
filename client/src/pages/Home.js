@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setView } from '../actions/setView';
 import { addLaunch } from '../actions/addAction';
+import { incrementIndex, decrementIndex } from '../actions/indexActions';
 
 
 
@@ -16,11 +17,11 @@ class Home extends React.Component {
   constructor(props) {
     super(props)
   }
-  state ={
-    launches: [],
-    index: 0,
-    view: "slider"
-  }
+  // state ={
+  //   launches: [],
+  //   index: 0,
+  //   view: "slider"
+  // }
   componentDidMount () {
     console.log("mounted");
     API.getUpcoming()
@@ -45,27 +46,22 @@ class Home extends React.Component {
         
         
         // console.log("LAUNCHDATA",launchData)
-        launches.push(launchData)
+        this.props.addLaunch(launchData);
       })
-      this.setState({
-        launches: launches
-      })
+      // this.setState({
+      //   launches: launches
+      // })
       // this.props.addLaunch(launches);
     })
     .catch(err => console.log(err));
   }
 
   handleViewChange = (view) => {
-    
-    // this.setState({
-    //   view: view
-    // });
     this.props.setView();
   }
 
   returnLaunchSlider = () => {
-    const {launches, index} = this.state
-    // const {launches, index} = this.props.appState.launches;
+    const {launches, index} = this.props.appState;
       return (
         <LaunchSlider 
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
@@ -78,7 +74,7 @@ class Home extends React.Component {
     }
 
     returnListView = () => {
-      const launches = this.state.launches
+      const launches = this.props.appState.launches;
       return (
         launches.map((launch,index) => (
           <ListView launch={launch} key={index} />)
@@ -87,22 +83,24 @@ class Home extends React.Component {
     }
 
     handleIndexChange = (change) => {
-      if(change > 0 && (this.state.index + change) < this.state.launches.length) {
-        this.setState({
-          index: this.state.index + 1
-        })
+      if(change > 0 && (this.props.appState.index + change) < this.props.appState.launches.length) {
+        // this.setState({
+        //   index: this.props.appState.index + 1
+        // })
+        this.props.incrementIndex();
       }
-      if(change < 0 && (this.state.index + change) >= 0) {
-        this.setState({
-          index: this.state.index -1
-        })
+      if(change < 0 && (this.props.appState.index + change) >= 0) {
+        // this.setState({
+        //   index: this.props.appState.index -1
+        // })
+        this.props.decrementIndex();
       }
       else {
         return false
       }
     }
   render() {
-    const {launches} = this.state;
+    const {launches} = this.props.appState;
     console.log(launches)
     return (
       <Template handleViewChange={this.handleViewChange}>
@@ -122,7 +120,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView, addLaunch }, dispatch);
+  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
