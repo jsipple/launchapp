@@ -3,6 +3,7 @@ import { REMOVE_LAUNCH } from '../actions/removeAction';
 import { UPDATE_LAUNCH } from '../actions/updateAction';
 import { SET_VIEW } from '../actions/setView';
 import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
+import { GET_CURRENT } from '../actions/currentLaunch';
 
 const initialState = {
     isAuthenticated: false,
@@ -10,7 +11,8 @@ const initialState = {
     profileImage: '',
     favoriteLaunches: [],
     launches: [],
-    index: 0
+    index: 0,
+    currentLaunch: 0
 };
 
 const launchReducer = (state = initialState, action) => {
@@ -19,6 +21,11 @@ const launchReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 launchView: state.launchView === 'list' ? 'slider' : 'list'
+            }
+        case GET_CURRENT:
+            return {
+                ...state,
+                launches: state.launches.filter(launch => launch === state.launches[action.index])
             }
         case ADD_LAUNCH:
             return {
