@@ -4,7 +4,12 @@ import launchReducer from '../reducers/launchReducer';
 
 
 const initialState = {
-    launches: []
+    isAuthenticated: false,
+    launchView: 'list',
+    profileImage: '',
+    favoriteLaunches: [],
+    launches: [],
+    index: 0
 };
 
 const middleware = [thunk];

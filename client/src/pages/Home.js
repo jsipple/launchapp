@@ -1,17 +1,27 @@
 import React from 'react';
-import {Template} from '../components/template/template.wrapper'
+import Template from '../components/template/template.wrapper'
 import API from '../utils/API';
 import LaunchSlider from '../components/LaunchSlider';
 import Spinner from 'react-bootstrap/Spinner';
 import ListView from '../components/list-view/list.view';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setView } from '../actions/setView';
+import { addLaunch } from '../actions/addAction';
+import { incrementIndex, decrementIndex } from '../actions/indexActions';
+
 
 
 class Home extends React.Component {
-  state ={
-    launches: [],
-    index: 0,
-    view: "slider"
+  constructor(props) {
+    super(props)
   }
+  // state ={
+  //   launches: [],
+  //   index: 0,
+  //   view: "slider"
+  // }
   componentDidMount () {
     console.log("mounted");
     API.getUpcoming()
@@ -29,27 +39,29 @@ class Home extends React.Component {
         const launchName = (launch.missions.length && launch.missions[0].name) ? (launch.missions[0].name) : ("");
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
         const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
-        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type};
+        console.log(date);
+        const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
+        console.log(countdownTime);
+        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime};
+        
         
         // console.log("LAUNCHDATA",launchData)
-        launches.push(launchData)
+        this.props.addLaunch(launchData);
       })
-      this.setState({
-        launches: launches
-      })
+      // this.setState({
+      //   launches: launches
+      // })
+      // this.props.addLaunch(launches);
     })
     .catch(err => console.log(err));
   }
 
   handleViewChange = (view) => {
-    
-    this.setState({
-      view: view
-    });
+    this.props.setView();
   }
 
   returnLaunchSlider = () => {
-    const {launches, index} = this.state
+    const {launches, index} = this.props.appState;
       return (
         <LaunchSlider 
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
@@ -62,7 +74,7 @@ class Home extends React.Component {
     }
 
     returnListView = () => {
-      const launches = this.state.launches
+      const launches = this.props.appState.launches;
       return (
         launches.map((launch,index) => (
           <ListView launch={launch} key={index} />)
@@ -71,27 +83,29 @@ class Home extends React.Component {
     }
 
     handleIndexChange = (change) => {
-      if(change > 0 && (this.state.index + change) < this.state.launches.length) {
-        this.setState({
-          index: this.state.index + 1
-        })
+      if(change > 0 && (this.props.appState.index + change) < this.props.appState.launches.length) {
+        // this.setState({
+        //   index: this.props.appState.index + 1
+        // })
+        this.props.incrementIndex();
       }
-      if(change < 0 && (this.state.index + change) >= 0) {
-        this.setState({
-          index: this.state.index -1
-        })
+      if(change < 0 && (this.props.appState.index + change) >= 0) {
+        // this.setState({
+        //   index: this.props.appState.index -1
+        // })
+        this.props.decrementIndex();
       }
       else {
         return false
       }
     }
   render() {
-    const {launches} = this.state;
+    const {launches} = this.props.appState;
     console.log(launches)
     return (
       <Template handleViewChange={this.handleViewChange}>
       {launches.length ? 
-        ((this.state.view === 'slider')? (this.returnLaunchSlider()): (this.returnListView())) 
+        ((this.props.appState.launchView === 'slider') ? (this.returnLaunchSlider()) : (this.returnListView())) 
         :
         (<Spinner animation="border" role="status">
           <span className="sr-only"> Loading ... </span>
@@ -101,6 +115,13 @@ class Home extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  appState: state
+});
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
