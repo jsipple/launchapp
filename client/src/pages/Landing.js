@@ -6,17 +6,7 @@ import {Col, Row, Container} from 'react-bootstrap';
 
 const Landing = () => {
     return (
-      <Template>      
-        <Container className="login">
-            <Row>
-                <Col>
-                <Login />
-                </Col>
-            </Row>
-        </Container>
-        </Template>
-  
-       
+        <Login />
     );
 }
 
