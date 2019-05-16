@@ -13,16 +13,10 @@ import { incrementIndex, decrementIndex } from '../actions/indexActions';
 
 
 
-
 class Home extends React.Component {
-  constructor(props) {
-    super(props)
+  state = {
+    weather: []
   }
-  // state ={
-  //   launches: [],
-  //   index: 0,
-  //   view: "slider"
-  // }
   componentDidMount () {
     console.log("mounted");
     API.getUpcoming()
@@ -47,10 +41,6 @@ class Home extends React.Component {
         // console.log("LAUNCHDATA",launchData)
         this.props.addLaunch(launchData);
       })
-      // this.setState({
-      //   launches: launches
-      // })
-      // this.props.addLaunch(launches);
     })
     .catch(err => console.log(err));
   }

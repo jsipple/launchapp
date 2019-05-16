@@ -14,7 +14,11 @@ const ArticleList = (props) => {
       alt="Generic placeholder"
     />
     <Media.Body>
-      <i class="wi wi-day-sunny"></i>
+      {/* <i class="wi wi-owm-210"></i>
+      <i class="wi wi-owm-211"></i>
+      <i class="wi wi-owm-221"></i>
+      <i class="wi wi-owm-212"></i> */}
+
       <h5>List-based media object</h5>
       <p>
         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
