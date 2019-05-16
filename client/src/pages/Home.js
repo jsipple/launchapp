@@ -13,6 +13,7 @@ import { incrementIndex, decrementIndex } from '../actions/indexActions';
 
 
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props)
@@ -39,9 +40,7 @@ class Home extends React.Component {
         const launchName = (launch.missions.length && launch.missions[0].name) ? (launch.missions[0].name) : ("");
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
         const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
-        console.log(date);
         const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
-        console.log(countdownTime);
         const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime};
         
         
@@ -58,15 +57,18 @@ class Home extends React.Component {
 
   handleViewChange = (view) => {
     this.props.setView();
+  
   }
-
+  
   returnLaunchSlider = () => {
     const {launches, index} = this.props.appState;
       return (
         <LaunchSlider 
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
+        index={index}
         launch={launches[index]}
         total={launches.length}
+        handleDetailClick = {this.handleDetailClick}
         handleIndexChange = {this.handleIndexChange}
         nextDate={((index + 1 < launches.length)? (launches[(index+1)].date) : ("none"))} 
         />
@@ -77,7 +79,7 @@ class Home extends React.Component {
       const launches = this.props.appState.launches;
       return (
         launches.map((launch,index) => (
-          <ListView launch={launch} key={index} />)
+          <ListView launch={launch} key={index} index={index} />)
         )
       )
     }
