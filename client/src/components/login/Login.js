@@ -23,27 +23,31 @@ class Login extends Component {
   }
   // this is working
   googleResponse = (response) => {
-    console.log(response)
+    console.log(response.profileObj)
     this.setState({
         user: response.profileObj,
         isAuthenticated: true
       })
     axios.get('/auth/login/google', response )
       .then(res => {
+        // same as below
+        console.log(res)
         console.log('added to mongodb')
       })
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
-    const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
-    console.log(tokenBlob)
-    console.log(response)
+    console.log(response.name)
+    // if (response.name !== undefined) {
     this.setState({
         user: response,
         isAuthenticated: true
       })
+    // }
     axios.get('/auth/login/facebook', response)
       .then(res => {
+        // being sent full file not sure if this is good
+        console.log(res)
         console.log('added to mongodb')
       })
   }
@@ -99,6 +103,7 @@ class Login extends Component {
                     fields="name,email,picture"
                     callback={this.facebookResponse}
                     reAuthenticate={true}
+                    onFailure={this.onFailure}
                      />
                 <GoogleLogin
                     clientId={ids.google.clientID}
