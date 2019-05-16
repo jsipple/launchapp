@@ -35,7 +35,9 @@ class Login extends Component {
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
-      console.log(response)
+    const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
+    console.log(tokenBlob)
+    console.log(response)
     this.setState({
         user: response,
         isAuthenticated: true
@@ -46,10 +48,11 @@ class Login extends Component {
       })
   }
   twitterResponse = (response) => {
-    axios.get('/auth/login/twitter', response)
-      .then(res => {
-        console.log('added to mongodb')
-      })
+    console.log(response)
+    // axios.get('/auth/login/twitter', response)
+    //   .then(res => {
+    //     console.log('added to mongodb')
+    //   })
   }
   onFailure = error => {
     alert(error)
@@ -62,6 +65,9 @@ class Login extends Component {
     .then(res => {
       console.log(res.data)
     })
+  }
+  handleFailure = () => {
+    console.log('a')
   }
   render() {
     let content = this.state.isAuthenticated ?
@@ -80,9 +86,13 @@ class Login extends Component {
         ) :
         (
             <div>
-                <TwitterLogin loginUrl="localhost:3001/login/twitter"
-                               onFailure={this.twitterResponse} onSuccess={this.twitterResponse}
-                               requestTokenUrl="http://localhost:3001/auth/twitter/redirect"/>
+                <TwitterLogin 
+                loginUrl="localhost:8080/auth/twitter"         
+                onFailure={this.handleFailure}            
+                onSuccess={this.twitterResponse}
+                // issue with request token url
+                requestTokenUrl="http://localhost:8080/auth/twitter/callback"
+                />
                 <FacebookLogin
                     appId='386466931941979'
                     autoLoad={true}
