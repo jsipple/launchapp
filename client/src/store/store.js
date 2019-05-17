@@ -10,7 +10,8 @@ const initialState = {
     favoriteLaunches: [],
     launches: [],
     index: 0,
-    currentLaunch: 0
+    currentLaunch: 0,
+    userData: []
 };
 
 const middleware = [thunk];
