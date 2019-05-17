@@ -1,26 +1,24 @@
 import React from 'react';
 import Template from '../components/template/template.wrapper';
+import LaunchSlider from '../components/LaunchSlider';
+import ArticleList from '../components/ArticleList';
+import { connect } from 'react-redux';
 
-const LaunchDetails = ()=> {
+
+const LaunchDetails = (props)=> {
+    console.log(props.appState.launches);
+    const launch = props.appState.launches[0];
+    console.log(launch);
     return (
        <Template>
-           {/* follow button benj already */}
-           {/* <Button />
-           <MissionDetails /> */}
-           {/* countdown(moment or something similar) */}
-            {/* mission details which will pull from launch api */}
-            {/* weather(at time of launch if available(or maybe current weather if not available)) */}
-           {/* picture behind same picture each time or maybe picture of the rocket */}
-           {/* watch live(link to separate site) */}
-           {/* grap company logo to display(for now just display the name of the company) */}
-           {/* link back to home page */}
-           {/* figure out what needs to be done to grab organizations logo */}
-           {/* api call to news that will be displayed if updates is highlighted(with state) */}
-        Landing Details
-        <p>test</p>
+           
+       <LaunchSlider launch={launch} />
+       <ArticleList />
        </Template>
 
     )
 }
-
-export default LaunchDetails;
+const mapStateToProps = state => ({
+    appState: state
+  });
+export default connect(mapStateToProps)(LaunchDetails);

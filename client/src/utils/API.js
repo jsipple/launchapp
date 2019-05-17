@@ -15,5 +15,8 @@ export default {
     },
     addUserImg: function(data, userId){
         return axios.put('/api/user/image/' + userId, data);
+    },
+    getWeather: function(location) {
+        return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=4b44d2c426126fc0555255fea24e6c5a`)
     }
 }
