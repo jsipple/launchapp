@@ -5,16 +5,23 @@ import TwitterLogin from 'react-twitter-auth';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import ids from './keys'
+import API from '../../utils/API';
+import { connect } from 'react-redux';
+import { addUser } from '../../actions/addUserAction';
+import { bindActionCreators } from 'redux';
+import { withRouter } from "react-router";
 
 class Login extends Component {
   // need to save this state to store as well figure out if i want to use token
+  constructor(props) {
+    super(props)
+  }
   state = {
     isAuthenticated: false,
     user: null,
     token: ''
   }
   handleLogout = () => {
-    console.log(this.state.user)
     this.setState({
       isAuthenticated: false,
       user: null,
@@ -23,15 +30,16 @@ class Login extends Component {
   }
   // this is working
   googleResponse = (response) => {
-    console.log(response)
+    const userData = response.profileObj;
     this.setState({
         user: response.profileObj,
         isAuthenticated: true
       })
-    axios.get('/auth/login/google', response )
-      .then(res => {
-        console.log('added to mongodb')
-      })
+    API.addUser(userData);
+    this.props.addUser(userData);
+
+    this.props.history.push('/home')
+
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
@@ -107,4 +115,11 @@ class Login extends Component {
 }
 }
 
-export default Login
+const mapStateToProps = state => state;
+
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({addUser}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
