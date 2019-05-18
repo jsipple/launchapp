@@ -1,12 +1,4 @@
-.login {
-    margin: 0 auto;
-    text-align: center;
-    padding: 300px 200px 300px 200px;
-    background-image: url('/images/shuttle.jpg');
-    background-size: cover;
-    overflow: hidden;
-    min-height: 100vh; 
-}
+
 .list-image {
     height: 100px;
     width: 100px;
