@@ -4,14 +4,42 @@ import getIcon from '../../utils/Icon';
 
 class Weather extends Component {
     state={
+        long: "",
+        lat: "",
         weather: "",
         icon: ""
     }
     componentDidMount() {
-        const {lat, long} = this.props
-        this.getWeather(lat,long)
+        let {lat, long} = this.props
+        lat = Math.floor(lat*100)/100
+        lat = lat.toFixed(2);
+        long = Math.floor(long*100)/100
+        long = long.toFixed(2);
+        this.setState({
+            long: long,
+            lat: lat
+        });
+        this.getWeather(lat, long)
+        
+    }
+    componentWillReceiveProps(newProps) {
+        let {lat,long} =newProps
+        lat = Math.floor(lat*100)/100
+        lat = lat.toFixed(2);
+        long = Math.floor(long*100)/100
+        long = long.toFixed(2);
+        if(lat !==this.state.lat) {
+            this.setState({
+                lat: lat,
+                long: long
+            });
+            this.getWeather(lat,long)
+        }
     }
     componentDidUpdate() {
+        // if(this.state.lat.length > 0 && this.state.weather.length !==0 && parseFloat(this.state.lat) !== this.state.weather.coord.lat) {
+        //     this.getWeather(this.state.lat,this.state.long)
+        // }
         if(this.state.weather.weather && this.state.icon.length ===0) {
             this.handlegetIcon(this.state.weather.weather[0].id)
         }
@@ -26,11 +54,10 @@ class Weather extends Component {
             this.setState({
                 weather: result.data
             })
+        //     .then( function() {
+        //         console.log(this.state)
+        //         this.handlegetIcon(this.state.weather.weather[0].id)}.bind(this));
         })
-        .then(
-            console.log("WEATHER", this.state.weather)
-            // this.handlegetIcon(this.state.weather.weather[0].id)
-        )
         .catch(err => console.log(err))
     }
     handlegetIcon = (id) => {
@@ -44,14 +71,14 @@ class Weather extends Component {
         return farenheight;
     } 
     render() {
-        
+        console.log(this.state);
         const {icon, weather} = this.state
         return (
             <div>
                 <p>
                 Temperature: {weather.main ? (weather.main.temp) : "loading" }
                 </p>
-                <i class={`wi ${icon}`}></i>
+                <i className={`wi ${icon}`}></i>
             </div>
         )
     }
