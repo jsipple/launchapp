@@ -34,8 +34,6 @@ module.exports = function(app){
   // Creates a new user 
   app.post("/api/user/", function(req, res) {
     
-    console.log(req.body.email);
-
     User.find({email: req.body.email})
     .then(response => {
       if (response === '') {
@@ -52,44 +50,9 @@ module.exports = function(app){
     });
   });
 
-  // Adds launch data to the user's followed launches.
   app.post("/api/user/:id", function(req, res){
-    
-    User.updateOne({_id: req.params.id}, {$push: {launches: req.body.launch}})
-    .then(() => {
-      res.json(true);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-  })
 
-  // Removes specific launch from user's followed launches
-  app.put("/api/user/:id", function(req, res){
-    
-    User.updateOne({_id: req.params.id}, {$pull: {launches: {id: req.body.id}}})
-    .then(() => {
-      res.json(true);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-  })
-
-//   app.get("/api/user/image/:id", function(req, res){
-//     User.findOne({_id: req.params.id}, (error, data) => {
-//         if (error) {
-//           console.log(error);
-//         }
-//         else {
-//             res.render(data.picture);
-//         }
-//       });
-//   })
-
-  app.put("/api/user/image/:id", function(req, res){
-    
-    User.updateOne({_id: req.params.id}, {picture: req.body.image})
+    User.updateOne({_id: req.params.id}, {$set: {favLaunches: req.body}})
     .then(() => {
       res.json(true);
     })
