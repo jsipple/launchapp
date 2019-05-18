@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
-import TwitterLogin from 'react-twitter-auth';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import ids from './keys'
+import './login.css'
+
 import API from '../../utils/API';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUserAction';
@@ -18,8 +19,7 @@ class Login extends Component {
   }
   state = {
     isAuthenticated: false,
-    user: null,
-    token: ''
+    email: undefined
   }
   handleLogout = () => {
     this.setState({
@@ -31,6 +31,7 @@ class Login extends Component {
   // this is working
   googleResponse = (response) => {
     const userData = response.profileObj;
+    console.log(userData)
     this.setState({
         user: response.profileObj,
         isAuthenticated: true
@@ -41,69 +42,64 @@ class Login extends Component {
     this.props.history.push('/home')
 
   }
+  guestLogin = () => {
+    this.setState({
+      isAuthenticated: true
+    })
+    this.props.addUser('guest')
+    this.props.history.push('/home')
+  }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
-      console.log(response)
+    console.log(response)
+    const userData = {
+      name: response.name,
+      email: response.email,
+      image: response.picture.data.url
+    }
+    // if (response.name !== undefined) {
     this.setState({
-        user: response,
         isAuthenticated: true
       })
-    axios.get('/auth/login/facebook', response)
-      .then(res => {
-        console.log('added to mongodb')
-      })
+      API.addUser(userData);
+      this.props.addUser(userData);
+  
+      this.props.history.push('/home')
+    // }
   }
-  twitterResponse = (response) => {
-    axios.get('/auth/login/twitter', response)
-      .then(res => {
-        console.log('added to mongodb')
-      })
-  }
+  
   onFailure = error => {
-    alert(error)
-  }
-  handleServer = () => {
-  // this is not being grabbed trying to get 3000 still
-    // getting a 404 not found seem sissue with proxy probably
-    axios.get('/auth/login', (req, res) => {
-    })
-    .then(res => {
-      console.log(res.data)
-    })
+    console.log(error)
   }
   render() {
-    let content = this.state.isAuthenticated ?
+    let content =
         (
-            <div>
-                <p>Authenticated</p>
-                <div>
-                    {this.state.user.email}
-                </div>
-                <div>
-                    <button onClick={this.handleLogout} className="button">
-                        Log out
-                    </button>
-                </div>
-            </div>
-        ) :
-        (
-            <div>
-                <TwitterLogin loginUrl="localhost:3001/login/twitter"
-                               onFailure={this.twitterResponse} onSuccess={this.twitterResponse}
-                               requestTokenUrl="http://localhost:3001/auth/twitter/redirect"/>
+            <div className='login'>
                 <FacebookLogin
                     appId='386466931941979'
                     autoLoad={true}
                     fields="name,email,picture"
                     callback={this.facebookResponse}
                     reAuthenticate={true}
+                    onFailure={this.onFailure}
+                    size='small'
+                    icon="fa-facebook"
                      />
+                     <div className='google'>
                 <GoogleLogin
                     clientId={ids.google.clientID}
-                    buttonText="Login"
+                    icon={true}
+                    // option if we just want icon
+                    // render={renderProps => (
+                    //   <img src="https://img.icons8.com/color/96/000000/google-logo.png" />
+                    // )}
                     onSuccess={this.googleResponse}
                     onFailure={this.onFailure}
                 />
+                </div>
+                <div>
+                  <button className='guest' onClick={this.guestLogin}>continue as guest &#8594;</button>
+                </div>
             </div>
         );
 
