@@ -7,7 +7,7 @@ import { LaunchList } from './pages/LaunchList';
 import LaunchDetails from './pages/LaunchDetails';
 import MyLaunches from './pages/MyLaunches';
 import PastLaunches from './pages/PastLauches';
-import Organizations from './pages/Organizations';
+import Organization from './pages/Organization';
 import Profile from './pages/Profile';
 import TestComponent from './components/test-see/Test.component';
 
@@ -29,7 +29,7 @@ class App extends Component {
           <Route exact path='/launches/test' component={TestComponent} />
           <Route exact path='/launches/fav' component={MyLaunches} />
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
-          <Route path='/organizations' component={Organizations} />
+          <Route path='/organizations' component={Organization} />
         </Router>
       </div>
     );

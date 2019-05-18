@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './MissionDetails.css'
 import axios from 'axios'
-
 class MissionDetails extends Component {
     state = {
         launchData: []

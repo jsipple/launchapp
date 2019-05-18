@@ -6,13 +6,9 @@ import {Col, Row, Container} from 'react-bootstrap';
 
 const Landing = () => {
     return (
-<<<<<<< Updated upstream
-        <Login />
-=======
-        <div className='login'>
-        <Login />
+        <div>
+            <Login />
         </div>
->>>>>>> Stashed changes
     );
 }
 
