@@ -12,14 +12,9 @@ let userSchema = new Schema({
   trim: true,
   match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
  },
- picture: {
-  // double check what type this should be
-   data: Buffer,
-   contentType: String 
+ imageUrl: {
+  type: String
  },
- // also add a preferred starter page
- // probably better to just have 3rd party id here instead of 3 different ones
- // for pictures see if they just want us to grab from 3rd party or have both options
  favLaunches: {
   type: Array
  }
