@@ -23,7 +23,7 @@ class App extends Component {
         <Router>
           <Route exact path='/home' component={Home} />
           <Route path='/profile' component={Profile} />
-          <Route path='/' component={Landing} />
+          <Route path='/' exact={true} component={Landing} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
           <Route exact path='/launches/upcoming' component={Home} />
           <Route exact path='/launches/details' component={LaunchDetails} />

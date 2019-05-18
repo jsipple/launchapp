@@ -4,20 +4,25 @@ import axios from 'axios'
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import ids from './keys'
-import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
-import SocialMediaIcons from 'react-social-media-icons';
 import './login.css'
 
+import API from '../../utils/API';
+import { connect } from 'react-redux';
+import { addUser } from '../../actions/addUserAction';
+import { bindActionCreators } from 'redux';
+import { withRouter } from "react-router";
 
 class Login extends Component {
   // need to save this state to store as well figure out if i want to use token
+  constructor(props) {
+    super(props)
+  }
   state = {
     isAuthenticated: false,
     user: null,
     token: ''
   }
   handleLogout = () => {
-    console.log(this.state.user)
     this.setState({
       isAuthenticated: false,
       user: null,
@@ -26,17 +31,16 @@ class Login extends Component {
   }
   // this is working
   googleResponse = (response) => {
-    console.log(response.profileObj)
+    const userData = response.profileObj;
     this.setState({
         user: response.profileObj,
         isAuthenticated: true
       })
-    axios.get('/auth/login/google', response )
-      .then(res => {
-        // same as below
-        console.log(res)
-        console.log('added to mongodb')
-      })
+    API.addUser(userData);
+    this.props.addUser(userData);
+
+    this.props.history.push('/home')
+
   }
   guestLogin = () => {
     this.setState({
@@ -117,4 +121,11 @@ class Login extends Component {
 }
 }
 
-export default Login
+const mapStateToProps = state => state;
+
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({addUser}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
