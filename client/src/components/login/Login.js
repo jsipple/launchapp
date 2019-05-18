@@ -31,6 +31,7 @@ class Login extends Component {
   // this is working
   googleResponse = (response) => {
     const userData = response.profileObj;
+    console.log(userData)
     this.setState({
         user: response.profileObj,
         isAuthenticated: true
