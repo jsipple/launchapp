@@ -19,8 +19,7 @@ class Login extends Component {
   }
   state = {
     isAuthenticated: false,
-    user: null,
-    token: ''
+    email: undefined
   }
   handleLogout = () => {
     this.setState({
@@ -69,23 +68,10 @@ class Login extends Component {
   }
   
   onFailure = error => {
-    alert(error)
+    console.log(error)
   }
   render() {
-    let content = this.state.isAuthenticated ?
-        (
-            <div>
-                <p>Authenticated</p>
-                <div>
-                    {this.state.user.email}
-                </div>
-                <div>
-                    <button onClick={this.handleLogout} className="button">
-                        Log out
-                    </button>
-                </div>
-            </div>
-        ) :
+    let content =
         (
             <div className='login'>
                 <FacebookLogin
