@@ -46,6 +46,8 @@ class Login extends Component {
     this.setState({
       isAuthenticated: true
     })
+    this.props.addUser('guest')
+    this.props.history.push('/home')
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
@@ -102,7 +104,6 @@ class Login extends Component {
                     // render={renderProps => (
                     //   <img src="https://img.icons8.com/color/96/000000/google-logo.png" />
                     // )}
-                    style='margin: 10px'
                     onSuccess={this.googleResponse}
                     onFailure={this.onFailure}
                 />
