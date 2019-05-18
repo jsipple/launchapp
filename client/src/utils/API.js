@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Last } from 'react-bootstrap/PageItem';
 
 export default {
     getUpcoming: function() {
@@ -16,7 +17,8 @@ export default {
     addUser: function(data){
         return axios.post('/api/user/', data);
     },
-    getWeather: function(location) {
-        return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=4b44d2c426126fc0555255fea24e6c5a`)
+    getWeather: function(lat,long) {
+        const APIkey = "3492e25a528a4ddab6b447654307061a"
+        return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${APIkey}`)
     }
 }

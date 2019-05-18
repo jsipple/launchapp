@@ -16,7 +16,6 @@ class DetailButton extends Component {
         
       }
     render() {
-      console.log('PROPS ', this.props)
         const {index} = this.props
         return (
             <div>

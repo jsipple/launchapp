@@ -22,11 +22,15 @@ class Home extends React.Component {
     API.getUpcoming()
     .then(result => {
       console.log(result);
+      console.log(result.data.launches[0].location.pads[0].latitude);
+      console.log(result.data.launches[0].location.pads[0].longitude);
       let launches = [];
       
       result.data.launches.forEach(launch => {
         const id = launch.id ? (launch.id): (1)
-        const location = launch.location.name ? (launch.location.name) : ("")
+        const location = launch.location.name ? (launch.location.name) : ("");
+        const longitude = launch.location.pads[0] ? (launch.location.pads[0].longitude) : ("");
+        const latitude = launch.location.pads[0] ? (launch.location.pads[0].latitude) : ("");
         const rocket = launch.rocket.name ? (launch.rocket.name) : ("");
         const date = launch.net ? (launch.net) : ("");
         const timestamp = launch.netstamp ? (launch.netstamp) : ("");
@@ -35,7 +39,7 @@ class Home extends React.Component {
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
         const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
         const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
-        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime};
+        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime, longitude, latitude};
         
         
         // console.log("LAUNCHDATA",launchData)
@@ -98,7 +102,6 @@ class Home extends React.Component {
     }
   render() {
     const {launches} = this.props.appState;
-    console.log(launches)
     return (
       <Template handleViewChange={this.handleViewChange}>
       {launches.length ? 

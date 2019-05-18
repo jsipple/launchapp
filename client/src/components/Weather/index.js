@@ -8,36 +8,50 @@ class Weather extends Component {
         icon: ""
     }
     componentDidMount() {
-        this.getWeather(this.props.location.split(","))
+        const {lat, long} = this.props
+        this.getWeather(lat,long)
     }
-    getWeather = (location) => {
-        console.log("LOCATION",location)
+    componentDidUpdate() {
+        if(this.state.weather.weather && this.state.icon.length ===0) {
+            this.handlegetIcon(this.state.weather.weather[0].id)
+        }
+    }
+    getWeather = (lat,long) => {
+        console.log("LOCATION",long);
+        console.log("LOCATION",lat);
 
-        API.getWeather(location[0])
+        API.getWeather(lat,long)
         .then(result => {
-            console.log(result);
+            console.log(result.data);
             this.setState({
-                weather: result
+                weather: result.data
             })
         })
-        // .then(
-        //     this.handlegetIcon(this.state.weather.weather.description)
-        // )
+        .then(
+            console.log("WEATHER", this.state.weather)
+            // this.handlegetIcon(this.state.weather.weather[0].id)
+        )
         .catch(err => console.log(err))
     }
-    handlegetIcon = (desc) => {
-        const descrip = desc.split(' ').join('-')
+    handlegetIcon = (id) => {
         this.setState({
-            icon: getIcon(descrip)
+            icon: getIcon(`${id}`)
         })
     }
+    convertToFarenheit = (temp) => {
+        console.log("TEMP", temp);
+        const farenheight = (temp - 273.15) * (9/5 )+ 32 
+        return farenheight;
+    } 
     render() {
+        
         const {icon, weather} = this.state
         return (
             <div>
-                {/* {weather.main.temp}
-                {icon} */}
-                Weather
+                <p>
+                Temperature: {weather.main ? (weather.main.temp) : "loading" }
+                </p>
+                <i class={`wi ${icon}`}></i>
             </div>
         )
     }

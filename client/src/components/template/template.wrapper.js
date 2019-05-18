@@ -18,7 +18,6 @@ class Template extends Component {
 
   render() {
     const {handleViewChange} = this.props
-    console.log(this.props);
     return (
       <div>
         <Navbar 

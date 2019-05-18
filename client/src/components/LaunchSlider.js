@@ -10,8 +10,7 @@ import Weather from '../components/Weather';
 
 const LaunchSlider = (props) => {
     const {launch, prevDate, nextDate, total, handleIndexChange, index} = props
-    // console.log("LAUNCH SLIDER", launch.countdownTime)
-    // console.log(launch.company)
+    console.log(launch.longitude)
     return(
         <Container className="slider" style={{backgroundColor: "blue"}}>
             <Row>
@@ -22,7 +21,7 @@ const LaunchSlider = (props) => {
                                 <ul>
                                     <li>Location: {launch.location}</li>
                                     <li>Date: {launch.date} </li>
-                                    <Weather location={launch.location} />
+                                    <Weather long={launch.longitude} lat={launch.latitude}/>
                                     <Counter date={`${launch.countdownTime}`} />
                                 </ul>
                             </Col>
