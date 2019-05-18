@@ -10,6 +10,9 @@ import PastLaunches from './pages/PastLauches';
 import Organizations from './pages/Organizations';
 import Profile from './pages/Profile';
 import TestComponent from './components/test-see/Test.component';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
 
 
 class App extends Component {

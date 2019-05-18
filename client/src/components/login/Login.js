@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
-import TwitterLogin from 'react-twitter-auth';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 import ids from './keys'
+import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
+import SocialMediaIcons from 'react-social-media-icons';
+import './login.css'
+
 
 class Login extends Component {
   // need to save this state to store as well figure out if i want to use token
@@ -35,6 +38,11 @@ class Login extends Component {
         console.log('added to mongodb')
       })
   }
+  guestLogin = () => {
+    this.setState({
+      isAuthenticated: true
+    })
+  }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
     console.log(response.name)
@@ -51,27 +59,9 @@ class Login extends Component {
         console.log('added to mongodb')
       })
   }
-  twitterResponse = (response) => {
-    console.log(response)
-    // axios.get('/auth/login/twitter', response)
-    //   .then(res => {
-    //     console.log('added to mongodb')
-    //   })
-  }
+  
   onFailure = error => {
     alert(error)
-  }
-  handleServer = () => {
-  // this is not being grabbed trying to get 3000 still
-    // getting a 404 not found seem sissue with proxy probably
-    axios.get('/auth/login', (req, res) => {
-    })
-    .then(res => {
-      console.log(res.data)
-    })
-  }
-  handleFailure = () => {
-    console.log('a')
   }
   render() {
     let content = this.state.isAuthenticated ?
@@ -89,14 +79,7 @@ class Login extends Component {
             </div>
         ) :
         (
-            <div>
-                <TwitterLogin 
-                loginUrl="localhost:8080/auth/twitter"         
-                onFailure={this.handleFailure}            
-                onSuccess={this.twitterResponse}
-                // issue with request token url
-                requestTokenUrl="http://localhost:8080/auth/twitter/callback"
-                />
+            <div className='login'>
                 <FacebookLogin
                     appId='386466931941979'
                     autoLoad={true}
@@ -104,13 +87,25 @@ class Login extends Component {
                     callback={this.facebookResponse}
                     reAuthenticate={true}
                     onFailure={this.onFailure}
+                    size='small'
+                    icon="fa-facebook"
                      />
+                     <div className='google'>
                 <GoogleLogin
                     clientId={ids.google.clientID}
-                    buttonText="Login"
+                    icon={true}
+                    // option if we just want icon
+                    // render={renderProps => (
+                    //   <img src="https://img.icons8.com/color/96/000000/google-logo.png" />
+                    // )}
+                    style='margin: 10px'
                     onSuccess={this.googleResponse}
                     onFailure={this.onFailure}
                 />
+                </div>
+                <div>
+                  <button className='guest' onClick={this.guestLogin}>continue as guest &#8594;</button>
+                </div>
             </div>
         );
 
