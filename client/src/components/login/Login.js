@@ -51,19 +51,21 @@ class Login extends Component {
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
-    console.log(response.name)
+    console.log(response)
+    const userData = {
+      name: response.name,
+      email: response.email,
+      image: response.picture.data.url
+    }
     // if (response.name !== undefined) {
     this.setState({
-        user: response,
         isAuthenticated: true
       })
+      API.addUser(userData);
+      this.props.addUser(userData);
+  
+      this.props.history.push('/home')
     // }
-    axios.get('/auth/login/facebook', response)
-      .then(res => {
-        // being sent full file not sure if this is good
-        console.log(res)
-        console.log('added to mongodb')
-      })
   }
   
   onFailure = error => {
