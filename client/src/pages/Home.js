@@ -13,16 +13,10 @@ import { incrementIndex, decrementIndex } from '../actions/indexActions';
 
 
 
-
 class Home extends React.Component {
-  constructor(props) {
-    super(props)
+  state = {
+    weather: []
   }
-  // state ={
-  //   launches: [],
-  //   index: 0,
-  //   view: "slider"
-  // }
   componentDidMount () {
     console.log("mounted");
     API.getUpcoming()
@@ -47,10 +41,6 @@ class Home extends React.Component {
         // console.log("LAUNCHDATA",launchData)
         this.props.addLaunch(launchData);
       })
-      // this.setState({
-      //   launches: launches
-      // })
-      // this.props.addLaunch(launches);
     })
     .catch(err => console.log(err));
   }
@@ -64,6 +54,7 @@ class Home extends React.Component {
     const {launches, index} = this.props.appState;
       return (
         <LaunchSlider 
+        launchID = {launches.id}
         prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
         index={index}
         launch={launches[index]}
@@ -79,7 +70,11 @@ class Home extends React.Component {
       const launches = this.props.appState.launches;
       return (
         launches.map((launch,index) => (
-          <ListView launch={launch} key={index} index={index} />)
+          <ListView 
+          launchID = {launches.id}
+          launch={launch} 
+          key={index} 
+          index={index} />)
         )
       )
     }

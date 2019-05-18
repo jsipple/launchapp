@@ -10,7 +10,7 @@ import PastLaunches from './pages/PastLauches';
 import Organization from './pages/Organization';
 import Profile from './pages/Profile';
 import TestComponent from './components/test-see/Test.component';
-
+import missionDetails from './components/missionDetails/MissionDetails'
 
 class App extends Component {
   render() {
@@ -20,7 +20,7 @@ class App extends Component {
         <Router>
           <Route exact path='/home' component={Home} />
           <Route path='/profile' component={Profile} />
-          <Route path='/' component={Landing} />
+          <Route path='/' exact={true} component={Landing} />
           {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
           <Route exact path='/launches/upcoming' component={Home} />
           <Route exact path='/launches/details' component={LaunchDetails} />
@@ -30,6 +30,7 @@ class App extends Component {
           <Route exact path='/launches/fav' component={MyLaunches} />
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
           <Route path='/organizations' component={Organization} />
+          <Route path='/test' component={missionDetails} />
         </Router>
       </div>
     );

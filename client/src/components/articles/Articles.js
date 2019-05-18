@@ -1,44 +1,82 @@
 import React, { Component } from "react";
 import API from "../../utils/API"
-
+import Media from 'react-bootstrap/Media'
 class Articles extends Component {
-   constructor(props) {
-       super(props)
-       this.state = {
-           datePublished: [],
-           url: [],
-           title: [],
-           image: [],
-           newsSite: []
-       }
-   }
-   componentDidMount = () => {
+    data = [{datePublished: 1, image: 2, newsSite: 3, title: 4, url: 5}];
+    datePublished = [];
+    image = [];
+    newsSite = [];
+    title = [];
+    url = [];
+    
+   componentDidMount() {
+
+       console.log(`this should be the name: ${this.props.name}`)
+
        API.getArticles(this.props.name)
-       .then(function(result) {
+       .then((result) => {
+           console.log(result)
         // result.data.docs[0].title
         // for loop  
         // let title = []
 //  result.data.docs[i].title
 // end for loop
-        // this.setState({title: title})
-        
+
+
         for (let i = 0; i < result.data.docs.length; i++) {
-        
-           console.log(result.data.docs[i].date_published);
-           console.log(result.data.docs[i].featured_image);
-           console.log(result.data.docs[i].news_site);
-           console.log(result.data.docs[i].title);
-           console.log(result.data.docs[i].url);
-        //    console.log(result.data.docs[i]);
+           this.datePublished.push(result.data.docs[i].date_published);
+           this.image.push(result.data.docs[i].featured_image);
+           this.newsSite.push(result.data.docs[i].news_site);
+           this.title.push(result.data.docs[i].title);
+           this.url.push(result.data.docs[i].url);
         }
+        const objData = {
+            datePublished: this.datePublished,
+            image: this.image,
+            newsSite: this.newsSite,
+            title: this.title,
+            url: this.url
+        };
+        this.data.push(objData);
+        console.log(this.data)
        })
    }
    render() {
-       return (
+       
+        const article = this.data.map( (x, i) => {
+                return <ul className="list-unstyled" key="i">
+                  <Media as="li">
+                    <img
+                      width={64}
+                      height={64}
+                      className="mr-3"
+                      src={x.image}
+                      alt="Generic placeholder"
+                    />
+                    <Media.Body>
+                        {x.datePublished}
+                      <i className="wi wi-owm-210"></i>
+                      <i className="wi wi-owm-211"></i>
+                      <i className="wi wi-owm-221"></i>
+                      <i className="wi wi-owm-212"></i>  
+                      <h5>
+                          {x.title}
+                          </h5>
+                      <p>
+                        Summary
+                      </p>
+                      <a href={x.url} target='_blank'>{x.url}</a>
+                      <a href={x.newsSite} target='_blank'>{x.newsSite}</a>
+                    </Media.Body>
+                  </Media>    
+                </ul>
+        }) 
+    
+        return (
+            <div>{article}</div>
+                
+        )
         //    dates, title, url, image
-           <div>hello
-               </div>
-       )
    }
    }
 

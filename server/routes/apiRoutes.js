@@ -34,11 +34,18 @@ module.exports = function(app){
   // Creates a new user 
   app.post("/api/user/", function(req, res) {
     
-    console.log(req.body);
+    console.log(req.body.email);
 
-    User.create(req.body)
-    .then(() => {
-      res.json(true);
+    User.find({email: req.body.email})
+    .then(response => {
+      if (response === '') {
+        res.json(response);
+      } else {
+        User.create(req.body)
+        .then((result) => {
+          res.json(true);
+        })
+      }
     })
     .catch((err) => {
       res.json(err);

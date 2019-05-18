@@ -2,6 +2,7 @@ import React from 'react';
 import Template from '../components/template/template.wrapper';
 import Login from '../components/login/Login';
 import {Col, Row, Container} from 'react-bootstrap';
+import './landing.css';
 // import { url } from 'inspector';
 
 const Landing = () => {

@@ -4,6 +4,7 @@ import { UPDATE_LAUNCH } from '../actions/updateAction';
 import { SET_VIEW } from '../actions/setView';
 import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
 import { GET_CURRENT } from '../actions/currentLaunch';
+import { ADD_USER } from '../actions/addUserAction';
 
 const initialState = {
     isAuthenticated: false,
@@ -12,7 +13,8 @@ const initialState = {
     favoriteLaunches: [],
     launches: [],
     index: 0,
-    currentLaunch: 0
+    currentLaunch: 0,
+    userData: []
 };
 
 const launchReducer = (state = initialState, action) => {
@@ -22,10 +24,14 @@ const launchReducer = (state = initialState, action) => {
                 ...state, 
                 launchView: state.launchView === 'list' ? 'slider' : 'list'
             }
-        case GET_CURRENT:
+        case ADD_USER:
             return {
                 ...state,
-                launches: state.launches.filter(launch => launch === state.launches[action.index])
+                userData: state.userData.concat(action.user)
+            }
+        case GET_CURRENT:
+            return {
+                ...state
             }
         case ADD_LAUNCH:
             return {
