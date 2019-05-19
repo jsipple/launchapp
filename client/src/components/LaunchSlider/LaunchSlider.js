@@ -12,7 +12,6 @@ import "./LaunchSlider.css";
 
 const LaunchSlider = (props) => {
     const {launch, prevDate, nextDate, total, handleIndexChange, index} = props
-    console.log(launch.longitude)
     return(
         <Container className="slider">
             <Row>

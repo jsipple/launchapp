@@ -7,7 +7,8 @@ class Weather extends Component {
         long: "",
         lat: "",
         weather: "",
-        icon: ""
+        icon: "",
+        iconUpdated: false
     }
     componentDidMount() {
         let {lat, long} = this.props
@@ -31,7 +32,8 @@ class Weather extends Component {
         if(lat !==this.state.lat) {
             this.setState({
                 lat: lat,
-                long: long
+                long: long,
+                iconUpdated: false
             });
             this.getWeather(lat,long)
         }
@@ -40,8 +42,9 @@ class Weather extends Component {
         // if(this.state.lat.length > 0 && this.state.weather.length !==0 && parseFloat(this.state.lat) !== this.state.weather.coord.lat) {
         //     this.getWeather(this.state.lat,this.state.long)
         // }
-        if(this.state.weather.weather && this.state.icon.length ===0) {
-            this.handlegetIcon(this.state.weather.weather[0].id)
+        if(this.state.weather.weather && this.state.iconUpdated === false) {
+            this.handlegetIcon(this.state.weather.weather[0].id);
+            this.setState({iconUpdated: true})
         }
     }
     getWeather = (lat,long) => {
@@ -73,6 +76,7 @@ class Weather extends Component {
     render() {
         console.log(this.state);
         const {icon, weather} = this.state
+        this.state.weather.weather ? console.log("ID", this.state.weather.weather[0].id) : console.log("Loading");
         return (
             <div>
                 <p>

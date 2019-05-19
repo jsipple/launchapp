@@ -3,7 +3,7 @@ import { Last } from 'react-bootstrap/PageItem';
 
 export default {
     getUpcoming: function() {
-       return axios.get('https://launchlibrary.net/1.3/launch/next/10')   
+       return axios.get('https://launchlibrary.net/1.3/launch/next/25')   
     },
     getPast: function(date) {
         return axios.get('https://launchlibrary.net/1.3/launch/?startdate=' + date)
