@@ -14,6 +14,10 @@ import { incrementIndex, decrementIndex } from '../actions/indexActions';
 
 
 class Home extends React.Component {
+  state={
+    filterOrg: "All Organizations",
+    filter: false
+  }
   componentDidMount () {
     console.log("mounted");
     API.getUpcoming()
@@ -50,12 +54,27 @@ class Home extends React.Component {
   
   returnLaunchSlider = () => {
     const {launches, index} = this.props.appState;
+    const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
+    if (this.state.filter){
+      return(
+        <LaunchSlider
+        launchID = {filterLaunches.id}
+        prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
+        index={index}
+        launch={this.state.filter ? filterLaunches[index]: filterLaunches[index]}
+        total={filterLaunches.length}
+        handleDetailClick = {this.handleDetailClick}
+        handleIndexChange = {this.handleIndexChange}
+        nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
+        />
+      )
+    } else {
       return (
-        <LaunchSlider 
+        <LaunchSlider
         launchID = {launches.id}
         prevDate={((index - 1) >= 0) ? (moment(launches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
         index={index}
-        launch={launches[index]}
+        launch={this.state.filter ? filterLaunches[index]: launches[index]}
         total={launches.length}
         handleDetailClick = {this.handleDetailClick}
         handleIndexChange = {this.handleIndexChange}
@@ -63,42 +82,65 @@ class Home extends React.Component {
         />
       )
     }
+      
+    }
 
     returnListView = () => {
       const launches = this.props.appState.launches;
-      return (
-        launches.map((launch,index) => (
-          <ListView 
-          launchID = {launches.id}
-          launch={launch} 
-          key={index} 
-          index={index} />)
+      const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
+      if(this.state.filter) {
+        return (
+          filterLaunches.map((launch,index) => (
+            <ListView
+            launchID = {launches.id}
+            launch={launch} 
+            key={index} 
+            index={index} />)
+          )
         )
-      )
+      } else {
+        return (
+          launches.map((launch,index) => (
+            <ListView
+            launchID = {launches.id}
+            launch={launch} 
+            key={index} 
+            index={index} />)
+          )
+        ) 
+      }
     }
 
     handleIndexChange = (change) => {
       if(change > 0 && (this.props.appState.index + change) < this.props.appState.launches.length) {
-        // this.setState({
-        //   index: this.props.appState.index + 1
-        // })
         this.props.incrementIndex();
       }
       if(change < 0 && (this.props.appState.index + change) >= 0) {
-        // this.setState({
-        //   index: this.props.appState.index -1
-        // })
         this.props.decrementIndex();
       }
       else {
         return false
       }
     }
+    handleFilter = (org)=> {
+      if(org === "All Organizations") {
+        this.setState({
+          filter: false,
+          filterOrg: org
+        })
+      } else {
+        this.setState({
+          filter: true,
+          filterOrg: org
+          })
+      }
+      
+    }
   render() {
     console.log(this.props.appState)
     const {launches} = this.props.appState;
     return (
-      <Template handleViewChange={this.handleViewChange}>
+      <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >
       {launches.length ? 
         ((this.props.appState.launchView === 'slider') ? (this.returnLaunchSlider()) : (this.returnListView())) 
         :
