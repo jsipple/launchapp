@@ -14,16 +14,10 @@ import { incrementIndex, decrementIndex } from '../actions/indexActions';
 
 
 class Home extends React.Component {
-  state = {
-    weather: []
-  }
   componentDidMount () {
     console.log("mounted");
     API.getUpcoming()
     .then(result => {
-      console.log(result);
-      console.log(result.data.launches[0].location.pads[0].latitude);
-      console.log(result.data.launches[0].location.pads[0].longitude);
       let launches = [];
       
       result.data.launches.forEach(launch => {
@@ -101,6 +95,7 @@ class Home extends React.Component {
       }
     }
   render() {
+    console.log(this.props.appState)
     const {launches} = this.props.appState;
     return (
       <Template handleViewChange={this.handleViewChange}>
