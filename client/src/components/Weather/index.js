@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import API from '../../utils/API';
 import getIcon from '../../utils/Icon';
+import "./style.css";
 
 class Weather extends Component {
     state={
         long: "",
         lat: "",
         weather: "",
-        icon: ""
+        icon: "",
+        iconUpdated: false,
+        temperature: ""
     }
     componentDidMount() {
         let {lat, long} = this.props
@@ -31,19 +34,22 @@ class Weather extends Component {
         if(lat !==this.state.lat) {
             this.setState({
                 lat: lat,
-                long: long
+                long: long,
+                iconUpdated: true
             });
             this.getWeather(lat,long)
         }
     }
-    componentDidUpdate() {
-        // if(this.state.lat.length > 0 && this.state.weather.length !==0 && parseFloat(this.state.lat) !== this.state.weather.coord.lat) {
-        //     this.getWeather(this.state.lat,this.state.long)
-        // }
-        if(this.state.weather.weather && this.state.icon.length ===0) {
-            this.handlegetIcon(this.state.weather.weather[0].id)
+    componentDidUpdate() { 
+        if(this.state.weather.weather && this.state.iconUpdated === false) {
+            const farenheight = this.convertToFarenheit(this.state.weather.main.temp);
+            this.handlegetIcon(this.state.weather.weather[0].id);
+            this.setState({
+                iconUpdated: true,
+                temperature: farenheight
+            })
+        } 
         }
-    }
     getWeather = (lat,long) => {
         console.log("LOCATION",long);
         console.log("LOCATION",lat);
@@ -52,11 +58,9 @@ class Weather extends Component {
         .then(result => {
             console.log(result.data);
             this.setState({
-                weather: result.data
+                weather: result.data,
+                iconUpdated: false
             })
-        //     .then( function() {
-        //         console.log(this.state)
-        //         this.handlegetIcon(this.state.weather.weather[0].id)}.bind(this));
         })
         .catch(err => console.log(err))
     }
@@ -67,18 +71,20 @@ class Weather extends Component {
     }
     convertToFarenheit = (temp) => {
         console.log("TEMP", temp);
-        const farenheight = (temp - 273.15) * (9/5 )+ 32 
+        let farenheight = ((parseFloat(temp) - 273.15) * (9/5 ))+ 32 ;
+        farenheight = parseInt(farenheight);
         return farenheight;
     } 
     render() {
         console.log(this.state);
-        const {icon, weather} = this.state
+        const {icon, weather, temperature} = this.state
+        this.state.weather.weather ? console.log("ID", this.state.weather.weather[0].id) : console.log("Loading");
         return (
-            <div>
-                <p>
-                Temperature: {weather.main ? (weather.main.temp) : "loading" }
-                </p>
-                <i className={`wi ${icon}`}></i>
+            <div className="weather">
+                <span className="circle"><i className={`wi ${icon}`}></i></span>
+            
+                {weather.main ? <span className="circle">{temperature}&#176;</span> : "loading" }
+            
             </div>
         )
     }
