@@ -12,4 +12,10 @@
     border-bottom-left-radius: 50px;
     border-top-left-radius: 50px;
     border-left: .5px solid white;
+    float: right;
+    margin-right: 0;
+}
+
+.details:hover{
+    color: rgb(160, 160, 160);
 }

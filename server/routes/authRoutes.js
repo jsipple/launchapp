@@ -52,11 +52,26 @@ router.get('/login/facebook', (req,res) => {
 router.get('/auth/twitter',
   passport.authenticate('twitter'));
 
-router.get('/auth/twitter/callback', 
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+
+  router.route('/auth/twitter/callback')
+  .post(function(req, res) {
+    // figure out what to do here
+    // request.post({
+    //   url: 'https://api.twitter.com/oauth/request_token',
+    //   oauth: {
+    //     oauth_callback: "http%3A%2F%2Flocalhost%3A3000%2Ftwitter-callback",
+    //     consumer_key: 'KEY',
+    //     consumer_secret: 'SECRET'
+    //   }
+    // }, function (err, r, body) {
+    //   if (err) {
+    //     return res.send(500, { message: err.message });
+    //   }
+
+
+    //   var jsonStr = '{ "' + body.replace(/&/g, '", "').replace(/=/g, '": "') + '"}';
+    //   res.send(JSON.parse(jsonStr));
+    // });
   });
 
 

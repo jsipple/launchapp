@@ -1,7 +1,7 @@
 import React from 'react';
 import Template from '../components/template/template.wrapper'
 import API from '../utils/API';
-import LaunchSlider from '../components/LaunchSlider';
+import LaunchSlider from '../components/LaunchSlider/LaunchSlider';
 import Spinner from 'react-bootstrap/Spinner';
 import ListView from '../components/list-view/list.view';
 import moment from 'moment';
@@ -55,13 +55,13 @@ class Home extends React.Component {
       return (
         <LaunchSlider 
         launchID = {launches.id}
-        prevDate={((index - 1) >= 0) ? (launches[(index-1)].date): ("none") } 
+        prevDate={((index - 1) >= 0) ? (moment(launches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
         index={index}
         launch={launches[index]}
         total={launches.length}
         handleDetailClick = {this.handleDetailClick}
         handleIndexChange = {this.handleIndexChange}
-        nextDate={((index + 1 < launches.length)? (launches[(index+1)].date) : ("none"))} 
+        nextDate={((index + 1 < launches.length)? (moment(launches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
         />
       )
     }
