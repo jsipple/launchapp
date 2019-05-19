@@ -56,18 +56,25 @@ class Home extends React.Component {
     const {launches, index} = this.props.appState;
     const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
     if (this.state.filter){
-      return(
-        <LaunchSlider
-        launchID = {filterLaunches.id}
-        prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
-        index={index}
-        launch={this.state.filter ? filterLaunches[index]: filterLaunches[index]}
-        total={filterLaunches.length}
-        handleDetailClick = {this.handleDetailClick}
-        handleIndexChange = {this.handleIndexChange}
-        nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
-        />
-      )
+      if(filterLaunches.length) {
+        return(
+          <LaunchSlider
+          launchID = {filterLaunches.id}
+          prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
+          index={index}
+          launch={this.state.filter ? filterLaunches[index]: filterLaunches[index]}
+          total={filterLaunches.length}
+          handleDetailClick = {this.handleDetailClick}
+          handleIndexChange = {this.handleIndexChange}
+          nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
+          />
+        )
+      } else {
+        return (
+          <div>No Results</div>
+        )
+      }
+      
     } else {
       return (
         <LaunchSlider
@@ -89,15 +96,22 @@ class Home extends React.Component {
       const launches = this.props.appState.launches;
       const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
       if(this.state.filter) {
-        return (
-          filterLaunches.map((launch,index) => (
-            <ListView
-            launchID = {launches.id}
-            launch={launch} 
-            key={index} 
-            index={index} />)
+        if(filterLaunches.length) {
+          return (
+            filterLaunches.map((launch,index) => (
+              <ListView
+              launchID = {launches.id}
+              launch={launch} 
+              key={index} 
+              index={index} />)
+            )
           )
-        )
+        } else {
+          return (
+            <div>No results</div>
+          )
+        }
+        
       } else {
         return (
           launches.map((launch,index) => (
