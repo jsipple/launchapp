@@ -6,7 +6,6 @@ import "./list.view.css";
 
 const ListView = (props) => {
     const {launch, index}= props
-    console.log("LISTVIEW", launch);
   return (
     <div>
         <Card className="list-view" style={{ margin: 40, backgroundColor: "blue"}}>
