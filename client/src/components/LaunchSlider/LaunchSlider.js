@@ -22,9 +22,9 @@ const LaunchSlider = (props) => {
                                 <ul className="launch-data">
                                     <li className="date">{moment(launch.date).format("MMMM DD, YYYY")} </li>
                                     <li className="time">{moment(launch.date).format("LTS")} </li>
-                                    <Weather long={launch.longitude} lat ={launch.latitude} />
                                     <li className="count-down"><Counter date={`${launch.countdownTime}`} /></li>
                                     <li className="location">{launch.location}</li>
+                                    <Weather long={launch.longitude} lat ={launch.latitude} />
                                 </ul>
                             </Col>
                         </Row>

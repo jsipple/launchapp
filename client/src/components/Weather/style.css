@@ -1,0 +1,16 @@
+.circle {
+    border:1px solid white;    
+    height:40px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    width:40px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 20px;
+    display: inline-block;
+    text-align: center
+}
+.weather {
+    margin: 15px
+}
