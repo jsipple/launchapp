@@ -10,7 +10,7 @@ import PastLaunches from './pages/PastLauches';
 import Organizations from './pages/Organizations';
 import Profile from './pages/Profile';
 import TestComponent from './components/test-see/Test.component';
-
+import OrganizationDetails from './pages/OrganizationDetails'
 
 class App extends Component {
   render() {
@@ -29,7 +29,8 @@ class App extends Component {
           <Route exact path='/launches/test' component={TestComponent} />
           <Route exact path='/launches/fav' component={MyLaunches} />
           {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
-          <Route path='/organizations' component={Organizations} />
+          <Route exact path='/organizations' component={Organizations} />
+          <Route exact path='/organizations/:id' component={OrganizationDetails} />
         </Router>
       </div>
     );
