@@ -7,6 +7,7 @@ import ListView from '../components/list-view/list.view';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { clearLaunches } from '../actions/clearLaunches';
 import { setView } from '../actions/setView';
 import { addLaunch } from '../actions/addAction';
 import { incrementIndex, decrementIndex, resetIndex } from '../actions/indexActions';
@@ -16,10 +17,12 @@ import { incrementIndex, decrementIndex, resetIndex } from '../actions/indexActi
 class Home extends React.Component {
   state={
     filterOrg: "All Organizations",
-    filter: false
+    filter: false,
+    indexReset: false
   }
   componentDidMount () {
     console.log("mounted");
+    this.props.clearLaunches();
     API.getUpcoming()
     .then(result => {
       let launches = [];
@@ -56,9 +59,6 @@ class Home extends React.Component {
     let {launches, index} = this.props.appState;
     const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
     if (this.state.filter){
-      if(index > 0) {
-        this.props.resetIndex();
-        let index = this.props.appState.index;
           if(filterLaunches.length) {
             console.log("IN FILTER LAUNCHES")
             return(
@@ -78,27 +78,6 @@ class Home extends React.Component {
               <div>No Results</div>
             )
           }
-      } else {
-          if(filterLaunches.length) {
-            console.log("IN FILTER LAUNCHES")
-            return(
-              <LaunchSlider
-              launchID = {filterLaunches.id}
-              prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
-              index={index}
-              launch={filterLaunches[index]}
-              total={filterLaunches.length}
-              handleDetailClick = {this.handleDetailClick}
-              handleIndexChange = {this.handleIndexChange}
-              nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
-              />
-            )
-          } else {
-            return (
-              <div>No Results</div>
-            )
-          }
-      }
     } else {
       return (
         <LaunchSlider
@@ -119,7 +98,6 @@ class Home extends React.Component {
     returnListView = () => {
       const launches = this.props.appState.launches;
       const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
-      console.log(filterLaunches);
       if(this.state.filter) {
         if(filterLaunches.length) {
           return (
@@ -162,6 +140,8 @@ class Home extends React.Component {
       }
     }
     handleFilter = (org)=> {
+      this.setState({indexReset: false});
+      this.props.resetIndex();
       if(org === "All Organizations") {
         this.setState({
           filter: false,
@@ -176,7 +156,6 @@ class Home extends React.Component {
       
     }
   render() {
-    console.log(this.props.appState)
     const {launches} = this.props.appState;
     return (
       <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >
@@ -197,7 +176,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex }, dispatch);
+  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex, clearLaunches }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
