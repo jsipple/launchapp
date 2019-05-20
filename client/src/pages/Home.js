@@ -7,6 +7,7 @@ import ListView from '../components/list-view/list.view';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { clearLaunches } from '../actions/clearLaunches';
 import { setView } from '../actions/setView';
 import { addLaunch } from '../actions/addAction';
 import { incrementIndex, decrementIndex, resetIndex } from '../actions/indexActions';
@@ -21,6 +22,7 @@ class Home extends React.Component {
   }
   componentDidMount () {
     console.log("mounted");
+    this.props.clearLaunches();
     API.getUpcoming()
     .then(result => {
       let launches = [];
@@ -175,7 +177,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex }, dispatch);
+  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex, clearLaunches }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
