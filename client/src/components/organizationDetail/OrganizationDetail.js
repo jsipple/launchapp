@@ -21,7 +21,7 @@ class OrganizationDetail extends Component {
   let agencyName = window.location.pathname.replace('/organizations/', '')
   console.log(agencyName)
   let urls = []
-  API.getAgency(10)
+  API.getAgency(agencyName)
    .then(res => {
     console.log(res)
     res.data.agencies[0].infoURLs.forEach((element) => {

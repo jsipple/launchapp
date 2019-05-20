@@ -17,7 +17,7 @@ const ListView = (props) => {
                   <p>{launch.location}</p>
                 </Card.Text>
                 <DetailButton index={index} />
-                <FollowButton text={"Follow"}/>
+                <FollowButton launch={launch} id={launch.id} text={"Follow"}/>
             </Card.Body>
         </Card>
     </div>

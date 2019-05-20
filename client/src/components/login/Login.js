@@ -68,9 +68,11 @@ class Login extends Component {
     this.setState({
         isAuthenticated: true
       })
-      API.addUser(userData);
-      this.props.addUser(userData);
-  
+      API.addUser(userData)
+      .then(res => {
+        console.log('test')
+    this.props.addUser(res.data);
+      })
       this.props.history.push('/home')
     // }
   }

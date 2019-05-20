@@ -10,6 +10,7 @@ class FollowButton extends Component {
 
     handleLaunch = (e) => {
         let data = this.props.launch
+        console.log(data)
         let userId = this.props.appState.userData[0].email
         if(e.target.textContent === "Follow"){
             axios.post('/api/launch/' + userId, data);
