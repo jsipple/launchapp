@@ -16,7 +16,8 @@ import { incrementIndex, decrementIndex, resetIndex } from '../actions/indexActi
 class Home extends React.Component {
   state={
     filterOrg: "All Organizations",
-    filter: false
+    filter: false,
+    indexReset: false
   }
   componentDidMount () {
     console.log("mounted");
@@ -56,9 +57,6 @@ class Home extends React.Component {
     let {launches, index} = this.props.appState;
     const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
     if (this.state.filter){
-      if(index > 0) {
-        this.props.resetIndex();
-        let index = this.props.appState.index;
           if(filterLaunches.length) {
             console.log("IN FILTER LAUNCHES")
             return(
@@ -78,27 +76,6 @@ class Home extends React.Component {
               <div>No Results</div>
             )
           }
-      } else {
-          if(filterLaunches.length) {
-            console.log("IN FILTER LAUNCHES")
-            return(
-              <LaunchSlider
-              launchID = {filterLaunches.id}
-              prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
-              index={index}
-              launch={filterLaunches[index]}
-              total={filterLaunches.length}
-              handleDetailClick = {this.handleDetailClick}
-              handleIndexChange = {this.handleIndexChange}
-              nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
-              />
-            )
-          } else {
-            return (
-              <div>No Results</div>
-            )
-          }
-      }
     } else {
       return (
         <LaunchSlider
@@ -162,6 +139,8 @@ class Home extends React.Component {
       }
     }
     handleFilter = (org)=> {
+      this.setState({indexReset: false});
+      this.props.resetIndex();
       if(org === "All Organizations") {
         this.setState({
           filter: false,
