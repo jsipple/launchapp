@@ -89,8 +89,6 @@ class Login extends Component {
                     autoLoad={true}
                     fields="name,email,picture"
                     callback={this.facebookResponse}
-                    cssClass="my-facebook-button-class"
-                    icon="fa-facebook"
                     reAuthenticate={true}
                     onFailure={this.onFailure}
                     size='small'
