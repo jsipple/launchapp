@@ -31,7 +31,6 @@ class Login extends Component {
   // this is working
   googleResponse = (response) => {
     const userData = response.profileObj;
-    console.log(userData)
     this.setState({
         user: response.profileObj,
         isAuthenticated: true
@@ -51,7 +50,6 @@ class Login extends Component {
   }
   // says needs to be https for this to run what do i need to do
   facebookResponse = (response) => {
-    console.log(response)
     const userData = {
       name: response.name,
       email: response.email,
