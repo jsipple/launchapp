@@ -5,6 +5,7 @@ import { SET_VIEW } from '../actions/setView';
 import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
 import { GET_CURRENT } from '../actions/currentLaunch';
 import { ADD_USER } from '../actions/addUserAction';
+import { RESET_INDEX } from '../actions/indexActions';
 
 const initialState = {
     isAuthenticated: false,
@@ -37,6 +38,11 @@ const launchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 launch: state.launches.push(action.launch)
+            }
+        case RESET_INDEX:
+            return {
+                ...state,
+                index: 0
             }
         case INCREMENT_INDEX:
             return {
