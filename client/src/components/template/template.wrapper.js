@@ -29,8 +29,7 @@ class Template extends Component {
                 <Nav className="mr-auto">
                   <NavbarComponent />
                 </Nav>
-                <Button onClick={()=>this.handleChangeView()}>Slider</Button>
-                <Button value="list" onClick={()=>this.handleChangeView()}>List</Button>
+                <Button onClick={()=>this.handleChangeView()}>Toggle View</Button>
                 {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Carousel View</NavDropdown.Item>
                     <NavDropdown.Divider />
