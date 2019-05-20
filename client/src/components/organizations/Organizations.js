@@ -7,7 +7,8 @@ render() {
  return(
   <Fragment>
    <div>Organization component</div>
-  </Fragment>
+
+  </Fragment> 
  )
  }
 }

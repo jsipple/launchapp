@@ -1,11 +1,9 @@
 import React from 'react';
-import Template from '../components/template/template.wrapper';
+import OrganizationComp from '../components/organizationComp/OrganizationComp';
 
 const Organizations =()=> {
     return (
-        <Template>
-            List of Organizations
-        </Template>
+            <OrganizationComp />
     );
 }
 
