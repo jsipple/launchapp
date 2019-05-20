@@ -12,7 +12,7 @@ export default {
         return axios.post('/api/user/' + userId, data);
     },
     getAgency: function(agency) {
-        return axios.get('https://launchlibrary.net/1.4/agency/' + agency)
+        return axios.get('https://launchlibrary.net/1.3/agency?id=' + agency)
     },
     unfollowLaunch: function(data, userId) {
         return axios.put('/api/user/' + userId, data)

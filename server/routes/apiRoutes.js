@@ -6,25 +6,25 @@ module.exports = function(app){
 
 
   // Renders a specific user at this url
-  app.get("/api/user/:id", function(req, res){
+  // app.get("/api/user/:id", function(req, res){
     
-    User.findOne({_id: req.params.id}, (error, data) => {
-      if (error) {
-        console.log(error);
-      }
-      else {
+  //   User.findOne({_id: req.params.id}, (error, data) => {
+  //     if (error) {
+  //       console.log(error);
+  //     }
+  //     else {
       
-        res.json(data);
-      }
-    });
-  })
+  //       res.json(data);
+  //     }
+  //   });
+  // })
 
   // Creates a new user 
-  app.post("/api/test/", function(req, res) {
+  app.post("/api/user/", function(req, res) {
     
     User.find({email: req.body.email})
     .then(response => {
-      if (response !== '') {
+      if (response != '') {
         res.json(response);
       } else {
         User.create(req.body)

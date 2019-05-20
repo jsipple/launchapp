@@ -47,7 +47,7 @@ const LaunchSlider = (props) => {
                     <DetailButton className="details-btn" index={index} />
                 </Col>
                 <Col>
-                    <FollowButton text="Follow" />
+                    <FollowButton id={launch.id} launch={launch} />
                 </Col>
             </Row>
             <Row>

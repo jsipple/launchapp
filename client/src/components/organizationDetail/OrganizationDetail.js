@@ -21,7 +21,7 @@ class OrganizationDetail extends Component {
   let agencyName = window.location.pathname.replace('/organizations/', '')
   console.log(agencyName)
   let urls = []
-  API.getAgency(agencyName)
+  API.getAgency(10)
    .then(res => {
     console.log(res)
     res.data.agencies[0].infoURLs.forEach((element) => {
@@ -39,7 +39,7 @@ class OrganizationDetail extends Component {
     this.setState({
       urls,
       country: res.data.agencies[0].countryCode, 
-      name: agencyName
+      name: res.data.agencies[0].name
     })
    })
  }

@@ -5,6 +5,7 @@ import { SET_VIEW } from '../actions/setView';
 import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
 import { GET_CURRENT } from '../actions/currentLaunch';
 import { ADD_USER } from '../actions/addUserAction';
+import { FAVORITE_LAUNCH } from '../actions/favoriteAction'
 
 const initialState = {
     isAuthenticated: false,
@@ -62,6 +63,11 @@ const launchReducer = (state = initialState, action) => {
                     }
                     return rocket;
                 })
+            }
+        case FAVORITE_LAUNCH:
+            return {
+                ...state,
+                favoriteLaunches: [...state.favoriteLaunches, action.launch]
             }
         default:
             return state
