@@ -35,17 +35,24 @@ class Login extends Component {
         user: response.profileObj,
         isAuthenticated: true
       })
-    API.addUser(userData);
-    this.props.addUser(userData);
-
+    API.addUser(userData)
+      .then(res => {
+        console.log('test')
+    this.props.addUser(res.data);
     this.props.history.push('/home')
+      })
+
+
 
   }
   guestLogin = () => {
     this.setState({
       isAuthenticated: true
     })
-    this.props.addUser('guest')
+    this.props.addUser({
+      name: 'guest',
+      favLaunches: []
+    })
     this.props.history.push('/home')
   }
   // says needs to be https for this to run what do i need to do
@@ -59,9 +66,11 @@ class Login extends Component {
     this.setState({
         isAuthenticated: true
       })
-      API.addUser(userData);
-      this.props.addUser(userData);
-  
+      API.addUser(userData)
+      .then(res => {
+        console.log('test')
+    this.props.addUser(res.data);
+      })
       this.props.history.push('/home')
     // }
   }
@@ -100,6 +109,7 @@ class Login extends Component {
                 </div>
             </div>
         );
+
 
     return (
         <div className="App">

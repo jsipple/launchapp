@@ -1,26 +1,43 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Container, Card, Col, Row } from 'react-bootstrap';
+import Media from 'react-bootstrap/Media'
 import FollowButton from '../button';
 import DetailButton from '../DetailButton';
+import moment from 'moment';
 import "./list.view.css";
 
 const ListView = (props) => {
     const {launch, index}= props
   return (
-    <div>
-        <Card className="list-view" style={{ margin: 40, backgroundColor: "blue"}}>
-            <Card.Img style={{height: 100, width: 100}}className="list-image" variant="top" src={launch.image}/>
-            <Card.Body>
-                <Card.Title>{launch.date}</Card.Title>
-                <Card.Text>
-                  <p>{launch.company} | {launch.rocket} </p>
-                  <p>{launch.location}</p>
-                </Card.Text>
-                <DetailButton index={index} />
-                <FollowButton text={"Follow"}/>
-            </Card.Body>
-        </Card>
-    </div>
+   
+    <Media as="li" key={index} className="launch-list-item">
+    <img
+      width={64}
+      height={64}
+      className="mr-3"
+      src={launch.image}
+      alt="Generic placeholder"
+    />
+    <Media.Body>
+      {/* <i class="wi wi-owm-210"></i>
+      <i class="wi wi-owm-211"></i>
+      <i class="wi wi-owm-221"></i>
+      <i class="wi wi-owm-212"></i> */}
+
+      <h5>{moment(launch.date).format("MMMM DD, YYYY hh:mm")}</h5>
+      <Container>
+        <Row>
+          <Col xs={7}>
+            <h6>{launch.company} &#xb7; {launch.rocket}</h6>
+          </Col>
+          <Col className="button-area" >
+            <FollowButton launch={launch} id={launch.id} text={"Follow"}/>
+            <DetailButton launch={launch} />
+          </Col>
+        </Row>
+      </Container>
+    </Media.Body>
+  </Media>
   )
 }
 

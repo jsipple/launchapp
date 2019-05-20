@@ -1,5 +1,5 @@
 .slider{
-    background-image: linear-gradient(navy, black);
+    background-image: linear-gradient(hsl(212,42,52), black);
     color: white;
     width: 100%;
     margin-bottom: 10%;

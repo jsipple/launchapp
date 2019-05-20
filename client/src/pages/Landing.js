@@ -7,7 +7,9 @@ import './landing.css';
 
 const Landing = () => {
     return (
-        <Login />
+        <div>
+            <Login />
+        </div>
     );
 }
 

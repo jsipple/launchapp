@@ -39,7 +39,7 @@ class Template extends Component {
         </Navbar>
         <Container className="wrapper">
         <Filter handleFilter={handleFilter} filterOrg={filterOrg} />
-          <section>
+          <section className="list-wrapper">
             {this.props.children}
           </section>
          </Container>

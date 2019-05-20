@@ -1,0 +1,19 @@
+.wrapper-org {
+    margin: 0 auto;
+    width: 80%;
+    background-image: linear-gradient(steelblue, black);
+    color: white;
+    margin-bottom: 10%;
+    margin-top: 2%;
+    padding: 5%;
+}
+.icon {
+    margin: 5px;
+}
+.logo {
+    float: left;
+}
+h1 {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
