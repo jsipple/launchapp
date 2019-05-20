@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setView } from '../actions/setView';
 import { addLaunch } from '../actions/addAction';
-import { incrementIndex, decrementIndex } from '../actions/indexActions';
+import { incrementIndex, decrementIndex, resetIndex } from '../actions/indexActions';
 
 
 
@@ -51,37 +51,61 @@ class Home extends React.Component {
     this.props.setView();
   
   }
-  
+
   returnLaunchSlider = () => {
-    const {launches, index} = this.props.appState;
+    let {launches, index} = this.props.appState;
     const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
     if (this.state.filter){
-      if(filterLaunches.length) {
-        return(
-          <LaunchSlider
-          launchID = {filterLaunches.id}
-          prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
-          index={index}
-          launch={this.state.filter ? filterLaunches[index]: filterLaunches[index]}
-          total={filterLaunches.length}
-          handleDetailClick = {this.handleDetailClick}
-          handleIndexChange = {this.handleIndexChange}
-          nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
-          />
-        )
+      if(index > 0) {
+        this.props.resetIndex();
+        let index = this.props.appState.index;
+          if(filterLaunches.length) {
+            console.log("IN FILTER LAUNCHES")
+            return(
+              <LaunchSlider
+              launchID = {filterLaunches.id}
+              prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
+              index={index}
+              launch={filterLaunches[index]}
+              total={filterLaunches.length}
+              handleDetailClick = {this.handleDetailClick}
+              handleIndexChange = {this.handleIndexChange}
+              nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
+              />
+            )
+          } else {
+            return (
+              <div>No Results</div>
+            )
+          }
       } else {
-        return (
-          <div>No Results</div>
-        )
+          if(filterLaunches.length) {
+            console.log("IN FILTER LAUNCHES")
+            return(
+              <LaunchSlider
+              launchID = {filterLaunches.id}
+              prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
+              index={index}
+              launch={filterLaunches[index]}
+              total={filterLaunches.length}
+              handleDetailClick = {this.handleDetailClick}
+              handleIndexChange = {this.handleIndexChange}
+              nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
+              />
+            )
+          } else {
+            return (
+              <div>No Results</div>
+            )
+          }
       }
-      
     } else {
       return (
         <LaunchSlider
         launchID = {launches.id}
         prevDate={((index - 1) >= 0) ? (moment(launches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
         index={index}
-        launch={this.state.filter ? filterLaunches[index]: launches[index]}
+        launch={launches[index]}
         total={launches.length}
         handleDetailClick = {this.handleDetailClick}
         handleIndexChange = {this.handleIndexChange}
@@ -95,6 +119,7 @@ class Home extends React.Component {
     returnListView = () => {
       const launches = this.props.appState.launches;
       const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
+      console.log(filterLaunches);
       if(this.state.filter) {
         if(filterLaunches.length) {
           return (
@@ -171,7 +196,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex }, dispatch);
+  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

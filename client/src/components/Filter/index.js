@@ -4,7 +4,7 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import DropdownButton from 'react-bootstrap/DropdownButton'
 
 const Filter = (props) => {
-    const organizations = ["Nasa", "SpaceX", "ULA", "Arianespace"];
+    const organizations = ["NASA", "SpaceX", "United Launch Alliance", "Arianespace"];
     const {filterOrg, handleFilter} = props
     return (
     <div className="filter">
