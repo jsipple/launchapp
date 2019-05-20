@@ -1,7 +1,7 @@
-.wrapper {
+.wrapper-org {
     margin: 0 auto;
     width: 80%;
-    background-image: linear-gradient(navy, black);
+    background-image: linear-gradient(steelblue, black);
     color: white;
     margin-bottom: 10%;
     margin-top: 2%;
