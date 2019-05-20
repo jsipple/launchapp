@@ -1,6 +1,7 @@
-.spacing {
-    margin: 40px;
+.launch-list-item {
+    padding: 15px;
+    border: 1px solid whitesmoke;
 }
 .list-view {
-    background-color: blue;
+    background-color: hsl(212,42,52)
 }

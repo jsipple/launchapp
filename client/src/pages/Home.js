@@ -101,17 +101,21 @@ class Home extends React.Component {
       if(this.state.filter) {
         if(filterLaunches.length) {
           return (
-            filterLaunches.map((launch,index) => (
-              <ListView
-              launchID = {launches.id}
-              launch={launch} 
-              key={index} 
-              index={index} />)
-            )
+            <div className="list-wrapper">
+              <ul className="list-unstyled">
+              {filterLaunches.map((launch,index) => (
+                <ListView
+                launchID = {launches.id}
+                launch={launch} 
+                key={index} 
+                index={index} />)
+              )}
+              </ul>
+            </div>
           )
         } else {
           return (
-            <div>No results</div>
+            <div className="list-wrapper">No results</div>
           )
         }
         

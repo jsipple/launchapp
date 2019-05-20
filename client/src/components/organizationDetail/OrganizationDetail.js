@@ -47,7 +47,7 @@ render() {
   console.log(this.state.urls)
   let links = this.state.urls.map( (x,i) => <SocialIcon className='icon' url={x} target='_blank' />)
  return(
-  <div className='wrapper'>
+  <div className='wrapper-org'>
   <h1>{this.state.name.toUpperCase()}</h1>
   <img className='logo' alt='nasa' src={NASA} />
   <hr />

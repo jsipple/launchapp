@@ -3,3 +3,13 @@
     height: 100px;
     width: 100px;
 }
+.list-wrapper{
+    margin: 0 auto;
+    width: 100%;
+    background-image: linear-gradient(steelblue, black);
+    color: white;
+}
+.launches-header{
+    margin-right: 15px;
+    color:whitesmoke;
+}
