@@ -169,6 +169,7 @@ class Home extends React.Component {
         (<Spinner animation="border" role="status">
           <span className="sr-only"> Loading ... </span>
           </Spinner>)}
+
       </Template>
     );
   }

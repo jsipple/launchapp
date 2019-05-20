@@ -1,10 +1,10 @@
 import React from 'react';
 import OrganizationComp from '../components/organizationComp/OrganizationComp';
 
-const Organizations =()=> {
+const Organizations = () => {
     return (
             <OrganizationComp />
     );
 }
 
-export default Organizations;
+export default Organizations; 
