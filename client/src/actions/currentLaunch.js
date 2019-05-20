@@ -1,11 +1,11 @@
-export const GET_CURRENT = 'GET_CURRENT';
+export const SET_CURRENT = 'SET_CURRENT';
 
 
 
-export const getCurrentLaunch = (index) => {
+export const setCurrentLaunch = (launch) => {
     return {
-        type: GET_CURRENT,
-        index
+        type: SET_CURRENT,
+        launch
     };
 };
 

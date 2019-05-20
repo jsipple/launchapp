@@ -98,7 +98,6 @@ class Home extends React.Component {
     returnListView = () => {
       const launches = this.props.appState.launches;
       const filterLaunches = launches.filter(launch => launch.company === this.state.filterOrg );
-      console.log(filterLaunches);
       if(this.state.filter) {
         if(filterLaunches.length) {
           return (
@@ -157,7 +156,6 @@ class Home extends React.Component {
       
     }
   render() {
-    console.log(this.props.appState)
     const {launches} = this.props.appState;
     return (
       <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >

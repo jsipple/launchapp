@@ -3,8 +3,9 @@ import { REMOVE_LAUNCH } from '../actions/removeAction';
 import { UPDATE_LAUNCH } from '../actions/updateAction';
 import { SET_VIEW } from '../actions/setView';
 import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
-import { GET_CURRENT } from '../actions/currentLaunch';
+import { SET_CURRENT } from '../actions/currentLaunch';
 import { ADD_USER } from '../actions/addUserAction';
+import { FAVORITE_LAUNCH } from '../actions/favoriteAction'
 import { RESET_INDEX } from '../actions/indexActions';
 import { CLEAR_LAUNCHES } from '../actions/clearLaunches';
 
@@ -15,7 +16,7 @@ const initialState = {
     favoriteLaunches: [],
     launches: [],
     index: 0,
-    currentLaunch: 0,
+    currentLaunch: [],
     userData: []
 };
 
@@ -31,15 +32,18 @@ const launchReducer = (state = initialState, action) => {
                 ...state,
                 userData: state.userData.concat(action.user)
             }
-        case GET_CURRENT:
+        case SET_CURRENT:
             return {
-                ...state
+                ...state,
+                currentLaunch: [action.launch]
             }
+        
         case ADD_LAUNCH:
             return {
                 ...state,
                 launch: state.launches.push(action.launch)
             }
+
         case RESET_INDEX:
             return {
                 ...state,
@@ -74,6 +78,11 @@ const launchReducer = (state = initialState, action) => {
                     }
                     return rocket;
                 })
+            }
+        case FAVORITE_LAUNCH:
+            return {
+                ...state,
+                favoriteLaunches: [...state.favoriteLaunches, action.launch]
             }
         default:
             return state
