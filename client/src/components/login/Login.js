@@ -7,7 +7,6 @@ import ids from './keys'
 import './login.css'
 
 import API from '../../utils/API';
-import './login.css'
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUserAction';
 import { bindActionCreators } from 'redux';
