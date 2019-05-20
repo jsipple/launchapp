@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Articles from '../components/articles/Articles'
 
 const LaunchDetails = (props)=> {
+        const launch = props.appState.currentLaunch[0];
     return (
        <Template>
           <Articles name={launch.rocket} />
