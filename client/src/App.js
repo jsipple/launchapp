@@ -7,15 +7,12 @@ import { LaunchList } from './pages/LaunchList';
 import LaunchDetails from './pages/LaunchDetails';
 import MyLaunches from './pages/MyLaunches';
 import PastLaunches from './pages/PastLauches';
-import Organization from './pages/Organization';
+import Organizations from './pages/Organizations';
 import Profile from './pages/Profile';
 import TestComponent from './components/test-see/Test.component';
-<<<<<<< HEAD
 import missionDetails from './components/missionDetails/MissionDetails'
-=======
 import OrganizationDetails from './pages/OrganizationDetails'
 import { connect } from 'react-redux';
->>>>>>> a1d9045ca4e1225a8698c8ce2fd97390d90f9015
 
 class App extends Component {
   componentDidMount = () => {
