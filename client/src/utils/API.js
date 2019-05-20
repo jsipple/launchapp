@@ -19,6 +19,6 @@ export default {
     },
     getWeather: function(lat,long) {
         const APIkey = "3492e25a528a4ddab6b447654307061a"
-        return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${APIkey}`)
+        return axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&APPID=${APIkey}`)
     }
 }
