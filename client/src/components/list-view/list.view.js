@@ -6,7 +6,6 @@ import "./list.view.css";
 
 const ListView = (props) => {
     const {launch, index}= props
-    console.log("LISTVIEW", launch);
   return (
     <div>
         <Card className="list-view" style={{ margin: 40, backgroundColor: "blue"}}>
@@ -18,7 +17,7 @@ const ListView = (props) => {
                   <p>{launch.location}</p>
                 </Card.Text>
                 <DetailButton index={index} />
-                <FollowButton text={"Follow"}/>
+                <FollowButton launch={launch} id={launch.id} text={"Follow"}/>
             </Card.Body>
         </Card>
     </div>

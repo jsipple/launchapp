@@ -10,7 +10,8 @@ render() {
   <Fragment>
       <Articles name="Apollo" />
    <div>Organization component</div>
-  </Fragment>
+
+  </Fragment> 
  )
  }
 }

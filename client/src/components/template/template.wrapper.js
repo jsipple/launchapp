@@ -4,12 +4,10 @@ import NavbarComponent from '../navbar/Navbar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setView } from '../../actions/setView';
+import Filter from '../Filter';
 
 
 class Template extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   handleChangeView = () => {
     console.log('setting view');
@@ -17,8 +15,7 @@ class Template extends Component {
   }
 
   render() {
-    const {handleViewChange} = this.props
-    console.log(this.props);
+    const {handleViewChange, handleFilter, filterOrg} = this.props
     return (
       <div>
         <Navbar 
@@ -32,8 +29,7 @@ class Template extends Component {
                 <Nav className="mr-auto">
                   <NavbarComponent />
                 </Nav>
-                <Button onClick={()=>this.handleChangeView()}>Slider</Button>
-                <Button value="list" onClick={()=>this.handleChangeView()}>List</Button>
+                <Button onClick={()=>this.handleChangeView()}>Toggle View</Button>
                 {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">Carousel View</NavDropdown.Item>
                     <NavDropdown.Divider />
@@ -41,7 +37,8 @@ class Template extends Component {
                 </NavDropdown> */}
             </Navbar.Collapse>
         </Navbar>
-        <Container className="wrapper"> 
+        <Container className="wrapper">
+        <Filter handleFilter={handleFilter} filterOrg={filterOrg} />
           <section>
             {this.props.children}
           </section>

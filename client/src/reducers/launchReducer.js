@@ -5,6 +5,9 @@ import { SET_VIEW } from '../actions/setView';
 import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
 import { GET_CURRENT } from '../actions/currentLaunch';
 import { ADD_USER } from '../actions/addUserAction';
+import { FAVORITE_LAUNCH } from '../actions/favoriteAction'
+import { RESET_INDEX } from '../actions/indexActions';
+import { CLEAR_LAUNCHES } from '../actions/clearLaunches';
 
 const initialState = {
     isAuthenticated: false,
@@ -38,6 +41,17 @@ const launchReducer = (state = initialState, action) => {
                 ...state,
                 launch: state.launches.push(action.launch)
             }
+
+        case RESET_INDEX:
+            return {
+                ...state,
+                index: 0
+            }
+        case CLEAR_LAUNCHES:
+            return {
+                ...state,
+                launches: []
+            }
         case INCREMENT_INDEX:
             return {
                 ...state,
@@ -62,6 +76,11 @@ const launchReducer = (state = initialState, action) => {
                     }
                     return rocket;
                 })
+            }
+        case FAVORITE_LAUNCH:
+            return {
+                ...state,
+                favoriteLaunches: [...state.favoriteLaunches, action.launch]
             }
         default:
             return state

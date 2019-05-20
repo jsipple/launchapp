@@ -10,31 +10,41 @@ import PastLaunches from './pages/PastLauches';
 import Organization from './pages/Organization';
 import Profile from './pages/Profile';
 import TestComponent from './components/test-see/Test.component';
+<<<<<<< HEAD
 import missionDetails from './components/missionDetails/MissionDetails'
+=======
+import OrganizationDetails from './pages/OrganizationDetails'
+import { connect } from 'react-redux';
+>>>>>>> a1d9045ca4e1225a8698c8ce2fd97390d90f9015
 
 class App extends Component {
+  componentDidMount = () => {
+    console.log(this.props.appState.userData)
+  }
   render() {
     return (
       
       <div className="App">
+        {(this.props.appState.userData[0] !== undefined) ? 
         <Router>
           <Route exact path='/home' component={Home} />
           <Route path='/profile' component={Profile} />
           <Route path='/' exact={true} component={Landing} />
-          {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
           <Route exact path='/launches/upcoming' component={Home} />
           <Route exact path='/launches/details' component={LaunchDetails} />
           <Route exact path ='/launches/list' component={LaunchList} />
           <Route exact path='/launches/past' component={PastLaunches} />
           <Route exact path='/launches/test' component={TestComponent} />
           <Route exact path='/launches/fav' component={MyLaunches} />
-          {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
-          <Route path='/organizations' component={Organization} />
-          <Route path='/test' component={missionDetails} />
+          <Route exact path='/organizations' component={Organizations} />
+          <Route exact path='/organizations/:id' component={OrganizationDetails} />
         </Router>
+        // so it's forcing me to add the router here which is weird
+        : <Router><Landing /></Router>}
+
       </div>
     );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({appState: state});
+export default connect(mapStateToProps)(App);
