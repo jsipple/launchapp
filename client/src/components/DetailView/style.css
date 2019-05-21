@@ -23,4 +23,14 @@
     font-size: 25px;
     font-weight: lighter;
 }
+.back-col {
+    margin-top: 5%;
+    height: 200px;
+    text-align: center
+}
+.follow-col {
+    margin-bottom: 5%;
+    height: 200px;
+    text-align: center;
+}
 
