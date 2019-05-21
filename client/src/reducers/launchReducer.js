@@ -11,7 +11,7 @@ import { CLEAR_LAUNCHES } from '../actions/clearLaunches';
 import { SHOW_BUTTONS } from '../actions/showButtons';
 import { REMOVE_FAVORITE } from '../actions/removeFavorite';
 import { ADD_FAVORITE } from '../actions/addFavorite';
-
+import { ADD_AGENCY } from '../actions/agencyName'
 
 const initialState = {
     isAuthenticated: false,
@@ -22,7 +22,9 @@ const initialState = {
     index: 0,
     currentLaunch: [],
     userData: [],
-    showButtons: true
+    showButtons: true,
+    abbv: '',
+    agency: ''
 };
 
 const launchReducer = (state = initialState, action) => {
@@ -106,6 +108,12 @@ const launchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 favoriteLaunches: a
+            }
+        case ADD_AGENCY:
+            return {
+                ...state,
+                agency: action.agency,
+                abbv: action.abbv
             }
         default:
             return state

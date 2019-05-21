@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom'
 import NASA from '../../images/nasa.png'
 import spacex from '../../images/spacex.png'
 import ula from '../../images/ula.png'
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addAgency } from '../../actions/agencyName' 
 
 class OrganizationComp extends Component {
 render() {
  return(
   <Fragment>
    <div>
-   <Link to='organizations/nasa'>
+   <Link to='organizations/nasa' onClick={addAgency('National Aeronautics and Space Administration', 'nasa')}>
     <img
       width={200}
       height={200}
@@ -30,7 +32,7 @@ render() {
       alt="Generic placeholder"
     />
       </Link>
-   <Link to='organizations/United_Launch_Alliance'>
+   <Link onClick={addAgency('United Launch Agency', 'ula')} to='organizations/United_Launch_Alliance'>
     <img
       width={200}
       height={150}
@@ -45,5 +47,11 @@ render() {
  )
  }
 }
-
-export default OrganizationComp
+const mapStateToProps = state => ({
+    appState: state
+  });
+  
+  const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ addAgency }, dispatch);
+  };
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationComp)
