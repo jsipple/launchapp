@@ -51,12 +51,9 @@ class Weather extends Component {
         } 
         }
     getWeather = (lat,long) => {
-        console.log("LOCATION",long);
-        console.log("LOCATION",lat);
 
         API.getWeather(lat,long)
         .then(result => {
-            console.log(result.data);
             this.setState({
                 weather: result.data,
                 iconUpdated: false
@@ -76,9 +73,7 @@ class Weather extends Component {
         return farenheight;
     } 
     render() {
-        console.log(this.state);
         const {icon, weather, temperature} = this.state
-        this.state.weather.weather ? console.log("ID", this.state.weather.weather[0].id) : console.log("Loading");
         return (
             <div className="weather">
                 <span className="circle"><i className={`wi ${icon}`}></i></span>

@@ -1,0 +1,26 @@
+.detail-counter {
+    background: rgba(255, 255, 204, 0.1);
+}
+.details-col {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.detail-data {
+    list-style: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.detail-count-down {
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgb(255, 233, 111);
+}
+.detail-company {
+    font-weight: bold;
+}
+.detail-rocket {
+    font-family: sans-serif;
+    font-size: 25px;
+    font-weight: lighter;
+}
+
