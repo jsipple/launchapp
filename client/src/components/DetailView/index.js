@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Weather from '../Weather';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 
 class DetailView extends Component {
@@ -36,7 +37,7 @@ render() {
                             <Container>
                                 <Row>
                                     <Col className="back-col">
-                                        <Button variant="warning" size="lg" href="/launches/upcoming">&#8678; Launches</Button>
+                                        <Link to={"/launches/upcoming"}><Button variant="warning" size="lg">&#8678; Launches</Button></Link>
                                     </Col>
                                 </Row>
                                 <Row>
