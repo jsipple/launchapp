@@ -19,6 +19,8 @@ class OrganizationDetail extends Component {
 
  componentDidMount = () => {
   let agencyName = window.location.pathname.replace('/organizations/', '')
+  agencyName = agencyName.replace(/_/g, ' ')
+  agencyName = 'ula'
   console.log(agencyName)
   let urls = []
   API.getAgency(agencyName)
@@ -29,7 +31,7 @@ class OrganizationDetail extends Component {
       urls.push(element)
     })
     wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' })
-    .page(agencyName)
+    .page('United Launch Alliance')
     .then(page => page.summary())
     .then(res => {
       this.setState({
@@ -55,9 +57,6 @@ render() {
    <br />
    <br />
    {links}
-   <br />
-   <br />
-   <h2>Upcoming Launches</h2>
   </div>
  )
  }

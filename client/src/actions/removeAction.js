@@ -1,8 +1,8 @@
 export const REMOVE_LAUNCH = 'REMOVE_LAUNCH';
 
-export const removeLaunch = (idx) => {
+export const removeLaunch = (launch) => {
     return {
         type: REMOVE_LAUNCH,
-        idx
+        launch
     }
 };

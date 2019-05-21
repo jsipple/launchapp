@@ -7,7 +7,7 @@ const MyLaunches = (props) => {
     return (
         <Template>
             Saved Launches
-            <UpcomingLaunches launches={props.appState.userData[0].favLaunches}/>
+            <UpcomingLaunches launches={props.appState.favoriteLaunches}/>
         </Template>
     );
 }

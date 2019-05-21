@@ -9,6 +9,9 @@ import { FAVORITE_LAUNCH } from '../actions/favoriteAction'
 import { RESET_INDEX } from '../actions/indexActions';
 import { CLEAR_LAUNCHES } from '../actions/clearLaunches';
 import { SHOW_BUTTONS } from '../actions/showButtons';
+import { REMOVE_FAVORITE } from '../actions/removeFavorite';
+import { ADD_FAVORITE } from '../actions/addFavorite';
+
 
 const initialState = {
     isAuthenticated: false,
@@ -89,12 +92,21 @@ const launchReducer = (state = initialState, action) => {
         case FAVORITE_LAUNCH:
             return {
                 ...state,
-                favoriteLaunches: [...state.favoriteLaunches, action.launch]
+                favoriteLaunches: state.favoriteLaunches.concat(action.launch)
             }
-        // case REMOVE_FAVORITE:
-        //     return {
-        //         ...state,
-        //     }
+        case ADD_FAVORITE:
+        return {
+            ...state,
+            favoriteLaunches: [...state.favoriteLaunches, action.launch]
+        }
+        case REMOVE_FAVORITE:
+        let a = state.favoriteLaunches.filter(rocket => {
+             return rocket.id !== action.launch.id
+        })
+            return {
+                ...state,
+                favoriteLaunches: a
+            }
         default:
             return state
     }
