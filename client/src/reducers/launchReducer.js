@@ -42,7 +42,7 @@ const launchReducer = (state = initialState, action) => {
         case SHOW_BUTTONS:
             return {
                 ...state,
-                showButtons: !state.showButtons
+                showButtons: action.show
             }
         
         case ADD_LAUNCH:

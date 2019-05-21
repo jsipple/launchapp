@@ -5,9 +5,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setView } from '../../actions/setView';
 import Filter from '../Filter';
+import { showButtons } from '../../actions/showButtons';
 
 
 class Template extends Component {
+
+
+  componentWillMount() {
+    this.props.showButtons(true);
+  }
 
   handleChangeView = () => {
     console.log('setting view');
@@ -62,7 +68,7 @@ class Template extends Component {
 const mapStateToProps = state => ({appState: state});
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView }, dispatch);
+  return bindActionCreators({ setView, showButtons }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Template);

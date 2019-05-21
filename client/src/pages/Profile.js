@@ -15,8 +15,8 @@ import { showButtons } from '../actions/showButtons';
        userId: '5cd6f79bb3adb487f1994a99'
       }
      }
-     componentWillMount() {
-      this.props.showButtons();
+     componentDidMount() {
+      this.props.showButtons(false);
      }
 
 

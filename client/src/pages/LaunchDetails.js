@@ -11,8 +11,8 @@ class LaunchDetails extends Component {
    launch = this.props.appState.currentLaunch[0];
 
    
-   componentWillMount() {
-      this.props.showButtons()
+   componentDidMount() {
+      this.props.showButtons(false)
    }
    
 
