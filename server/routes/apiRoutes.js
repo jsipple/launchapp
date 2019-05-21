@@ -41,13 +41,8 @@ module.exports = function(app){
   app.post("/api/launch/:id", function(req, res){
     console.log(req.params.id)
     User.updateOne({email: req.params.id}, {$push: {favLaunches: req.body}})
-    .then((result) => {
-      console.log(result);
-      User.find({email: req.params.id})
-      .then(result =>
-        {
-          res.json(result)
-        });
+    .then(() => {
+      res.json(true);
     })
     .catch((err) => {
       res.json(err);
@@ -58,8 +53,8 @@ module.exports = function(app){
 app.put('/api/launch/delete/:id', (req, res) => {
   console.log('testing')
   User.updateOne({email: req.params.id}, {$pull: {favLaunches: req.body}})
-    .then((result) => {
-      console.log(result)
+    .then(() => {
+      console.log('test')
       res.json(true)
     })
 })
