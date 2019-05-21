@@ -8,6 +8,7 @@ import { ADD_USER } from '../actions/addUserAction';
 import { FAVORITE_LAUNCH } from '../actions/favoriteAction'
 import { RESET_INDEX } from '../actions/indexActions';
 import { CLEAR_LAUNCHES } from '../actions/clearLaunches';
+import { SHOW_BUTTONS } from '../actions/showButtons';
 
 const initialState = {
     isAuthenticated: false,
@@ -17,7 +18,8 @@ const initialState = {
     launches: [],
     index: 0,
     currentLaunch: [],
-    userData: []
+    userData: [],
+    showButtons: true
 };
 
 const launchReducer = (state = initialState, action) => {
@@ -36,6 +38,11 @@ const launchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentLaunch: [action.launch]
+            }
+        case SHOW_BUTTONS:
+            return {
+                ...state,
+                showButtons: action.show
             }
         
         case ADD_LAUNCH:

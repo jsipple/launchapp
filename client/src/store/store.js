@@ -11,7 +11,8 @@ const initialState = {
     launches: [],
     index: 0,
     currentLaunch: 0,
-    userData: []
+    userData: [],
+    showButtons: true
 };
 
 const middleware = [thunk];
