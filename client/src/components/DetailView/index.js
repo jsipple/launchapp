@@ -8,6 +8,8 @@ import Counter from '../Counter';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import Weather from '../Weather';
+import Button from 'react-bootstrap/Button';
+
 
 class DetailView extends Component {
 
@@ -30,8 +32,19 @@ render() {
                             </ul>
                             <Weather long={launch.longitude} lat ={launch.latitude} />
                         </Col>
-                        <Col xs={3} className="details-col">
-                            <RoundFollow id={launch.id} launch={launch} />
+                        <Col xs={3} >
+                            <Container>
+                                <Row>
+                                    <Col className="back-col">
+                                        <Button variant="warning" size="lg" href="/launches/upcoming">&#8678; Launches</Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col  className="follow-col">
+                                        <RoundFollow id={launch.id} launch={launch} />
+                                    </Col>
+                                </Row>
+                            </Container>
                         </Col>
                     </Row>
                     <Row className="detail-counter">    
