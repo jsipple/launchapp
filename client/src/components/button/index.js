@@ -26,7 +26,8 @@ class FollowButton extends Component {
     render() {
         return (
             <div>
-                <button id='test' className="btn follow" onClick={this.handleLaunch}>{this.props.appState.userData[0].favLaunches.map(e => e.id).indexOf(this.props.id) === -1 ? 'Follow' : 'Unfollow'}</button>
+                <button id='test' className="btn follow" onClick={this.handleLaunch}>
+                {this.props.appState.userData[0].favLaunches.map(e => e.id).indexOf(this.props.id) === -1 ? 'Follow' : 'Unfollow'}</button>
             </div>
         );
     }
