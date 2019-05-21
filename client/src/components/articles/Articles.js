@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Media from 'react-bootstrap/Media';
+import Articles from 'articles/Articles'
 
 
 class Articles extends Component {
@@ -15,15 +16,19 @@ class Articles extends Component {
 
        console.log(`this should be the name: ${this.props.name}`)
 
-       API.getArticles(this.props.name)
+       API.getArticles(`../utlis/API`)
        .then((result) => {
-           console.log(result)
+           console.log(response.data);
+       })
+       .catch(error => {
+           console.log(error);
+
+       })
         // result.data.docs[0].title
         // for loop  
         // let title = []
 //  result.data.docs[i].title
 // end for loop
-
 
         for (let i = 0; i < result.data.docs.length; i++) {
            this.datePublished.push(result.data.docs[i].date_published);
@@ -41,10 +46,26 @@ class Articles extends Component {
         };
         this.data.push(objData);
         console.log(this.data)
-       })
-   }
+       }
+   
    render() {
+    if(!this.state.done) {
         return (
+            <div>
+                Artiles Loading 
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                Articles: {this.state.users}            
+            </div>
+        )
+    }
+//    render() 
+//         const { imageURL } = this.state;
+//          return (
+//              <img src={imageURL} />
         //   <ul className="list-unstyled" key="i">
         //   <Media as="li">
         //     <img
@@ -67,11 +88,10 @@ class Articles extends Component {
         //     </Media.Body>
         //   </Media>    
         // </ul>
-            <div>ARTICLES</div>
+            // <div>ARTICLES</div>
                 
-        )
+        
         //    dates, title, url, image
-   }
-   }
-
-   export default Articles
+   
+;
+   export default Articles;

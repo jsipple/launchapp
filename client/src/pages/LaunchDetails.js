@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Articles from '../components/articles/Articles';
 import { showButtons } from '../actions/showButtons';
 import { bindActionCreators } from 'redux';
+import LaunchSlider from "../pages/LaunchDetails"
 
 class LaunchDetails extends Component {
    launch = this.props.appState.currentLaunch[0];
