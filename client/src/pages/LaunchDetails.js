@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Template from '../components/template/template.wrapper';
-import LaunchSlider from '../components/LaunchSlider/LaunchSlider';
+import DetailView from '../components/DetailView';
 import ArticleList from '../components/ArticleList';
 import { connect } from 'react-redux';
 import Articles from '../components/articles/Articles';

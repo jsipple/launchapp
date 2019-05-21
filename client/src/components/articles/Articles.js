@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import API from "../../utils/API"
-import Media from 'react-bootstrap/Media'
+import API from "../../utils/API";
+import Media from 'react-bootstrap/Media';
+
+
 class Articles extends Component {
     data = [{datePublished: 1, image: 2, newsSite: 3, title: 4, url: 5}];
     datePublished = [];
@@ -42,38 +44,30 @@ class Articles extends Component {
        })
    }
    render() {
-       
-        const article = this.data.map( (x, i) => {
-                return <ul className="list-unstyled" key="i">
-                  <Media as="li">
-                    <img
-                      width={64}
-                      height={64}
-                      className="mr-3"
-                      src={x.image}
-                      alt="Generic placeholder"
-                    />
-                    <Media.Body>
-                        {x.datePublished}
-                      <i className="wi wi-owm-210"></i>
-                      <i className="wi wi-owm-211"></i>
-                      <i className="wi wi-owm-221"></i>
-                      <i className="wi wi-owm-212"></i>  
-                      <h5>
-                          {x.title}
-                          </h5>
-                      <p>
-                        Summary
-                      </p>
-                      <a href={x.url} target='_blank'>{x.url}</a>
-                      <a href={x.newsSite} target='_blank'>{x.newsSite}</a>
-                    </Media.Body>
-                  </Media>    
-                </ul>
-        }) 
-    
         return (
-            <div>{article}</div>
+        //   <ul className="list-unstyled" key="i">
+        //   <Media as="li">
+        //     <img
+        //       width={64}
+        //       height={64}
+        //       className="mr-3"
+        //       src={x.image}
+        //       alt="Generic placeholder"
+        //     />
+        //     <Media.Body>
+        //         {x.datePublished}
+        //       <h5>
+        //           {x.title}
+        //           </h5>
+        //       <p>
+        //         Summary
+        //       </p>
+        //       <a href={x.url} target='_blank'>{x.url}</a>
+        //       <a href={x.newsSite} target='_blank'>{x.newsSite}</a>
+        //     </Media.Body>
+        //   </Media>    
+        // </ul>
+            <div>ARTICLES</div>
                 
         )
         //    dates, title, url, image
