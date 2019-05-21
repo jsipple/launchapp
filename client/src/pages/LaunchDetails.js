@@ -1,22 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Template from '../components/template/template.wrapper';
 import LaunchSlider from '../components/LaunchSlider/LaunchSlider';
 import ArticleList from '../components/ArticleList';
 import { connect } from 'react-redux';
-import Articles from '../components/articles/Articles'
+import Articles from '../components/articles/Articles';
+import { showButtons } from '../actions/showButtons';
+import { bindActionCreators } from 'redux';
 
-const LaunchDetails = (props)=> {
-        const launch = props.appState.currentLaunch[0];
-    return (
-       <Template>
-          <Articles name={launch.rocket} />
-       <LaunchSlider launch={launch} />
-       <ArticleList />
-       </Template>
+class LaunchDetails extends Component {
+   launch = this.props.appState.currentLaunch[0];
 
-    )
+   
+   componentWillMount() {
+      this.props.showButtons()
+   }
+   
+
+   render() {
+      return (
+         <Template>
+            <Articles name={this.launch.rocket} />
+         <LaunchSlider launch={this.launch} />
+         </Template>
+
+      )
+   }
 }
+
 const mapStateToProps = state => ({
     appState: state
   });
-export default connect(mapStateToProps)(LaunchDetails);
+
+const mapDispatchToProps = dispatch => {
+   return bindActionCreators({
+      showButtons
+   }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LaunchDetails);
