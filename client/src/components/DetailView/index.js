@@ -3,7 +3,7 @@ import './style.css';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import RoundFollow from '../RoundFollow';
+import FollowButton from '../button';
 import Counter from '../Counter';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -31,7 +31,7 @@ render() {
                             <Weather long={launch.longitude} lat ={launch.latitude} />
                         </Col>
                         <Col xs={3} className="details-col">
-                            <RoundFollow id={launch.id} launch={launch} />
+                            <FollowButton id={launch.id} launch={launch} />
                         </Col>
                     </Row>
                     <Row className="detail-counter">    
