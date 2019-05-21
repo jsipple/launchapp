@@ -9,11 +9,10 @@
     font-weight: bolder;
     letter-spacing: 4px;
     cursor: pointer;
-    border-bottom-left-radius: 50px;
-    border-top-left-radius: 50px;
+    border-radius: 50px;
     border-left: .5px solid white;
+    margin-left: 0%;
     float: right;
-    margin-right: 0;
 }
 
 .details:hover{

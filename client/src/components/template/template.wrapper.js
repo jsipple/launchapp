@@ -25,6 +25,7 @@ class Template extends Component {
     return (
       <div>
         <Navbar 
+        className="navbar sticky-top"
         bg="dark" 
         variant="dark" 
         expand="lg"
