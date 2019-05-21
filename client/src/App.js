@@ -24,7 +24,7 @@ class App extends Component {
         {(this.props.appState.userData[0] !== undefined) ? 
         <Router>
           <Route exact path='/home' component={Home} />
-          <Route path='/profile' component={Profile} />
+          <Route exact path='/profile' component={Profile} />
           <Route path='/' exact={true} component={Landing} />
           <Route exact path='/launches/upcoming' component={Home} />
           <Route exact path='/launches/details' component={LaunchDetails} />
