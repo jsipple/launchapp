@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
-
 import Template from '../components/template/template.wrapper';
 import API from "../utils/API";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { showButtons } from '../actions/showButtons';
 
     
     class Profile extends Component {
@@ -13,6 +15,11 @@ import API from "../utils/API";
        userId: '5cd6f79bb3adb487f1994a99'
       }
      }
+     componentDidMount() {
+      this.props.showButtons(false);
+     }
+
+
      handleChange = (e) => {
       let input = document.querySelector('input')
 
@@ -52,5 +59,11 @@ import API from "../utils/API";
      }
     }
     
-export default Profile;
+    const mapDispatchToProps = dispatch => {
+      return bindActionCreators({
+        showButtons
+      }, dispatch)
+    };
+
+export default connect(null, mapDispatchToProps)(Profile);
 

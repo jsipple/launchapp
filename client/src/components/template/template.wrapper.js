@@ -5,9 +5,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setView } from '../../actions/setView';
 import Filter from '../Filter';
+import { showButtons } from '../../actions/showButtons';
 
 
 class Template extends Component {
+
+
+  componentWillMount() {
+    this.props.showButtons(true);
+  }
 
   handleChangeView = () => {
     console.log('setting view');
@@ -28,17 +34,14 @@ class Template extends Component {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                   <NavbarComponent />
-                </Nav>
-                <Button onClick={()=>this.handleChangeView()}>Toggle View</Button>
-                {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Carousel View</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.2">List View</NavDropdown.Item>
-                </NavDropdown> */}
+                </Nav>{
+                this.props.appState.showButtons ? <Button onClick={()=>this.handleChangeView()}>Toggle View</Button> : ''
+                }
             </Navbar.Collapse>
         </Navbar>
-        <Container className="wrapper">
-        <Filter handleFilter={handleFilter} filterOrg={filterOrg} />
+        <Container className="wrapper">{ this.props.appState.showButtons ?
+        <Filter handleFilter={handleFilter} filterOrg={filterOrg} /> : ''
+        }
           <section className="list-wrapper">
             {this.props.children}
           </section>
@@ -65,7 +68,7 @@ class Template extends Component {
 const mapStateToProps = state => ({appState: state});
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView }, dispatch);
+  return bindActionCreators({ setView, showButtons }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Template);
