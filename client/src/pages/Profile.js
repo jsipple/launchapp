@@ -32,12 +32,16 @@ class Profile extends Component {
               <p className="username">{this.userData.name}</p>
               <p className="email">{this.userData.email}</p>
               <div className="row preference">
-                <p className="preference-text">Home Screen:</p>
-                <select className="select-home">
-                <option>Home</option>
-                <option>Launches</option>
-                <option>Organizations</option>
-                </select>
+                <div className="col">
+                    <p className="preference-text">Home Screen Preference:</p>
+                </div>
+                <div className="col">
+                    <select className="select-home">
+                    <option>Home</option>
+                    <option>Launches</option>
+                    <option>Organizations</option>
+                    </select>
+                </div>
           </div>
           </div>
         </Template>

@@ -8,6 +8,7 @@
 .profile-card{
     padding: 10%;
     margin: 10%;
+    margin-top: 0%;
     padding-top: 0%;
     padding-bottom: 5%;
     text-align: center;
@@ -32,7 +33,6 @@
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     width: 100%;
-    text-align: center;
 }
 
 .preference-text{
@@ -57,5 +57,4 @@
 .select-home{
     margin-top: 3%;
     height: 30px;
-    float: right;
 }
