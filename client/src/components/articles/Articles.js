@@ -1,26 +1,24 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Media from 'react-bootstrap/Media';
+import Articles from 'articles/Articles'
 
 
 class Articles extends Component {
-    state= {
-        articles: ""
-    }
-    // data = [{datePublished: 1, image: 2, newsSite: 3, title: 4, url: 5}];
-    // datePublished = [];
-    // image = [];
-    // newsSite = [];
-    // title = [];
-    // url = [];
+    data = [{datePublished: 1, image: 2, newsSite: 3, title: 4, url: 5}];
+    datePublished = [];
+    image = [];
+    newsSite = [];
+    title = [];
+    url = [];
     
    componentDidMount() {
 
        console.log(`this should be the name: ${this.props.name}`)
 
-       API.getArticles(this.props.name)
+       API.getArticles(`../utlis/API`)
        .then((result) => {
-           console.log(result.data);
+           console.log(response.data);
        })
        .catch(error => {
            console.log(error);
@@ -32,42 +30,38 @@ class Articles extends Component {
 //  result.data.docs[i].title
 // end for loop
 
-        // for (let i = 0; i < result.data.docs.length; i++) {
-        //    this.datePublished.push(result.data.docs[i].date_published);
-        //    this.image.push(result.data.docs[i].featured_image);
-        //    this.newsSite.push(result.data.docs[i].news_site);
-        //    this.title.push(result.data.docs[i].title);
-        //    this.url.push(result.data.docs[i].url);
-        // }
-        // const objData = {
-        //     datePublished: this.datePublished,
-        //     image: this.image,
-        //     newsSite: this.newsSite,
-        //     title: this.title,
-        //     url: this.url
-        // };
-        // this.data.push(objData);
-        // console.log(this.data)
+        for (let i = 0; i < result.data.docs.length; i++) {
+           this.datePublished.push(result.data.docs[i].date_published);
+           this.image.push(result.data.docs[i].featured_image);
+           this.newsSite.push(result.data.docs[i].news_site);
+           this.title.push(result.data.docs[i].title);
+           this.url.push(result.data.docs[i].url);
+        }
+        const objData = {
+            datePublished: this.datePublished,
+            image: this.image,
+            newsSite: this.newsSite,
+            title: this.title,
+            url: this.url
+        };
+        this.data.push(objData);
+        console.log(this.data)
        }
    
    render() {
-       return(
-        <div>Articles</div>
-       )
-      
-    // if(!this.state.done) {
-    //     return (
-    //         <div>
-    //             Artiles Loading 
-    //         </div>
-    //     )
-    // } else {
-    //     return (
-    //         <div>
-    //             Articles: {this.state.users}            
-    //         </div>
-    //     )
-    // }
+    if(!this.state.done) {
+        return (
+            <div>
+                Artiles Loading 
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                Articles: {this.state.users}            
+            </div>
+        )
+    }
 //    render() 
 //         const { imageURL } = this.state;
 //          return (
@@ -99,7 +93,5 @@ class Articles extends Component {
         
         //    dates, title, url, image
    
-       }
-    }
-
+;
    export default Articles;
