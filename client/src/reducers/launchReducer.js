@@ -91,6 +91,10 @@ const launchReducer = (state = initialState, action) => {
                 ...state,
                 favoriteLaunches: [...state.favoriteLaunches, action.launch]
             }
+        // case REMOVE_FAVORITE:
+        //     return {
+        //         ...state,
+        //     }
         default:
             return state
     }
