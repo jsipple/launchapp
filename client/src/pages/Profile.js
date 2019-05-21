@@ -1,69 +1,59 @@
 
 import React, { Component } from 'react';
 import Template from '../components/template/template.wrapper';
-import API from "../utils/API";
-import { bindActionCreators } from 'redux';
+import DetailView from '../components/DetailView';
+import ArticleList from '../components/ArticleList';
 import { connect } from 'react-redux';
+import Articles from '../components/articles/Articles';
 import { showButtons } from '../actions/showButtons';
+import { bindActionCreators } from 'redux';
+import "./profile.css"
 
     
-    class Profile extends Component {
-     constructor() {
-      super()
-      this.state = {
-       image: '',
-       userId: '5cd6f79bb3adb487f1994a99'
-      }
-     }
-     componentDidMount() {
-      this.props.showButtons(false);
+class Profile extends Component {
+    userData = this.props.appState.userData[0];
+
+    componentDidMount() {
+      this.props.showButtons(false)
+
+      console.log(this.image)
      }
 
-
-     handleChange = (e) => {
-      let input = document.querySelector('input')
-
-      let image = {image: window.URL.createObjectURL(input.files[0])}
-
-      console.log(window.URL.createObjectURL(input.files[0]));
-
-      API.addUserImg(image, this.state.userId);
-
-      this.setState({
-       image
-      })
-     }
-     handleError = (e) => {
-      console.log('a')
-      this.setState({
-       image: ''
-      })
-     }
      render() {
       return (
        
           <Template>
-        <input type='file' onChange={this.handleChange} name='profilePic' id='profilePic' accept='image/png, image/jpeg, image/jpg'/>
           {/* look into making a default avatar if nothing in the system */}
-          <img alt='profileImg' id='profileImg' src={`${this.state.image}`} onError={this.handleError} />
-          <hr />
-          <p>Home screen preference</p>
-          <select>
-          <option>Home</option>
-          <option>launches</option>
-          <option>organizations</option>
-          </select>
+          <div className="profile-card">
+              <p className="profile-title">PROFILE</p>
+
+              <img alt='profileImg' id='profileImg' src={`${this.userData.imageUrl}`}/>
+
+              <p className="username">{this.userData.name}</p>
+              <p className="email">{this.userData.email}</p>
+              <div className="row preference">
+                <p className="preference-text">Home Screen:</p>
+                <select className="select-home">
+                <option>Home</option>
+                <option>Launches</option>
+                <option>Organizations</option>
+                </select>
+          </div>
+          </div>
         </Template>
        
        )
      }
     }
-    
-    const mapDispatchToProps = dispatch => {
-      return bindActionCreators({
-        showButtons
-      }, dispatch)
-    };
 
-export default connect(null, mapDispatchToProps)(Profile);
+const mapStateToProps = state => ({
+      appState: state
+    });
 
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({
+      showButtons
+    }, dispatch)
+};
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Profile);

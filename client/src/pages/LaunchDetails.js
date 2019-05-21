@@ -10,17 +10,15 @@ import { bindActionCreators } from 'redux';
 class LaunchDetails extends Component {
    launch = this.props.appState.currentLaunch[0];
 
-   
    componentDidMount() {
       this.props.showButtons(false)
    }
    
-
    render() {
       return (
          <Template>
-            <Articles name={this.launch.rocket} />
-         <LaunchSlider launch={this.launch} />
+            {/* <Articles name={this.launch.rocket} />
+         <LaunchSlider launch={this.launch} /> */}
          </Template>
 
       )
