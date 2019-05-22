@@ -13,7 +13,7 @@ class RoundFollow extends Component {
         let data = this.props.launch
         console.log(data)
         let userId = this.props.appState.userData[0].email
-        if(e.target.id === "following"){
+        if(e.target.id === "follow"){
             // not sure why this is not working
             this.props.addFavorite(data)
 
@@ -23,7 +23,7 @@ class RoundFollow extends Component {
                 })
            
         }
-        else if(e.target.id === "follow"){
+        else if(e.target.id === "following"){
             axios.put('/api/launch/delete/' + userId, data)
             this.props.removeFavorite(data)
         }
