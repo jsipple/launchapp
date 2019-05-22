@@ -52,7 +52,7 @@ module.exports = function(app){
 
 app.put('/api/launch/delete/:id', (req, res) => {
   console.log('testing')
-  User.findOneAndUpdate({email: req.params.id}, {$pull: {favLaunches: req.body}})
+  User.findOneAndUpdate({email: req.params.id}, {$pull: {favLaunches: {id: req.body.id}}})
     .then(() => {
       console.log('test')
       res.json()
