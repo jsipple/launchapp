@@ -5,10 +5,7 @@ import UpcomingLaunches from '../components/launches/Launches'
 
 const Home = (props) => {
     return (
-        <Template>
-            Saved Launches
             <UpcomingLaunches launches={props.appState.launches}/>
-        </Template>
     );
 }
 const mapStateToProps = state => ({

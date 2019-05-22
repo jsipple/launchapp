@@ -5,10 +5,7 @@ import UpcomingLaunches from '../components/launches/Launches'
 
 const MyLaunches = (props) => {
     return (
-        <Template>
-            Saved Launches
             <UpcomingLaunches launches={props.appState.favoriteLaunches}/>
-        </Template>
     );
 }
 const mapStateToProps = state => ({
