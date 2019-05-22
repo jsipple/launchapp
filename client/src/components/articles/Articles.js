@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Media from 'react-bootstrap/Media';
-
+import moment from 'moment';
+import "./styles.css"
 
 class Articles extends Component {
     state = {
-        articles: ""
+        articles: []
     }
     
    componentDidMount() {
@@ -21,30 +22,35 @@ class Articles extends Component {
        })
    }
    render() {
+       const articles = this.state.articles;
+       console.log(articles)
         return (
-        //   <ul className="list-unstyled" key="i">
-        //   <Media as="li">
-        //     <img
-        //       width={64}
-        //       height={64}
-        //       className="mr-3"
-        //       src={x.image}
-        //       alt="Generic placeholder"
-        //     />
-        //     <Media.Body>
-        //         {x.datePublished}
-        //       <h5>
-        //           {x.title}
-        //           </h5>
-        //       <p>
-        //         Summary
-        //       </p>
-        //       <a href={x.url} target='_blank'>{x.url}</a>
-        //       <a href={x.newsSite} target='_blank'>{x.newsSite}</a>
-        //     </Media.Body>
-        //   </Media>    
-        // </ul>
-            <div>ARTICLES</div>
+            <div >
+                <ul className="list-unstyled">
+                    {
+                        articles.map((article,index)=> (
+                            <Media as="li" key={index} className="article-list">
+                                <img
+                                    width={100}
+                                    height={100}
+                                    className="mr-3"
+                                    src={article.featured_image}
+                                    alt={article.title}
+                                    
+                                />
+                                <Media.Body>
+                                    {moment(article.date_published).format("MMMM DD, YYYY")}
+                                    <h5>{article.title}</h5>
+                                    <h6>Source: {article.news_site_long}</h6>
+                                    <a className="article-read" href={article.url} target='_blank'>Read</a>
+                                </Media.Body>
+                            </Media> 
+                            )
+                        )
+                    }
+                    
+                    </ul>
+            </div>
                 
         )
         //    dates, title, url, image
