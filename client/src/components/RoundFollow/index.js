@@ -3,7 +3,8 @@ import axios from 'axios';
 import "./style.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { favoriteAction } from '../../actions/favoriteAction'
+import { addFavorite } from '../../actions/addFavorite';
+import { removeFavorite } from '../../actions/removeFavorite';
 // need to send redux here or send data from launchSlider
 
 class RoundFollow extends Component {
