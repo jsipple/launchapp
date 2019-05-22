@@ -31,8 +31,8 @@ const ListView = (props) => {
             <h6>{launch.company} &#xb7; {launch.rocket}</h6>
           </Col>
           <Col className="button-area" >
-            <FollowButton launch={launch} id={launch.id}/>
-            <DetailButton launch={launch} />
+              <FollowButton launch={launch} id={launch.id}/>
+              <DetailButton launch={launch} />
           </Col>
         </Row>
       </Container>
