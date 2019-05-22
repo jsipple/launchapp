@@ -5,7 +5,9 @@ import API from '../../utils/API'
 import wiki from 'wikijs'
 import { SocialIcon } from 'react-social-icons';
 import NASA from '../../images/nasa.png'
+import { connect } from 'react-redux';
 
+// issue with going to this taking out some state
 class OrganizationDetail extends Component {
   constructor(props) {
     super(props)
@@ -18,10 +20,10 @@ class OrganizationDetail extends Component {
   }
 
  componentDidMount = () => {
-  let agencyName = window.location.pathname.replace('/organizations/', '')
-  console.log(agencyName)
   let urls = []
-  API.getAgency(agencyName)
+  console.log(this.props.appState.abbv)
+  console.log(this.props.appState.agency)
+  API.getAgency(this.props.appState.abbv)
    .then(res => {
     console.log(res)
     res.data.agencies[0].infoURLs.forEach((element) => {
@@ -29,10 +31,10 @@ class OrganizationDetail extends Component {
       urls.push(element)
     })
     wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' })
-    .page(agencyName)
+    .page(this.props.appState.agency)
     .then(page => page.summary())
     .then(res => {
-      this.setState({
+        this.setState({
         summary: res
       })
     });
@@ -55,12 +57,13 @@ render() {
    <br />
    <br />
    {links}
-   <br />
-   <br />
-   <h2>Upcoming Launches</h2>
   </div>
  )
  }
 }
 
-export default OrganizationDetail
+const mapStateToProps = state => ({
+  appState: state
+});
+
+export default connect(mapStateToProps)(OrganizationDetail)

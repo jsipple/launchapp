@@ -1,12 +1,15 @@
 import React from 'react';
 import Template from '../components/template/template.wrapper';
+import { connect } from 'react-redux';
+import UpcomingLaunches from '../components/launches/Launches'
 
-const MyLaunches = () => {
+const MyLaunches = (props) => {
     return (
-        <Template>
-            Saved Launches
-        </Template>
+            <UpcomingLaunches launches={props.appState.favoriteLaunches}/>
     );
 }
+const mapStateToProps = state => ({
+  appState: state
+});
 
-export default MyLaunches;
+export default connect(mapStateToProps)(MyLaunches);
