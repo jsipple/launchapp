@@ -14,7 +14,8 @@ const initialState = {
     userData: [],
     showButtons: true,
     abbv: '',
-    agency: ''
+    agency: '',
+    image: ''
 };
 
 const middleware = [thunk];

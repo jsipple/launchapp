@@ -43,6 +43,8 @@ render() {
                                 <Row>
                                     <Col  className="follow-col">
                                         <RoundFollow id={launch.id} launch={launch} />
+                                        <br />
+                                        {launch.livestream != '' ? <a href={launch.livestream} target='_blank' ><button className='link'><i class="far fa-play-circle"></i> watch liveStream</button></a> : 'livestream not available at this time'}
                                     </Col>
                                 </Row>
                             </Container>

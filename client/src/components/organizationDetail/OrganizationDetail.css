@@ -10,10 +10,31 @@
 .icon {
     margin: 5px;
 }
-.logo {
-    float: left;
-}
 h1 {
     border-bottom: 1px solid white;
     padding-bottom: 10px;
+}
+.NASA {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin-right: 20px;
+}
+.ULA {
+    width: 150px;
+    height: 100px;
+    float: left;
+    margin-right: 20px;
+}
+.spacex {
+    width: 250px;
+    height: 50px;
+    float: left;
+    margin-right: 20px;
+}
+.arianespace {
+    width: 200px;
+    height: 150px;
+    float: left;
+    margin-right: 20px;
 }
