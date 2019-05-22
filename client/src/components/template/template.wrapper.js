@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { setView } from '../../actions/setView';
 import Filter from '../Filter';
 import { showButtons } from '../../actions/showButtons';
+import './template.wrapper.css';
 
 
 class Template extends Component {
@@ -30,15 +31,14 @@ class Template extends Component {
         variant="dark" 
         expand="lg"
         style={{marginBottom: 80}}>
-            <Navbar.Brand href="#home"><h4>LaunchVue</h4></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                  <NavbarComponent />
-                </Nav>{
-                this.props.appState.showButtons ? <Button onClick={()=>this.handleChangeView()}>Toggle View</Button> : ''
-                }
-            </Navbar.Collapse>
+            
+                <Nav className="mr-auto navDisplay">
+                  <NavbarComponent className="left"/>
+                  <Navbar.Brand href="#home"><h4>LaunchVue</h4></Navbar.Brand>
+                  {
+                    this.props.appState.showButtons ? <Button className="right" onClick={()=>this.handleChangeView()}>Toggle View</Button> : ''
+                    }
+                </Nav>
         </Navbar>
         <Container className="wrapper">{ this.props.appState.showButtons ?
         <Filter handleFilter={handleFilter} filterOrg={filterOrg} /> : ''
