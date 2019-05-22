@@ -2,11 +2,9 @@ import { ADD_LAUNCH } from '../actions/addAction';
 import { REMOVE_LAUNCH } from '../actions/removeAction';
 import { UPDATE_LAUNCH } from '../actions/updateAction';
 import { SET_VIEW } from '../actions/setView';
-import { INCREMENT_INDEX, DECREMENT_INDEX } from '../actions/indexActions';
 import { SET_CURRENT } from '../actions/currentLaunch';
 import { ADD_USER } from '../actions/addUserAction';
 import { FAVORITE_LAUNCH } from '../actions/favoriteAction'
-import { RESET_INDEX } from '../actions/indexActions';
 import { CLEAR_LAUNCHES } from '../actions/clearLaunches';
 import { SHOW_BUTTONS } from '../actions/showButtons';
 import { REMOVE_FAVORITE } from '../actions/removeFavorite';
@@ -19,7 +17,6 @@ const initialState = {
     profileImage: '',
     favoriteLaunches: [],
     launches: [],
-    index: 0,
     currentLaunch: [],
     userData: [],
     showButtons: true,
@@ -49,32 +46,15 @@ const launchReducer = (state = initialState, action) => {
                 ...state,
                 showButtons: action.show
             }
-        
         case ADD_LAUNCH:
             return {
                 ...state,
                 launch: state.launches.push(action.launch)
             }
-
-        case RESET_INDEX:
-            return {
-                ...state,
-                index: 0
-            }
         case CLEAR_LAUNCHES:
             return {
                 ...state,
                 launches: []
-            }
-        case INCREMENT_INDEX:
-            return {
-                ...state,
-                index: state.index += 1
-            }
-        case DECREMENT_INDEX:
-            return {
-                ...state,
-                index: state.index -= 1
             }
         case REMOVE_LAUNCH:
             return {

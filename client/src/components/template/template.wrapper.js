@@ -34,7 +34,7 @@ class Template extends Component {
             
                 <Nav className="mr-auto navDisplay">
                   <NavbarComponent className="left"/>
-                  <Navbar.Brand href="#home"><h4>LaunchVue</h4></Navbar.Brand>
+                  <Navbar.Brand href="#home"><h4>Launch Tracker</h4></Navbar.Brand>
                   {
                     this.props.appState.showButtons ? <Button className="right" onClick={()=>this.handleChangeView()}>Toggle View</Button> : ''
                     }
@@ -56,7 +56,7 @@ class Template extends Component {
           className="text-center"
           >
             
-              <span>LaunchVue © 2019</span>
+              <span>Launch Tracker © 2019</span>
         
           </Navbar>
         </footer>
