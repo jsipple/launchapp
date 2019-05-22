@@ -1,17 +1,9 @@
 import React from 'react';
-import Template from '../components/template/template.wrapper'
-import API from '../utils/API';
-import LaunchSlider from '../components/LaunchSlider/LaunchSlider';
-import Spinner from 'react-bootstrap/Spinner';
-import ListView from '../components/list-view/list.view';
-import moment from 'moment';
+import Template from '../components/template/template.wrapper';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { clearLaunches } from '../actions/clearLaunches';
-import { setView } from '../actions/setView';
-import { addLaunch } from '../actions/addAction';
-import { incrementIndex, decrementIndex, resetIndex } from '../actions/indexActions';
+import UpcomingLaunches from '../components/launches/Launches'
 
+<<<<<<< HEAD
 
 
 class Home extends React.Component {
@@ -161,27 +153,15 @@ class Home extends React.Component {
     }
   render() {
     const {launches} = this.props.appState;
+=======
+const Home = (props) => {
+>>>>>>> d2820de3d1350f7b2faecd84c87966914e507f03
     return (
-      <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >
-      {launches.length ? 
-        ((this.props.appState.launchView === 'slider') ? (this.returnLaunchSlider()) : (this.returnListView())) 
-        :
-        (<Spinner animation="border" role="status">
-          <span className="sr-only"> Loading ... </span>
-          </Spinner>)}
-
-      </Template>
+            <UpcomingLaunches launches={props.appState.launches}/>
     );
-  }
 }
-
 const mapStateToProps = state => ({
   appState: state
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex, clearLaunches }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
+export default connect(mapStateToProps)(Home);

@@ -12,7 +12,9 @@ const initialState = {
     index: 0,
     currentLaunch: 0,
     userData: [],
-    showButtons: true
+    showButtons: true,
+    abbv: '',
+    agency: ''
 };
 
 const middleware = [thunk];

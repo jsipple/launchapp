@@ -1,95 +1,180 @@
-import React, { Component, Fragment } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import './Launches.css'
+import React from 'react';
+import Template from '../template/template.wrapper'
 import API from '../../utils/API';
-import {Link} from 'react-router-dom';
-let search;
+import LaunchSlider from '../LaunchSlider/LaunchSlider';
+import Spinner from 'react-bootstrap/Spinner';
+import ListView from '../list-view/list.view';
+import moment from 'moment';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { clearLaunches } from '../../actions/clearLaunches';
+import { setView } from '../../actions/setView';
+import { addLaunch } from '../../actions/addAction';
+import { incrementIndex, decrementIndex, resetIndex } from '../../actions/indexActions';
 
-class Launches extends Component {
-    state = {
-            launchesData: [],
-            date: ''
-        }
-    
-    componentDidMount = () => {
-        console.log(window.location.pathname)
-        // using this to grab a year before by default
-        let a = new Date().toISOString()
-        let past = new Date(new Date().setFullYear(new Date().getFullYear() -1)).toISOString()
-        past = past.substring(0, 10)
-        this.setState({
-            date: past
-        });
-        console.log(past)
-        a = a.substring(0, 10)
-        // might do an axios.get of this for rocket details https://launchlibrary.net/1.3/rocket/whateverLooking for
-        if (window.location.pathname === '/launches/upcoming') {
-            API.getUpcoming()
-            .then(res => {
-                console.log(res)
-                this.setState({
-                    launchesData: res.data.launches
-                })
-                console.log(res.data.launches)
-                for (let i = 0; i < res.data.launches.length; i++) {
-                console.log(res.data.launches[i])
-                }
-            })
-        } else if (window.location.pathname === '/launches/past') {
-            this.timedApi(past)
-    }
 
-}
-timedApi = (date) => {
-    console.log(date)
-   API.getPast(date)
-    .then(res => {
-        console.log(res)
-        this.setState({
-            launchesData: res.data.launches
-        })
+
+class UpcomingLaunches extends React.Component {
+  state={
+    filterOrg: "All Organizations",
+    filter: false,
+    indexReset: false
+  }
+  componentDidMount () {
+    console.log("mounted");
+    this.props.clearLaunches();
+    API.getUpcoming()
+    .then(result => {
+      
+      result.data.launches.forEach(launch => {
+        const id = launch.id ? (launch.id): (1)
+        const location = launch.location.name ? (launch.location.name) : ("");
+        const longitude = launch.location.pads[0] ? (launch.location.pads[0].longitude) : ("");
+        const latitude = launch.location.pads[0] ? (launch.location.pads[0].latitude) : ("");
+        const rocket = launch.rocket.name ? (launch.rocket.name) : ("");
+        const date = launch.net ? (launch.net) : ("");
+        const timestamp = launch.netstamp ? (launch.netstamp) : ("");
+        const company = launch.lsp.name ? (launch.lsp.name) : ("");
+        const launchName = (launch.missions.length && launch.missions[0].name) ? (launch.missions[0].name) : ("");
+        const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
+        const image = (launch.rocket.imageURL === "https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png") ? ("../images/placeholder-rocket.jpeg") : (launch.rocket.imageURL)
+        const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
+        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime, longitude, latitude};
+        
+        
+        // console.log("LAUNCHDATA",launchData)
+        this.props.addLaunch(launchData);
+      })
     })
-    } 
-    handleChange = (e) => {
-        this.setState({
-            date: e.target.value
-        })
+    .catch(err => console.log(err));
+  }
+
+  handleViewChange = (view) => {
+    this.props.setView();
+  
+  }
+
+  returnLaunchSlider = () => {
+    let {index} = this.props.appState;
+    const filterLaunches = this.props.launches.filter(launch => launch.company === this.state.filterOrg );
+    if (this.state.filter){
+          if(filterLaunches.length) {
+            console.log("IN FILTER LAUNCHES")
+            return(
+              <LaunchSlider
+              launchID = {filterLaunches.id}
+              prevDate={((index - 1) >= 0) ? (moment(filterLaunches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
+              index={index}
+              launch={filterLaunches[index]}
+              total={filterLaunches.length}
+              handleDetailClick = {this.handleDetailClick}
+              handleIndexChange = {this.handleIndexChange}
+              nextDate={((index + 1 < filterLaunches.length)? (moment(filterLaunches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
+              />
+            )
+          } else {
+            return (
+              <div>No Results</div>
+            )
+          }
+    } else {
+      return (
+        <LaunchSlider
+        launchID = {this.props.launches.id}
+        prevDate={((index - 1) >= 0) ? (moment(this.props.launches[(index-1)].date).format("\u21E6 " + "MMM D")): ("none") } 
+        index={index}
+        launch={this.props.launches[index]}
+        total={this.props.launches.length}
+        handleDetailClick = {this.handleDetailClick}
+        handleIndexChange = {this.handleIndexChange}
+        nextDate={((index + 1 < this.props.launches.length)? (moment(this.props.launches[(index+1)].date).format("MMM D" + " \u21E8")) : ("none"))} 
+        />
+      )
     }
-    handleKeyPress = (e) => {
-        console.log(e.key)
-        if (e.key === 'Enter') {
-            console.log('a')
-        this.timedApi(this.state.date)
+      
+    }
+
+    returnListView = () => {
+      const filterLaunches = this.props.launches.filter(launch => launch.company === this.state.filterOrg );
+      if(this.state.filter) {
+        if(filterLaunches.length) {
+          return (
+            filterLaunches.map((launch,index) => (
+              <ListView
+              launchID = {this.props.launches.id}
+              launch={launch} 
+              key={index} 
+              index={index} />)
+            )
+          )
+        } else {
+          return (
+            <div>No results</div>
+          )
         }
+        
+      } else {
+        return (
+          this.props.launches.map((launch,index) => (
+            <ListView
+            launchID = {this.props.launches.id}
+            launch={launch} 
+            key={index} 
+            index={index} />)
+          )
+        ) 
+      }
     }
-render() {
-        search = <input onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.date} type='date' />
 
-    let image = this.state.launchesData.map( (x, i) => {
-   return (<div key={i}>
-        {/* <button onClick={this.timedApi(this.state.date)}>click</button> */}
-        <Link to={`details/${this.state.launchesData[i].id}`}> <img className='rocket' src={this.state.launchesData[i].rocket.imageURL} alt='image' /></Link>
-            <h1>{this.state.launchesData[i].name}</h1>
-            {/* should we have this be a link to their website? */}
-                <p>made by {this.state.launchesData[i].rocket.agencies[0].name}</p>
-                <p>{(this.state.launchesData[i].missions[0] !== undefined) ? this.state.launchesData[i].missions[0].description : 'no details at this time'}</p> 
-                <p>set to launch from {this.state.launchesData[i].location.name} on {this.state.launchesData[i].windowend}</p>
-                <p>see video below</p>
-                {/* would we want to try and embed this or just link? */}
-                {/* doesn't look like the below works might need to look at this for only the ones that have finished or are close(might start livestream early could also make this open the link in a new tab(we get a watch link not an embeded one)) */}
-                {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/?v=21X5lGlDOfg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-        <hr />
-        </div>
-    )})
-    // this.launches.map((x, i) => <div><h1>{this.state.launchesData.name}</h1></div>)
- return(
-  <Fragment>
-   { search }
+    handleIndexChange = (change) => {
+      if(change > 0 && (this.props.appState.index + change) < this.props.launches.length) {
+        this.props.incrementIndex();
+      }
+      if(change < 0 && (this.props.appState.index + change) >= 0) {
+        this.props.decrementIndex();
+      }
+      else {
+        return false
+      }
+    }
+    handleFilter = (org)=> {
+      this.setState({indexReset: false});
+      this.props.resetIndex();
+      if(org === "All Organizations") {
+        this.setState({
+          filter: false,
+          filterOrg: org
+        })
+      } else {
+        this.setState({
+          filter: true,
+          filterOrg: org
+          })
+      }
+      
+    }
+  render() {
+    return (
+      <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >
+      {this.props.launches.length ? 
+        ((this.props.appState.launchView === 'slider') ? (this.returnLaunchSlider()) : (this.returnListView())) 
+        :
+        (<Spinner animation="border" role="status">
+          <span className="sr-only"> Loading ... </span>
+          </Spinner>)}
 
-   {image}
-  </Fragment>
- )
- }
+      </Template>
+    );
+  }
 }
 
-export default Launches
+const mapStateToProps = state => ({
+  appState: state
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex, clearLaunches }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpcomingLaunches);
+
