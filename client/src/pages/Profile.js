@@ -15,8 +15,6 @@ class Profile extends Component {
 
     componentDidMount() {
       this.props.showButtons(false)
-
-      console.log(this.image)
      }
 
      render() {

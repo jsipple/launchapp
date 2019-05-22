@@ -37,7 +37,7 @@ class UpcomingLaunches extends React.Component {
         const company = launch.lsp.name ? (launch.lsp.name) : ("");
         const launchName = (launch.missions.length && launch.missions[0].name) ? (launch.missions[0].name) : ("");
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
-        const image = (launch.rocket.imageURL) ? (launch.rocket.imageURL) : ('./images/ea4078548b2778ad6487e1dfd3d4978fb67cdb2c.png');
+        const image = (launch.rocket.imageURL === "https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png") ? ("../images/placeholder-rocket.jpeg") : (launch.rocket.imageURL)
         const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
         const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime, longitude, latitude};
         
