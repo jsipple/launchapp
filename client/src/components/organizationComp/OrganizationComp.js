@@ -4,7 +4,7 @@ import './OrganizationComp.css'
 import { Link } from 'react-router-dom'
 import NASA from '../../images/nasa.png'
 import spacex from '../../images/spacex.png'
-import ULA from '../../images/ULA.png'
+import ULA from '../../images/ula.png'
 import arianespace from '../../images/arianespace.png'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
