@@ -26,35 +26,38 @@ class OrganizationDetail extends Component {
   API.getAgency(this.props.appState.abbv)
    .then(res => {
     console.log(res)
+    if (res.data.agencies.length > 0) {
     res.data.agencies[0].infoURLs.forEach((element) => {
       // this.urls.push(element)
       urls.push(element)
+      this.setState({
+        urls,
+        country: res.data.agencies[0].countryCode
+      })
     })
+  }
     wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' })
     .page(this.props.appState.agency)
     .then(page => page.summary())
     .then(res => {
+      console.log(res)
         this.setState({
         summary: res
       })
     });
     this.setState({
-      urls,
-      country: res.data.agencies[0].countryCode, 
-      name: res.data.agencies[0].name
+      name: this.props.appState.agency
     })
    })
  }
 render() {
-  console.log(this.state.urls)
   let links = this.state.urls.map( (x,i) => <SocialIcon className='icon' url={x} target='_blank' />)
  return(
   <div className='wrapper-org'>
   <h1>{this.state.name.toUpperCase()}</h1>
-  <img className='logo' alt='nasa' src={NASA} />
-  <hr />
+  <img className={this.props.appState.abbv} alt={this.props.appState.agency} src={`${this.props.appState.image[this.props.appState.abbv]}`} />
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.summary}
-   <br />
+   <br /> 
    <br />
    {links}
   </div>

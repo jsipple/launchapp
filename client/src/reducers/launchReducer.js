@@ -21,7 +21,8 @@ const initialState = {
     userData: [],
     showButtons: true,
     abbv: '',
-    agency: ''
+    agency: '',
+    image: ''
 };
 
 const launchReducer = (state = initialState, action) => {
@@ -93,7 +94,8 @@ const launchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 agency: action.agency,
-                abbv: action.abbv
+                abbv: action.abbv,
+                image: action.image
             }
         default:
             return state

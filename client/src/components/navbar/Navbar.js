@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Navbar.css'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 
 class Navbar extends Component {
@@ -23,7 +24,7 @@ class Navbar extends Component {
    <div id="mySidenav" className="sidenav" style={{width: this.state.showNav ? '250px' : '0px'}}>
    <Link to="#" className="closebtn" onClick={this.toggleNav}>&times;</Link>
    <Link to="/launches/upcoming">Launches</Link>
-   <Link to="/launches/fav">My Launches</Link>
+   <Link to="/launches/fav">My Launches <i className='amount'>{this.props.appState.favoriteLaunches.length}</i></Link>
    <Link to="/launches/past">Past Launches</Link>
    <Link to="/organizations">Organizations</Link>
    <Link to="/notifications">Into The Void</Link>
@@ -36,4 +37,8 @@ class Navbar extends Component {
  }
 }
 
-export default Navbar
+const mapStateToProps = state => ({
+  appState: state
+});
+
+export default connect(mapStateToProps)(Navbar)

@@ -33,4 +33,10 @@
     height: 200px;
     text-align: center;
 }
-
+.link {
+    color: white;
+    padding: 5px;
+    border-radius: 25px;
+    background-color: red;
+    border-color: red
+}

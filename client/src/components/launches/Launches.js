@@ -23,7 +23,7 @@ class UpcomingLaunches extends React.Component {
     this.props.clearLaunches();
     API.getUpcoming()
     .then(result => {
-      
+      console.log(result)
       result.data.launches.forEach(launch => {
         const id = launch.id ? (launch.id): (1)
         const location = launch.location.name ? (launch.location.name) : ("");
@@ -37,9 +37,8 @@ class UpcomingLaunches extends React.Component {
         const type =  (launch.missions.length && launch.missions[0].typeName )? (launch.missions[0].typeName) : ("");
         const image = (launch.rocket.imageURL === "https://s3.amazonaws.com/launchlibrary/RocketImages/placeholder_1920.png") ? ("../images/placeholder-rocket.jpeg") : (launch.rocket.imageURL)
         const countdownTime = moment(date).format("YYYY-MM-DTHH:mm:ss");
-        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime, longitude, latitude};
-        
-        
+        const livestream = launch.vidURLs        
+        const launchData = {id, image, location, rocket, date, timestamp, company, launchName, type, countdownTime, longitude, latitude, livestream};
         // console.log("LAUNCHDATA",launchData)
         this.props.addLaunch(launchData);
       })
