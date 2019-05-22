@@ -3,56 +3,45 @@ import axios from 'axios';
 import "./style.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { favoriteAction } from '../../actions/favoriteAction'
+import { addFavorite } from '../../actions/addFavorite';
+import { removeFavorite } from '../../actions/removeFavorite';
 // need to send redux here or send data from launchSlider
 
 class RoundFollow extends Component {
-    state={
-        following: false
-    }
-    componentDidMount () {
-        if(this.props.appState.userData[0].favLaunches.map(launch => launch.id).indexOf(this.props.id) >= 0) {
-            this.setState({
-                following: true
-            })
-        }
-    }
-    handleLaunch = () => {
-        let userId = this.props.appState.userData[0].email
+   
+    handleLaunch = (e) => {
         let data = this.props.launch
-        let favLaunches = this.props.appState.userData[0].favLaunches
-        if(favLaunches.map(launch => launch.id).indexOf(this.props.id) === -1 ){
-            console.log("ADDING");
-            this.setState({
-                following:true
-            });
-            axios.post('/api/launch/' + userId, data).then(result=> 
-                console.log("ADD RESULT", result)
-            );
+        console.log(data)
+        let userId = this.props.appState.userData[0].email
+        if(e.target.id === "following"){
+            // not sure why this is not working
+            this.props.addFavorite(data)
 
-            this.props.favoriteAction(data);
-            
-        } else if(favLaunches.map(launch => launch.id).indexOf(this.props.id) >= 0) {
-            console.log("REMOVING");
-            this.setState({
-                following: false
-            });
-            axios.put('/api/launch/delete/' + userId, data).then(result=> 
-                console.log("DELETE RESULT", result)
-            );
-            
+            axios.post('/api/launch/' + userId, data)
+                .then(res => {
+                    console.log(res)
+                })
+           
+        }
+        else if(e.target.id === "follow"){
+            axios.put('/api/launch/delete/' + userId, data)
+            this.props.removeFavorite(data)
         }
     }
     
 
     render() {
-        console.log(this.props.id);
-        console.log(this.props.appState.userData[0].favLaunches)
+        const { appState, id } = this.props
+        const conditional = appState && appState.favoriteLaunches.find(e =>  {
+            return e.favoriteLaunches ? e.favoriteLaunches.id === id : e.id === id
+    })
+        // const button = !conditional ? '&#10003; Following' : 'Follow'
         return (
             <div>
-                <button id='test' className="btn round-follow" onClick={this.handleLaunch}>
-                 {this.state.following ? <span>&#10003; Following</span> : <span>  Follow</span>  }
-                 </button>
+                {/* on my launches page have in issue with the button below it changing to follow */}
+                {!conditional ? 
+                (<button key={id} id='following' className="btn round-follow" onClick={this.handleLaunch}>&#10003; Following</button>):
+                (<button key={id} id='follow' className="btn round-follow" onClick={this.handleLaunch}>Follow</button>)}
             </div>
         );
     }
@@ -60,6 +49,6 @@ class RoundFollow extends Component {
 
 const mapStateToProps = state => ({appState: state});
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({favoriteAction}, dispatch);
+    return bindActionCreators({addFavorite, removeFavorite}, dispatch);
   }
 export default connect(mapStateToProps, mapDispatchToProps)(RoundFollow);

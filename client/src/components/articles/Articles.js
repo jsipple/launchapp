@@ -4,12 +4,9 @@ import Media from 'react-bootstrap/Media';
 
 
 class Articles extends Component {
-    data = [{datePublished: 1, image: 2, newsSite: 3, title: 4, url: 5}];
-    datePublished = [];
-    image = [];
-    newsSite = [];
-    title = [];
-    url = [];
+    state = {
+        articles: ""
+    }
     
    componentDidMount() {
 
@@ -18,29 +15,9 @@ class Articles extends Component {
        API.getArticles(this.props.name)
        .then((result) => {
            console.log(result)
-        // result.data.docs[0].title
-        // for loop  
-        // let title = []
-//  result.data.docs[i].title
-// end for loop
-
-
-        for (let i = 0; i < result.data.docs.length; i++) {
-           this.datePublished.push(result.data.docs[i].date_published);
-           this.image.push(result.data.docs[i].featured_image);
-           this.newsSite.push(result.data.docs[i].news_site);
-           this.title.push(result.data.docs[i].title);
-           this.url.push(result.data.docs[i].url);
-        }
-        const objData = {
-            datePublished: this.datePublished,
-            image: this.image,
-            newsSite: this.newsSite,
-            title: this.title,
-            url: this.url
-        };
-        this.data.push(objData);
-        console.log(this.data)
+            this.setState({
+                articles: result.data.docs
+            })
        })
    }
    render() {
