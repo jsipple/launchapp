@@ -31,8 +31,8 @@ class Articles extends Component {
                         articles.map((article,index)=> (
                             <Media as="li" key={index} className="article-list">
                                 <img
-                                    width={100}
-                                    height={100}
+                                    width={120}
+                                    height={85}
                                     className="mr-3"
                                     src={article.featured_image}
                                     alt={article.title}
