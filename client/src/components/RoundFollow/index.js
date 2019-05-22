@@ -32,14 +32,13 @@ class RoundFollow extends Component {
 
     render() {
         const { appState, id } = this.props
-        const conditional = appState && appState.favoriteLaunches.find(e =>  {
-            return e.favoriteLaunches ? e.favoriteLaunches.id === id : e.id === id
-    })
+        const conditional = appState && appState.favoriteLaunches.find(launch =>  {
+            return launch.id === id})
         // const button = !conditional ? '&#10003; Following' : 'Follow'
         return (
             <div>
                 {/* on my launches page have in issue with the button below it changing to follow */}
-                {!conditional ? 
+                {conditional ? 
                 (<button key={id} id='following' className="btn round-follow" onClick={this.handleLaunch}>&#10003; Following</button>):
                 (<button key={id} id='follow' className="btn round-follow" onClick={this.handleLaunch}>Follow</button>)}
             </div>
