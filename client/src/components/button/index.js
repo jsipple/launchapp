@@ -3,7 +3,8 @@ import axios from 'axios';
 import "./style.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { favoriteAction } from '../../actions/favoriteAction'
+import { addFavorite } from '../../actions/addFavorite'
+import { removeFavorite } from '../../actions/removeFavorite'
 // need to send redux here or send data from launchSlider
 
 class FollowButton extends Component {
@@ -13,20 +14,32 @@ class FollowButton extends Component {
         console.log(data)
         let userId = this.props.appState.userData[0].email
         if(e.target.textContent === "Follow"){
-            axios.post('/api/launch/' + userId, data);
+            // not sure why this is not working
+            this.props.addFavorite(data)
+
+            axios.post('/api/launch/' + userId, data)
+                .then(res => {
+                    console.log(res)
+                })
             e.target.textContent = 'Unfollow'
-            this.props.favoriteAction(data)
         }
         else if(e.target.textContent === "Unfollow"){
             axios.put('/api/launch/delete/' + userId, data)
             e.target.textContent = 'Follow'
+            this.props.removeFavorite(data)
         }
     }
 
     render() {
+        const { appState, id } = this.props
+        const conditional = appState && appState.favoriteLaunches.find(e =>  {
+            return e.favoriteLaunches ? e.favoriteLaunches.id === id : e.id === id
+    })
+        const button = !conditional ? 'Follow' : 'Unfollow'
         return (
             <div>
-                <button id='test' className="btn follow" onClick={this.handleLaunch}>{this.props.appState.userData[0].favLaunches.map(e => e.id).indexOf(this.props.id) === -1 ? 'Follow' : 'Unfollow'}</button>
+                {/* on my launches page have in issue with the button below it changing to follow */}
+                <button key={id} id='test' className="btn follow" onClick={this.handleLaunch}>{button}</button>
             </div>
         );
     }
@@ -34,6 +47,6 @@ class FollowButton extends Component {
 
 const mapStateToProps = state => ({appState: state});
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({favoriteAction}, dispatch);
+    return bindActionCreators({addFavorite, removeFavorite}, dispatch);
   }
 export default connect(mapStateToProps, mapDispatchToProps)(FollowButton);

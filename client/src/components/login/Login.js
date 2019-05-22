@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUserAction';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router";
+import { favoriteAction } from '../../actions/favoriteAction'
 
 class Login extends Component {
   // need to save this state to store as well figure out if i want to use token
@@ -28,6 +29,10 @@ class Login extends Component {
       token: ''
     })
   }
+  componentDidMount = () => {
+    this.props.history.push('/')
+
+  }
   // this is working
   googleResponse = (response) => {
     const userData = response.profileObj;
@@ -39,6 +44,8 @@ class Login extends Component {
       .then(res => {
         console.log('test')
     this.props.addUser(res.data);
+    // added twice for some reason but worked
+    this.props.favoriteAction(res.data[0].favLaunches)
     this.props.history.push('/home')
       })
 
@@ -50,8 +57,7 @@ class Login extends Component {
       isAuthenticated: true
     })
     this.props.addUser({
-      name: 'guest',
-      favLaunches: []
+      name: 'guest'
     })
     this.props.history.push('/home')
   }
@@ -123,7 +129,7 @@ const mapStateToProps = state => state;
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({addUser}, dispatch);
+  return bindActionCreators({addUser, favoriteAction}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))
