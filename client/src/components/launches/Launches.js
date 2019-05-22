@@ -10,15 +10,13 @@ import { bindActionCreators } from 'redux';
 import { clearLaunches } from '../../actions/clearLaunches';
 import { setView } from '../../actions/setView';
 import { addLaunch } from '../../actions/addAction';
-import { incrementIndex, decrementIndex, resetIndex } from '../../actions/indexActions';
-
 
 
 class UpcomingLaunches extends React.Component {
   state={
     filterOrg: "All Organizations",
     filter: false,
-    indexReset: false
+    index: 0
   }
   componentDidMount () {
     console.log("mounted");
@@ -55,11 +53,12 @@ class UpcomingLaunches extends React.Component {
   }
 
   returnLaunchSlider = () => {
-    let {index} = this.props.appState;
     const filterLaunches = this.props.launches.filter(launch => launch.company === this.state.filterOrg );
     if (this.state.filter){
           if(filterLaunches.length) {
+            let index = this.state.index;
             console.log("IN FILTER LAUNCHES")
+            console.log(index)
             return(
               <LaunchSlider
               launchID = {filterLaunches.id}
@@ -78,6 +77,7 @@ class UpcomingLaunches extends React.Component {
             )
           }
     } else {
+      let index = this.state.index;
       return (
         <LaunchSlider
         launchID = {this.props.launches.id}
@@ -127,33 +127,38 @@ class UpcomingLaunches extends React.Component {
     }
 
     handleIndexChange = (change) => {
-      if(change > 0 && (this.props.appState.index + change) < this.props.launches.length) {
-        this.props.incrementIndex();
+      if(change > 0 && (this.state.index + change) < this.props.launches.length) {
+        this.setState({
+          index: this.state.index +1
+        });
       }
-      if(change < 0 && (this.props.appState.index + change) >= 0) {
-        this.props.decrementIndex();
+      if(change < 0 && (this.state.index + change) >= 0) {
+        this.setState({
+          index: this.state.index -1
+        });
       }
       else {
         return false
       }
     }
     handleFilter = (org)=> {
-      this.setState({indexReset: false});
-      this.props.resetIndex();
       if(org === "All Organizations") {
         this.setState({
           filter: false,
-          filterOrg: org
+          filterOrg: org,
+          index: 0
         })
       } else {
         this.setState({
           filter: true,
-          filterOrg: org
+          filterOrg: org,
+          index: 0
           })
       }
       
     }
   render() {
+    console.log(this.props.launches)
     return (
       <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >
       {this.props.launches.length ? 
@@ -173,7 +178,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ setView, addLaunch, incrementIndex, decrementIndex, resetIndex, clearLaunches }, dispatch);
+  return bindActionCreators({ setView, addLaunch, clearLaunches }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpcomingLaunches);
