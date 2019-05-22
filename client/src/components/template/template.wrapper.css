@@ -6,3 +6,9 @@
 .top-margin {
     margin-top: 60px;
 }
+
+.navDisplay {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
