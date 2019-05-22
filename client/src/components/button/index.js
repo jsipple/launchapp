@@ -31,10 +31,15 @@ class FollowButton extends Component {
     }
 
     render() {
+        const { appState, id } = this.props
+        const conditional = appState && appState.favoriteLaunches.find(e =>  {
+            return e.favoriteLaunches ? e.favoriteLaunches.id === id : e.id === id
+    })
+        const button = !conditional ? 'Follow' : 'Unfollow'
         return (
             <div>
                 {/* on my launches page have in issue with the button below it changing to follow */}
-                <button id='test' className="btn follow" onClick={this.handleLaunch}>{this.props.appState.favoriteLaunches.map(e => e.id).indexOf(this.props.id) === -1 ? 'Follow' : 'Unfollow'}</button>
+                <button key={id} id='test' className="btn follow" onClick={this.handleLaunch}>{button}</button>
             </div>
         );
     }

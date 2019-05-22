@@ -28,6 +28,7 @@ const initialState = {
 };
 
 const launchReducer = (state = initialState, action) => {
+    console.log(action.type)
     switch (action.type) {
         case SET_VIEW:
             return {

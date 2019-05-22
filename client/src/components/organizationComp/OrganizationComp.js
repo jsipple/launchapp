@@ -14,7 +14,7 @@ render() {
  return(
   <Fragment>
    <div>
-   <Link to='organizations/nasa' onClick={addAgency('National Aeronautics and Space Administration', 'nasa')}>
+   <Link to='organizations/nasa' onClick={() => this.props.addAgency('National Aeronautics and Space Administration', 'nasa')}>
     <img
       width={200}
       height={200}
@@ -32,7 +32,7 @@ render() {
       alt="Generic placeholder"
     />
       </Link>
-   <Link onClick={addAgency('United Launch Agency', 'ula')} to='organizations/United_Launch_Alliance'>
+   <Link onClick={() => this.props.addAgency('United Launch Alliance', 'ula')} to='organizations/United_Launch_Alliance'>
     <img
       width={200}
       height={150}

@@ -21,7 +21,9 @@ class OrganizationDetail extends Component {
 
  componentDidMount = () => {
   let urls = []
-  API.getAgency(this.props.abbv)
+  console.log(this.props.appState.abbv)
+  console.log(this.props.appState.agency)
+  API.getAgency(this.props.appState.abbv)
    .then(res => {
     console.log(res)
     res.data.agencies[0].infoURLs.forEach((element) => {
@@ -29,10 +31,10 @@ class OrganizationDetail extends Component {
       urls.push(element)
     })
     wiki({ apiUrl: 'https://en.wikipedia.org/w/api.php' })
-    .page(this.props.agency)
+    .page(this.props.appState.agency)
     .then(page => page.summary())
     .then(res => {
-      this.setState({
+        this.setState({
         summary: res
       })
     });

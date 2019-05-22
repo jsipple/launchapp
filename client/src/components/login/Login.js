@@ -29,6 +29,10 @@ class Login extends Component {
       token: ''
     })
   }
+  componentDidMount = () => {
+    this.props.history.push('/')
+
+  }
   // this is working
   googleResponse = (response) => {
     const userData = response.profileObj;
@@ -53,8 +57,7 @@ class Login extends Component {
       isAuthenticated: true
     })
     this.props.addUser({
-      name: 'guest',
-      favLaunches: []
+      name: 'guest'
     })
     this.props.history.push('/home')
   }
