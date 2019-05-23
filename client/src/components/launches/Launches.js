@@ -157,7 +157,6 @@ class UpcomingLaunches extends React.Component {
       
     }
   render() {
-    console.log(this.props.launches)
     return (
       <Template handleViewChange={this.handleViewChange} handleFilter={this.handleFilter} filterOrg={this.state.filterOrg} >
       {this.props.launches.length ? 
