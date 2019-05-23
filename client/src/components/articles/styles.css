@@ -1,0 +1,12 @@
+.article-list{
+    border: whitesmoke solid 1px;
+    padding: 20px 60px 20px 60px;
+}
+
+.article-read{
+    color: gold;
+}
+
+.article-read:hover{
+    color: rgb(153, 130, 0);
+}

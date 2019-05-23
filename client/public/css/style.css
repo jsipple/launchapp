@@ -1,0 +1,18 @@
+
+.list-image {
+    height: 100px;
+    width: 100px;
+}
+.list-wrapper{
+    margin: 0 auto;
+    width: 100%;
+    background-image: linear-gradient(steelblue, black);
+    color: white;
+}
+.launches-header{
+    margin-right: 15px;
+    color:whitesmoke;
+}
+body {
+    background: url("../images/7e2d7bea4ac21388c4a96e1371f375c4ce00094b.jpg") no-repeat top center fixed;
+  }

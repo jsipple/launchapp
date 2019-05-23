@@ -1,35 +1,46 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import homeRoute from './routes/homeRoute'
-import Navbar from './components/navbar/Navbar'
-import profileRoute from './routes/profileRoute';
-import notificationsRoute from './routes/notificationsRoute';
-import launchesRoute from './routes/launchesRoute';
-import pastLaunchesRoute from './routes/pastLaunchesRoute';
-import favoritedLaunchesRoute from './routes/favoritedLaunchesRoute';
-import organizationsRoute from './routes/organizationsRoute';
+import Home from './pages/Home';
+import Landing from './pages/Landing';
+import { LaunchList } from './pages/LaunchList';
+import LaunchDetails from './pages/LaunchDetails';
+import MyLaunches from './pages/MyLaunches';
+import PastLaunches from './pages/PastLauches';
+import Organizations from './pages/Organizations';
+import Profile from './pages/Profile';
+import TestComponent from './components/test-see/Test.component';
+import OrganizationDetails from './pages/OrganizationDetails'
+import { connect } from 'react-redux';
 
 class App extends Component {
+  componentDidMount = () => {
+    console.log(this.props.appState.userData)
+  }
   render() {
     return (
       
       <div className="App">
+        {(this.props.appState.userData[0] !== undefined) ? 
         <Router>
-          <Navbar />
-          <Route path='/home' component={homeRoute} />
-          <Route path='/profile' component={profileRoute} />
-          {/* will this be where they set notification settings? like saying if favorited send email or a list of notifications? */}
-          <Route path='/notifications' component={notificationsRoute} />
-          <Route exact path='/launches/upcoming' component={launchesRoute} />
-          <Route exact path='/launches/past' component={pastLaunchesRoute} />
-          <Route exact path='/launches/fav' component={favoritedLaunchesRoute} />
-          {/* what do we want in here descriptons of the origanization upcoming/past launches links to their website etc? */}
-          <Route path='/organizations' component={organizationsRoute} />
+          <Route exact path='/home' component={Home} />
+          <Route exact path='/profile' component={Profile} />
+          <Route path='/' exact={true} component={Landing} />
+          <Route exact path='/launches/upcoming' component={Home} />
+          <Route exact path='/launches/details' component={LaunchDetails} />
+          <Route exact path ='/launches/list' component={LaunchList} />
+          <Route exact path='/launches/past' component={PastLaunches} />
+          <Route exact path='/launches/test' component={TestComponent} />
+          <Route exact path='/launches/fav' component={MyLaunches} />
+          <Route exact path='/organizations' component={Organizations} />
+          <Route exact path='/organizations/:id' component={OrganizationDetails} />
         </Router>
+        // so it's forcing me to add the router here which is weird
+        : <Router><Landing /></Router>}
+
       </div>
     );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({appState: state});
+export default connect(mapStateToProps)(App);
