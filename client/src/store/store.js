@@ -21,7 +21,7 @@ const initialState = {
 
 const store = createStore(
     launchReducer,
-    initialState,
+    initialState
 );
 
 export default store;

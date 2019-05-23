@@ -12,6 +12,8 @@ import { addUser } from '../../actions/addUserAction';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router";
 import { favoriteAction } from '../../actions/favoriteAction'
+import { clearFavorites } from '../../actions/clearFavorites'
+
 
 class Login extends Component {
   // need to save this state to store as well figure out if i want to use token
@@ -30,8 +32,9 @@ class Login extends Component {
     })
   }
   componentDidMount = () => {
+    // this.props.favoriteLaunches = []
     this.props.history.push('/')
-
+    this.props.clearFavorites()
   }
   // this is working
   googleResponse = (response) => {
@@ -128,7 +131,7 @@ const mapStateToProps = state => state;
 
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({addUser, favoriteAction}, dispatch);
+  return bindActionCreators({addUser, favoriteAction, clearFavorites}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login))

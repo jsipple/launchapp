@@ -10,6 +10,7 @@ import { SHOW_BUTTONS } from '../actions/showButtons';
 import { REMOVE_FAVORITE } from '../actions/removeFavorite';
 import { ADD_FAVORITE } from '../actions/addFavorite';
 import { ADD_AGENCY } from '../actions/agencyName'
+import { CLEAR_FAVORITES } from '../actions/clearFavorites'
 
 const initialState = {
     isAuthenticated: false,
@@ -26,6 +27,7 @@ const initialState = {
 };
 
 const launchReducer = (state = initialState, action) => {
+    console.log(action.type)
     switch (action.type) {
         case SET_VIEW:
             return {
@@ -96,6 +98,12 @@ const launchReducer = (state = initialState, action) => {
                 agency: action.agency,
                 abbv: action.abbv,
                 image: action.image
+            }
+        case CLEAR_FAVORITES:
+            console.log('testing')
+            return {
+                ...state,
+                favoriteLaunches: []
             }
         default:
             return state
