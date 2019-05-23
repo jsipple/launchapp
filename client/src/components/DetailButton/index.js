@@ -9,7 +9,6 @@ import { withRouter } from "react-router";
 class DetailButton extends Component {
    
     handleDetailClick = (launch) => {
-        console.log(launch);
         this.props.setCurrentLaunch(launch);
         this.props.history.push('/launches/details')
         

@@ -16,8 +16,6 @@ class DetailView extends Component {
 
 render() {
     const launch= this.props.appState.currentLaunch[0]
-    console.log("LAUNCH", launch);
-    console.log(launch.image);
 // let image = <img alt='test' src={this.state.rocket.imageURL} />
  return(
     <Container className="detail-view">

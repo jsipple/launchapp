@@ -10,12 +10,8 @@ class Articles extends Component {
     }
     
    componentDidMount() {
-
-       console.log(`this should be the name: ${this.props.name}`)
-
        API.getArticles(this.props.name)
        .then((result) => {
-           console.log(result)
             this.setState({
                 articles: result.data.docs
             })
@@ -23,7 +19,6 @@ class Articles extends Component {
    }
    render() {
        const articles = this.state.articles;
-       console.log(articles)
         return (
             <div >
                 <ul className="list-unstyled">
@@ -39,7 +34,7 @@ class Articles extends Component {
                                     
                                 />
                                 <Media.Body>
-                                    {moment(article.date_published).format("MMMM DD, YYYY")}
+                                    {moment.unix(article.date_published).format("MMMM DD YYYY")}
                                     <h5>{article.title}</h5>
                                     <h6>Source: {article.news_site_long}</h6>
                                     <a className="article-read" href={article.url} target='_blank'>Read</a>
