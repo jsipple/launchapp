@@ -74,7 +74,6 @@ class Login extends Component {
       })
       API.addUser(userData)
       .then(res => {
-        console.log('test')
     this.props.addUser(res.data);
       })
       this.props.history.push('/home')

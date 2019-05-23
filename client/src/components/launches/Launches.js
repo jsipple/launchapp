@@ -19,11 +19,9 @@ class UpcomingLaunches extends React.Component {
     index: 0
   }
   componentDidMount () {
-    console.log("mounted");
     this.props.clearLaunches();
     API.getUpcoming()
     .then(result => {
-      console.log(result)
       result.data.launches.forEach(launch => {
         const id = launch.id ? (launch.id): (1)
         const location = launch.location.name ? (launch.location.name) : ("");
@@ -56,8 +54,6 @@ class UpcomingLaunches extends React.Component {
     if (this.state.filter){
           if(filterLaunches.length) {
             let index = this.state.index;
-            console.log("IN FILTER LAUNCHES")
-            console.log(index)
             return(
               <LaunchSlider
               launchID = {filterLaunches.id}
