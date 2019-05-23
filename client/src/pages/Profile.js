@@ -1,12 +1,10 @@
 
 import React, { Component } from 'react';
 import Template from '../components/template/template.wrapper';
-import DetailView from '../components/DetailView';
-import ArticleList from '../components/ArticleList';
 import { connect } from 'react-redux';
-import Articles from '../components/articles/Articles';
 import { showButtons } from '../actions/showButtons';
 import { bindActionCreators } from 'redux';
+import profileImage from "../images/profilePlaceholder.png"
 import "./profile.css"
 
     
@@ -25,7 +23,7 @@ class Profile extends Component {
           <div className="profile-card">
               <p className="profile-title">PROFILE</p>
 
-              <img alt='profileImg' id='profileImg' src={`${this.userData.imageUrl}`}/>
+              <img alt="Guest" id='profileImg' src={this.userData.imageUrl ? this.userData.imageUrl : profileImage}/>
 
               <p className="username">{this.userData.name}</p>
               <p className="email">{this.userData.email}</p>
